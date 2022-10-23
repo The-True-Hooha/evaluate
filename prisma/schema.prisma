@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  userId     String       @id @default(uuid()) //pk
+  username   String
+  useremail  String
+  role       Role         @default(BASIC)
+  password   String
+  submission Submission[]
+
+  @@unique([useremail])
+}
+
+model Course {
+  courseId          String              @id @default(uuid()) //pk
+  major             String              @default("Computer Science")
+  facultyname       String
+  title             String
+  section           String
+  academicyear      String
+  academicterm      String
+  activity          Activity[]
+  LearningObjective LearningObjective[]
+
+  @@unique([title])
+}
+
+model LearningObjective {
+  learningObjId String     @id @default(uuid())
+  description   String
+  course        Course     @relation(fields: [courseId], references: [courseId])
+  activity      Activity[]
+  courseId      String
+}
+
+model Activity {
+  activityId         String              @id @default(uuid())
+  course             Course?             @relation(fields: [courseId], references: [courseId])
+  learningobjectives LearningObjective[]
+  courseId           String?
+  type               Type
+  topic              String
+  points             Int
+  numofattempts      Int
+  level              Level               @default(EASY)
+  duedate            DateTime
+  availablefrom      DateTime
+  availableto        DateTime
+  codingActivity     CodingActivity[]
+  submission         Submission[]
+}
+
+model CodingActivity {
+  codingactivityId String    @id @default(uuid())
+  codingactivity   Activity? @relation(fields: [activityId], references: [activityId])
+  activityId       String?
+  description      String
+}
+
+model Submission {
+  submissionId String    @id @default(uuid())
+  user         User      @relation(fields: [userId], references: [userId])
+  activity     Activity? @relation(fields: [activityId], references: [activityId])
+  activityId   String
+  sumbittedAt  DateTime  @default(now())
+  userId       String
+}
+
+
+enum Role {
+  BASIC
+  FACULTY
+}
+
+enum Level {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum Type {
+  Coding
+  MultipleChoice
+  TrueFalse
+  FillInBlank
+  Matching
+}
+
+// a course has a many to many relationship with an activity ?? debating
