@@ -4,6 +4,7 @@ import * as subs from 'aws-cdk-lib/aws-sns-subscriptions';
 import * as sqs from 'aws-cdk-lib/aws-sqs';
 import * as ec2 from "aws-cdk-lib/aws-ec2"
 import * as ecs from "aws-cdk-lib/aws-ecs"
+import * as ecsPatterns from "aws-cdk-lib/aws-ecs-patterns"
 import { Construct } from 'constructs';
 
 export class InfraAsCodeStack extends Stack {
@@ -12,7 +13,10 @@ export class InfraAsCodeStack extends Stack {
 
     const queue = new sqs.Queue(this, 'InfraAsCodeQueue', {
       fifo: true,
-      queueName: "codeSubmission.fifo"
+      queueName: "codeSubmission.fifo",
+      receiveMessageWaitTime: Duration.seconds(20),
+      retentionPeriod: Duration.seconds(345600),
+      visibilityTimeout: Duration.seconds(43200),
     });
 
     const vpc = ec2.Vpc.fromLookup(this, 'Vpc', {
@@ -21,23 +25,12 @@ export class InfraAsCodeStack extends Stack {
 
     const cluster = new ecs.Cluster(this, 'FargateCluster', { vpc: vpc, clusterName: "codeSubmissionCluster" });
 
-    const fargateTaskDefinition = new ecs.FargateTaskDefinition(this, 'evaluate-TaskDef', {
-      memoryLimitMiB: 512,
-      cpu: 256,
-      ephemeralStorageGiB: 100,
-    });
-
-    const containerDefinition = fargateTaskDefinition.addContainer('evaluate-fargate', {
-      image: ecs.ContainerImage.fromAsset("./image"),
-      memoryLimitMiB: 256,
-    });
-
-    const service = new ecs.FargateService(this, 'Service', {
+    const queueProcessingFargateService = new ecsPatterns.QueueProcessingFargateService(this, 'evaluate-fargate-queue', {
       cluster,
-      taskDefinition: fargateTaskDefinition,
-      desiredCount: 1,
+      image: ecs.ContainerImage.fromAsset("./fargate-workers"),
+      queue: queue,
+      serviceName: "fargate-daemon"
     });
-
 
   }
 }
