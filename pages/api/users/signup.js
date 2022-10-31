@@ -5,11 +5,11 @@ export default function handler(req, res) {
 
     const prisma = new PrismaClient();
 
-    const {username, email, password} = req.body;
+    const {username, useremail, password} = req.body;
 
     // validator for input field
     // no field in the schema for first name and last name
-    if(!username || !email || !password){
+    if(!username || !useremail || !password){
         res.status(400).json({
             message: "missing field, please make sure all inputs are field correctly"
         });
