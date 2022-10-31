@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-export default async function handler(req, res) {
+export default function handler(req, res) {
     // res.status(200).json({ name: 'John Doe' })
 
     const prisma = new PrismaClient();
