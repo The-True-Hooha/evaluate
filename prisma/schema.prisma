@@ -16,7 +16,7 @@ model User {
   submission Submission[]
 
   @@unique([email])
-  // @@unique([password])
+  @@unique([password])
 }
 
 model Course {

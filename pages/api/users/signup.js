@@ -16,8 +16,7 @@ export default function handler(req, res) {
         });
         return;
     }
-    // todo: change email to email and update prisma schema
-
+    
     prisma.user.findUnique({
         where: {
             email: email
