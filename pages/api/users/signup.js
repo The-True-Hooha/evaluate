@@ -1,6 +1,9 @@
 import { PrismaClient } from "@prisma/client";
+import bcrypt from 'bcrypt'
+import jwt from "jsonwebtoken";
 
-export default function handler(req, res) {
+
+export default async function handler(req, res) {
     // res.status(200).json({ name: 'John Doe' })
 
     const prisma = new PrismaClient();
@@ -16,6 +19,15 @@ export default function handler(req, res) {
         });
         return;
     }
+
+    
+    const token = (userId, email) => {
+        return jwt.sign({id: userId, email}, process.env.SECRET, {
+            expiresIn: process.env.TIME
+        })
+    }
+    const generateHash = await bcrypt.genSalt(Number(process.env.SALT));
+    const hashedPassword = await bcrypt.hash(password, generateHash)
     
     prisma.user.findUnique({
         where: {
@@ -29,7 +41,7 @@ export default function handler(req, res) {
         } else {
             prisma.user.findUnique({
                 where: {
-                    password: password
+                    password: hashedPassword
                 }
             }).then(user => {
                 if(user) {
@@ -41,7 +53,7 @@ export default function handler(req, res) {
                         data: {
                             email: email,
                             username: username,
-                            password: password
+                            password: hashedPassword
                         }
                     }).then(user => {
                         res.status(201).json({
