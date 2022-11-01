@@ -10,12 +10,13 @@ datasource db {
 model User {
   userId     String       @id @default(uuid()) //pk
   username   String
-  useremail  String
+  email      String
   role       Role         @default(BASIC)
   password   String
   submission Submission[]
 
-  @@unique([useremail])
+  @@unique([email])
+  @@unique([password])
 }
 
 model Course {
