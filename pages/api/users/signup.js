@@ -10,9 +10,8 @@ export default async function handler(req, res) {
 
     const {username, email, password} = req.body;
 
-    // validator for input field
     //todo: no field in the schema for first name and last name
-    //todo: updates schema file
+
     if(!username || !email || !password){
         res.status(400).json({
             message: "missing field, please make sure all inputs are field correctly"
@@ -20,12 +19,11 @@ export default async function handler(req, res) {
         return;
     }
 
-    
-    const token = (userId, email) => {
-        return jwt.sign({id: userId, email}, process.env.SECRET, {
-            expiresIn: process.env.TIME
-        })
-    }
+    const token = jwt.sign({email}, process.env.SECRET, {
+        expiresIn: process.env.TIME
+    });
+
+    // password hash gen
     const generateHash = await bcrypt.genSalt(Number(process.env.SALT));
     const hashedPassword = await bcrypt.hash(password, generateHash)
     
@@ -53,12 +51,13 @@ export default async function handler(req, res) {
                         data: {
                             email: email,
                             username: username,
-                            password: hashedPassword
+                            password: hashedPassword,
                         }
                     }).then(user => {
                         res.status(201).json({
                             message: "account created successfully",
-                            user: user
+                            user: user,
+                            token
                         })
                         console.log(user)
                     });

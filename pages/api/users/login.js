@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt';
+import jwt from "jsonwebtoken";
+import { serialize } from "cookie";
 
 export default async function handler(req, res) {
     const prisma = new PrismaClient();
@@ -13,13 +15,14 @@ export default async function handler(req, res) {
         return;
     }
 
-    // const checkPassword = await bcrypt.compare(
-    //     password,
-        
-    // )
+    const refreshToken = jwt.sign({email}, process.env.REFRESH_SECRET, {
+        expiresIn: process.env.REFRESH_TIME
+    });
+
+
     prisma.user.findUnique({
         where: {
-            email: email
+            email: email,
         }
     }).then(async user => {
 
@@ -34,14 +37,28 @@ export default async function handler(req, res) {
                     // user: email
                 });
             } else{
+
+                // change env PHASE to production if out of dev
+                // used cookies to store the refresh token that is being sent via the header to the client
+
+                const serialized = serialize("evaluate", refreshToken, {
+                    httpOnly: true,
+                    sameSite: "strict",
+                    secure: process.env.PHASE,
+                    maxAge: 60 * 60 * 24 * 7, // expires in 1 week
+                    path: "/"
+                });
+
+                res.setHeader("Set-Cookie", serialized);
                 res.status(201).json({
-                    message: "login successful"
+                    message: "login successful",
+                    user: user
                 })
             }
         } else{
             res.status(404).json({
                 message: "account does not exist"
             })
-        }
+        }        
     });
 }
