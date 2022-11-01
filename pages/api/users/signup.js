@@ -5,21 +5,22 @@ export default function handler(req, res) {
 
     const prisma = new PrismaClient();
 
-    const {username, useremail, password} = req.body;
+    const {username, email, password} = req.body;
 
     // validator for input field
-    // no field in the schema for first name and last name
-    if(!username || !useremail || !password){
+    //todo: no field in the schema for first name and last name
+    //todo: updates schema file
+    if(!username || !email || !password){
         res.status(400).json({
             message: "missing field, please make sure all inputs are field correctly"
         });
         return;
     }
-    // todo: change useremail to email and update prisma schema
+    // todo: change email to email and update prisma schema
 
     prisma.user.findUnique({
         where: {
-            useremail: useremail
+            email: email
         }
     }).then(user => {
         if(user) {
@@ -39,7 +40,7 @@ export default function handler(req, res) {
                 } else{
                     prisma.user.create({
                         data: {
-                            useremail: useremail,
+                            email: email,
                             username: username,
                             password: password
                         }

@@ -3,9 +3,9 @@ import { PrismaClient } from "@prisma/client";
 export default function handler(req, res) {
     const prisma = new PrismaClient();
 
-    const {useremail, password} = req.body;
+    const {email, password} = req.body;
 
-    if(!useremail || !password){
+    if(!email || !password){
         res.status(400).json({
             message: "field cannot be left empty"
         });
@@ -14,14 +14,14 @@ export default function handler(req, res) {
 
     prisma.user.findUnique({
         where: {
-            useremail: useremail
+            email: email
         }
     }).then(user => {
         if(user){
             if(user.password === password){
                 res.status(200).json({
                     message: "login successful",
-                    user: useremail
+                    user: email
                 });
             } else{
                 res.status(400).json({
