@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
+import bcrypt from 'bcrypt'
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
     const prisma = new PrismaClient();
 
     const {email, password} = req.body;
@@ -12,20 +13,29 @@ export default function handler(req, res) {
         return;
     }
 
+    // const checkPassword = await bcrypt.compare(
+    //     password,
+        
+    // )
     prisma.user.findUnique({
         where: {
             email: email
         }
-    }).then(user => {
+    }).then(async user => {
+
+        const checkPassword = await bcrypt.compare(
+            password,
+            user.password
+        )
         if(user){
-            if(user.password === password){
-                res.status(200).json({
-                    message: "login successful",
-                    user: email
+            if(!checkPassword){
+                res.status(401).json({
+                    message: "incorrect email or password",
+                    // user: email
                 });
             } else{
-                res.status(400).json({
-                    message: "incorrect password or login details"
+                res.status(201).json({
+                    message: "login successful"
                 })
             }
         } else{
