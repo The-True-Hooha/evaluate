@@ -15,7 +15,7 @@ export default async function handler(req, res) {
         return;
     }
 
-    const refreshToken = jwt.sign({email}, process.env.REFRESH_SECRET, {
+    const cookieToken = jwt.sign({email}, process.env.REFRESH_SECRET, {
         expiresIn: process.env.REFRESH_TIME
     });
 
@@ -41,7 +41,7 @@ export default async function handler(req, res) {
                 // change env PHASE to production if out of dev
                 // used cookies to store the refresh token that is being sent via the header to the client
 
-                const serialized = serialize("evaluate", refreshToken, {
+                const serialized = serialize("evaluate", cookieToken, {
                     httpOnly: true,
                     sameSite: "strict",
                     secure: process.env.PHASE,
