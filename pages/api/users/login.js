@@ -19,7 +19,6 @@ export default async function handler(req, res) {
         expiresIn: process.env.REFRESH_TIME
     });
 
-
     prisma.user.findUnique({
         where: {
             email: email,
