@@ -1,6 +1,8 @@
 const sqsSchema = require('./sqsSchema')
 const dbConnection = require('./db.config')
 const getMessages = require('../aws-sdk/sqs/getMessages')
+const dotenv = require('dotenv')
+dotenv.config()
 
 dbConnection()
 

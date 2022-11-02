@@ -14,6 +14,7 @@ model User {
   role       Role         @default(BASIC)
   password   String
   submission Submission[]
+  isEnabled  Boolean      @default(false)
 
   @@unique([email])
   @@unique([password])
@@ -29,8 +30,7 @@ model Course {
   academicterm      String
   activity          Activity[]
   LearningObjective LearningObjective[]
-
-  @@unique([title])
+ @@unique([title])
 }
 
 model LearningObjective {
@@ -73,7 +73,6 @@ model Submission {
   sumbittedAt  DateTime  @default(now())
   userId       String
 }
-
 
 enum Role {
   BASIC

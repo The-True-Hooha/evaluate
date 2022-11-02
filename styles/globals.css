@@ -4,7 +4,10 @@
 
 @layer base{
   body{
-      @apply tracking-wide bg-white text-black
+      @apply tracking-wide bg-white text-black 
+  }
+}
+  
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
