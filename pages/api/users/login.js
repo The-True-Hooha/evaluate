@@ -1,11 +1,10 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../../config/prisma.connect"
 import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
 
 export default async function handler(req, res) {
-    const prisma = new PrismaClient();
-
+    
     const {email, password} = req.body;
 
     if(!email || !password){
@@ -15,10 +14,9 @@ export default async function handler(req, res) {
         return;
     }
 
-    const refreshToken = jwt.sign({email}, process.env.REFRESH_SECRET, {
+    const cookieToken = jwt.sign({email}, process.env.REFRESH_SECRET, {
         expiresIn: process.env.REFRESH_TIME
     });
-
 
     prisma.user.findUnique({
         where: {
@@ -34,14 +32,13 @@ export default async function handler(req, res) {
             if(!checkPassword){
                 res.status(401).json({
                     message: "incorrect email or password",
-                    // user: email
                 });
             } else{
 
                 // change env PHASE to production if out of dev
                 // used cookies to store the refresh token that is being sent via the header to the client
 
-                const serialized = serialize("evaluate", refreshToken, {
+                const serialized = serialize("evaluate", cookieToken, {
                     httpOnly: true,
                     sameSite: "strict",
                     secure: process.env.PHASE,
