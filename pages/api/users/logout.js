@@ -1,9 +1,7 @@
-// import { PrismaClient } from ".prisma/client";
 import { serialize } from "cookie";
 
 
 export default async function handler(req, res){
-    // const prisma = new PrismaClient;
 
     const { cookies } = req;
     const jwt = cookies.evaluate;
