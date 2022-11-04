@@ -1,11 +1,10 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../../config/prisma.connect"
 import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
 
 export default async function handler(req, res) {
-    const prisma = new PrismaClient();
-
+    
     const {email, password} = req.body;
 
     if(!email || !password){
@@ -33,7 +32,6 @@ export default async function handler(req, res) {
             if(!checkPassword){
                 res.status(401).json({
                     message: "incorrect email or password",
-                    // user: email
                 });
             } else{
 
