@@ -1,15 +1,11 @@
 Always check this before you start work on the repo.
-This reference outlines all current problems and a working solution : https://www.youtube.com/watch?v=SD4KgwdjmdI
-Priority ranks from the top.
+PRIORITY RANKS FROM TOP.
 
 Hero :
-* Look into solutions for a remote code execution engine ( must achieve isolation, security and speed )
-* Add faculty auth flow 
-* login page v1
+* Complete faculty auth flow *working on 
+* Online web editor implementation. Look into libraries like codemirror
 
 Tochi: 
-* Look into solutions for a remote code execution engine ( must achieve isolation, security and speed )
-* Write rce algorithm ( when solution is found )
+* Write rce algorithm and routes *working on
 * add testcase feature to rce
-* rce raelated routes
 * login page v1
