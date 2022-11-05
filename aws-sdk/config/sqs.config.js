@@ -1,7 +1,4 @@
-const { SQSClient } = require("@aws-sdk/client-sqs");
-const dotenv = require('dotenv')
-dotenv.config()
-
+import { SQSClient } from "@aws-sdk/client-sqs"
 const config = {
     region: "us-east-1",
     credentials: {
@@ -10,4 +7,4 @@ const config = {
     }
 }
 const client = new SQSClient(config);
-module.exports = client
+module.exports = { client }

@@ -13,9 +13,3 @@ if( process.env.NODE_ENV === "production"){
 }
 
 export default prisma
-
-
-// const { PrismaClient } = require("@prisma/client");
-// const prisma = new PrismaClient({log : ["query"]});
-
-// module.exports = prisma

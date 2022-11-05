@@ -11,6 +11,7 @@ export default async function handler(req, res) {
       orderBy: {
         email: "asc",
         // best use case is to orderBy createdAt(Date/Time)
+        //i agree
       },
     });
     if (getAll) {
