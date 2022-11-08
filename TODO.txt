@@ -2,7 +2,10 @@ Always check this before you start work on the repo.
 PRIORITY RANKS FROM TOP.
 
 Hero :
-* Complete faculty auth flow *working on 
+* Complete faculty auth flow *working on {
+    add protected routes for users/admin
+    stage user auth from admin
+}
 * Online web editor implementation. Look into libraries like code mirror (https://codemirror.net/try/)
 
 
