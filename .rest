@@ -1,0 +1,9 @@
+POST http://localhost:3000/api/rce/submit
+Content-Type: application/json
+
+{
+    "language": "python/nme"
+}
+
+###
+GET http://localhost:3000/api/rce/getJob/1234

@@ -1,0 +1,11 @@
+Always check this before you start work on the repo.
+PRIORITY RANKS FROM TOP.
+
+Hero :
+* Complete faculty auth flow *working on 
+* Online web editor implementation. Look into libraries like codemirror
+
+Tochi: 
+* Write rce algorithm and routes *working on
+* add testcase feature to rce
+* login page v1

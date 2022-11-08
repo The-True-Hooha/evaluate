@@ -1,102 +1,82 @@
-import { Duration, Stack, StackProps } from 'aws-cdk-lib';
-import * as sqs from 'aws-cdk-lib/aws-sqs';
+import { Duration, RemovalPolicy, SecretValue, Stack, StackProps } from "aws-cdk-lib";
+import * as sqs from "aws-cdk-lib/aws-sqs";
+import { Construct } from "constructs";
+import * as lambda from "aws-cdk-lib/aws-lambda";
+import { SqsEventSource } from "aws-cdk-lib/aws-lambda-event-sources";
+import * as rds from "aws-cdk-lib/aws-rds"
+import * as secretsmanager from "aws-cdk-lib/aws-secretsmanager"
 import * as ec2 from "aws-cdk-lib/aws-ec2"
-import * as ecs from "aws-cdk-lib/aws-ecs"
-import * as ecsPatterns from "aws-cdk-lib/aws-ecs-patterns"
-import * as autoScale from "aws-cdk-lib/aws-applicationautoscaling"
-import { Construct } from 'constructs';
-import * as iam from 'aws-cdk-lib/aws-iam'
 
 
 export class InfraAsCodeStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    let queue = new sqs.Queue(this, 'InfraAsCodeQueue', {
-      fifo: true,
+    const vpc = new ec2.Vpc(this, 'evaluate-vpc', {
+      ipAddresses: ec2.IpAddresses.cidr('10.0.0.0/16'),
+      vpcName: 'evaluate-vpc',
+      enableDnsHostnames: true,
+      enableDnsSupport: true,
+      natGateways: 0,
+      subnetConfiguration: [{
+        name: 'evaluate-rds-public1a',
+        subnetType: ec2.SubnetType.PUBLIC,
+        cidrMask: 24
+      }],
+      maxAzs: 2
+    });
+
+    const subnetGroup = new rds.SubnetGroup(this, 'evaluate-rds-sg', {
+      description: 'subnet group for evaluate-rds',
+      vpc,
+      removalPolicy: RemovalPolicy.DESTROY,
+      subnetGroupName: 'evaluate-rds-sg',
+      vpcSubnets: {
+        availabilityZones: ['us-east-1a', "us-east-1b"],
+        subnets: vpc.publicSubnets,
+      }
+    })
+
+    const evaluateSG = new ec2.SecurityGroup(this, "evaluate-rds-secG", {
+      vpc,
+      allowAllOutbound: true,
+      description: 'evaluate-vpc-secG'
+    });
+
+    evaluateSG.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.allTraffic())
+
+    const instance = new rds.DatabaseInstance(this, 'database-store', {
+      vpc,
+      engine: rds.DatabaseInstanceEngine.mysql({
+        version: rds.MysqlEngineVersion.VER_8_0_28
+      }),
+      credentials: {
+        username: 'admin',
+        password: SecretValue.ssmSecure('evaluate-rds-password')
+      },
+      databaseName: "evaluate",
+      instanceIdentifier: 'db-evaluate',
+      publiclyAccessible: true,
+      subnetGroup,
+      removalPolicy: RemovalPolicy.DESTROY,
+      instanceType: ec2.InstanceType.of(ec2.InstanceClass.T2, ec2.InstanceSize.MICRO),
+      securityGroups: [evaluateSG]
+    })
+
+    const queue = new sqs.Queue(this, "code-submission-queue", {
       queueName: "codeSubmission.fifo",
-      receiveMessageWaitTime: Duration.seconds(20),
-      retentionPeriod: Duration.seconds(345600),
-      visibilityTimeout: Duration.seconds(43200),
+      visibilityTimeout: Duration.minutes(15),
+      retentionPeriod: Duration.seconds(1209600),
     });
 
+    const trigger = new SqsEventSource(queue);
 
-    const ecsRole = new iam.Role(this, 'TaskExecutionRole', {
-      assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com')
-    })
-
-
-    ecsRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('service-role/AmazonECSTaskExecutionRolePolicy'));
-
-    const vpc = ec2.Vpc.fromLookup(this, 'Vpc', {
-      isDefault: true,
+    const fn = new lambda.Function(this, "lambda-fn", {
+      runtime: lambda.Runtime.PYTHON_3_9,
+      handler: "index.lambda_handler",
+      code: lambda.Code.fromAsset("lambda/python"),
+      timeout: Duration.seconds(5),
+      events: [trigger]
     });
-
-    const cluster = new ecs.Cluster(this, 'FargateCluster', { vpc: vpc, clusterName: "codeSubmissionCluster" });
-    const fargateTaskDefinition = new ecs.FargateTaskDefinition(this, 'TaskDef', {
-      memoryLimitMiB: 512,
-      cpu: 256,
-      executionRole: ecsRole
-     
-    });
-
-    fargateTaskDefinition.addContainer("main-container", {
-      image: ecs.ContainerImage.fromAsset("./fargate-workers"),
-      containerName : "code-sub-daemon"
-    })
-
-    const queueProcessingFargateService = new ecsPatterns.QueueProcessingFargateService(this, 'evaluate-fargate-queue', {
-      cluster,
-      image: ecs.ContainerImage.fromAsset("./fargate-workers"),
-      queue: queue,
-      serviceName: "fargate-daemon",
-      scalingSteps: [
-        { "upper": 0, "change": 0 },
-        { "lower": 1, "change": +1 },
-      ],
-      minScalingCapacity: 0,
-      maxScalingCapacity: 2,
-      assignPublicIp : true
-
-    });
-
-    //scale down logic
-  //   const fargateServiceCpuMetric = queueProcessingFargateService.service.metricCpuUtilization({
-  //     period: Duration.minutes(3),
-  //     statistic: "Average"
-  //   })
-
-  //   const fargateScaleIn = fargateServiceCpuMetric.createAlarm(this, "fargate-LowCpuAlarm", {
-  //     alarmDescription: "When task is idle, remove it",
-  //     alarmName: "fargateLowCpuUtil",
-  //     threshold: 0.01,
-  //     evaluationPeriods: 1,
-  //     actionsEnabled: true,
-  //     datapointsToAlarm: 1,
-  //   })
-
-  //   // const scalableTarget = autoScale.ScalableTarget.fromScalableTargetId(this, "fargate-scalableTarget",
-  //   //   `service/${queueProcessingFargateService.cluster.clusterName}/${queueProcessingFargateService.service.serviceName}|ecs:service:DesiredCount|ecs`
-  //   // )
-
-  //   const target = new autoScale.ScalableTarget(this, "scalable-target", {
-  //     serviceNamespace : autoScale.ServiceNamespace.ECS,
-  //     resourceId: `service/${queueProcessingFargateService.cluster.clusterName}/${queueProcessingFargateService.service.serviceName}`,
-  //     scalableDimension: 'ecs:service:DesiredCount',
-  //     minCapacity : 0,
-  //     maxCapacity: 3
-  //   })
-
-
-  //   const stepScalingAction = new autoScale.StepScalingAction(this, "scaleToZero", {
-  //     scalingTarget: target,
-  //     adjustmentType: autoScale.AdjustmentType.EXACT_CAPACITY
-  //   })
-
-  //   stepScalingAction.addAdjustment({
-  //     adjustment: 0,
-  //     upperBound: 0
-  //   })
-  //   fargateScaleIn.addAlarmAction(new ApplicationScalingAction(stepScalingAction))
   }
 }
