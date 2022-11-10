@@ -1,9 +1,11 @@
-import dbClient from "../../../../aws-sdk/config/db.config"
-import testSchema from "../../../../aws-sdk/config/testSchema"
-import mongoose from 'mongoose'
+import getItem from '../../../../aws-sdk/dynamo/getItem'
 export default async function retrieveJob(req, res) {
     const { jobId } = req.query
+    console.log(jobId)
+    const response = await getItem(jobId)
 
-    return res.status(200)
+    if (!response.Item) return res.status(401).json("not available")
+
+    return res.status(200).json(response.Item)
     
 }

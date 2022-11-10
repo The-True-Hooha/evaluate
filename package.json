@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.204.0",
     "@aws-sdk/client-sqs": "^3.199.0",
     "@prisma/client": "^4.5.0",
     "bcrypt": "^5.1.0",

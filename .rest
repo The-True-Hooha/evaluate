@@ -6,4 +6,4 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/api/rce/getJob/1234
+GET http://localhost:3000/api/rce/getJob/ec65898e-0014-4a2b-8560-1938bfa5981

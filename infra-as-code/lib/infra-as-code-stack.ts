@@ -4,9 +4,8 @@ import { Construct } from "constructs";
 import * as lambda from "aws-cdk-lib/aws-lambda";
 import { SqsEventSource } from "aws-cdk-lib/aws-lambda-event-sources";
 import * as rds from "aws-cdk-lib/aws-rds"
-import * as secretsmanager from "aws-cdk-lib/aws-secretsmanager"
 import * as ec2 from "aws-cdk-lib/aws-ec2"
-
+import * as dynamodb from 'aws-cdk-lib/aws-dynamodb'
 
 export class InfraAsCodeStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -78,5 +77,14 @@ export class InfraAsCodeStack extends Stack {
       timeout: Duration.seconds(5),
       events: [trigger]
     });
+
+
+    const table = new dynamodb.Table(this, 'evaluate-table', {
+      tableName: "evaluateCacheStore",
+      partitionKey: { name: 'jobId', type: dynamodb.AttributeType.STRING },
+      removalPolicy : RemovalPolicy.DESTROY
+    });
+
+    table.grantWriteData(fn)
   }
 }
