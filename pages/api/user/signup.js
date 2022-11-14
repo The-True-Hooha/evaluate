@@ -46,7 +46,12 @@ export default async function handler(req, res) {
     if (createUser) {
       res.status(201).json({
         message: "account created successfully",
-        user: createUser,
+        user: {
+          email: createUser?.email,
+          username: createUser?.username,
+          role: createUser?.role,
+          isEnabled: createUser?.isEnabled
+        },
         token,
       });
       // send email to user
