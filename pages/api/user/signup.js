@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   //todo: no field in the schema for first name and last name
 
   if (!username || !email || !password) {
-    res.status(400).json({
+    res.status(403).json({
       message: "missing field, please make sure all inputs are field correctly",
     });
     return;

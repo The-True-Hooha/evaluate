@@ -8,11 +8,13 @@ export default async function handler(req, res) {
     const {email, password} = req.body;
 
     if(!email || !password){
-        res.status(400).json({
+        res.status(403).json({
             message: "field cannot be left empty"
         });
         return;
     }
+
+    
 
     const cookieToken = jwt.sign({email}, process.env.REFRESH_SECRET, {
         expiresIn: process.env.REFRESH_TIME

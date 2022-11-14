@@ -3,10 +3,12 @@ PRIORITY RANKS FROM TOP.
 
 Hero :
 * Complete faculty auth flow *working on {
-    add protected routes for users/admin
+    add protected routes for admin () || (create custom middleware to validate the role before accessing the link)
     stage user auth from admin
 }
+
 * Online web editor implementation. Look into libraries like code mirror (https://codemirror.net/try/)
+
 
 
 Tochi: 
