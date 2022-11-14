@@ -45,11 +45,18 @@ export default async function handler(req, res) {
                     maxAge: 60 * 60 * 24 * 7, // expires in 1 week
                     path: "/"
                 });
-
                 res.setHeader("Set-Cookie", serialized);
-                res.status(201).json({
+                res.status(200).json({
                     message: "login successful",
-                    user: user
+                    user: {
+                        username: user?.username,
+                        email:user?.email,
+                        role: user?.role,
+                    }
+                    // data: Object.entries(user).map((v) => ({
+                    //     username: v.username,
+                    //     email: v.email
+                    // }))
                 })
             }
         } else{
