@@ -1,7 +1,7 @@
-import { SendMessageCommand } from '@aws-sdk/client-sqs'
-import { v4 } from 'uuid'
+import { SendMessageCommand } from "@aws-sdk/client-sqs"
+import { v4 } from "uuid"
 import { client } from "../config/sqs.config"
-import queueUrl from './getQueueUrl'
+import queueUrl from "./getQueueUrl"
 
 export default async function publishMessage(submission) {
     const url = await queueUrl()
@@ -12,8 +12,8 @@ export default async function publishMessage(submission) {
         MessageBody: JSON.stringify(submission),
     }
 
-    const command = new SendMessageCommand(input);
-    const response = await client.send(command);
+    const command = new SendMessageCommand(input)
+    const response = await client.send(command)
 
     return response
 }

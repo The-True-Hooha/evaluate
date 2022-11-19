@@ -1,35 +1,33 @@
 import prisma from "../../../config/prisma.connect"
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
 
+export default async function handler(req, res) {
+    const { username, email, password } = req.body
 
-export default async function handler(req, res){
-
-    const {username, email, password} = req.body;
-
-    if(!email || !username || !password){
+    if (!email || !username || !password) {
         res.status(400).json({
-            message: "field cannot be left empty"
-        });
-        return;
+            message: "field cannot be left empty",
+        })
+        return
     }
 
     const token = jwt.sign({ email }, process.env.SECRET, {
         expiresIn: process.env.TIME,
-      });
+    })
 
-    const generateHash = await bcrypt.genSalt(Number(process.env.SALT));
-    const hashedPassword = await bcrypt.hash(password, generateHash);
-    try{
+    const generateHash = await bcrypt.genSalt(Number(process.env.SALT))
+    const hashedPassword = await bcrypt.hash(password, generateHash)
+    try {
         const admin = await prisma.user.findUnique({
             where: {
                 email: email,
             },
-        });
-        if(admin){
+        })
+        if (admin) {
             res.status(400).json({
-                message: "error, admin with such email exist already!"
-            });
+                message: "error, admin with such email exist already!",
+            })
         }
 
         const createAdmin = await prisma.user.create({
@@ -38,22 +36,22 @@ export default async function handler(req, res){
                 username: username,
                 password: hashedPassword,
                 isEnabled: true,
-                role: "FACULTY"
+                role: "FACULTY",
             },
-        });
+        })
 
-        if(createAdmin){
+        if (createAdmin) {
             res.status(201).json({
                 message: "admin account created successfully",
                 admin: createAdmin,
                 token,
-            });
+            })
 
             // send email for verification
         }
-    } catch(error){
+    } catch (error) {
         return res.status(400).json({
-            message: `Sorry! An error occurred trying to create admin ${error}`
-        });
+            message: `Sorry! An error occurred trying to create admin ${error}`,
+        })
     }
 }
