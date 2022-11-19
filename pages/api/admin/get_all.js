@@ -1,4 +1,4 @@
-import { prisma, Role } from "../../../config/prisma.connect"
+import { prisma, Role } from "../../../src/config/prisma.connect"
 
 export default async function handler(req, res, next) {
     if (Role !== "FACULTY") {
