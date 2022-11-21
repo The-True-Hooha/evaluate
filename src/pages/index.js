@@ -1,25 +1,21 @@
-import Head from "next/head"
-import Image from "next/image"
 import React, { useState } from "react"
+import { useAuth } from "../lib/AuthContext"
+import api from '../lib/api'
+
 
 export default function Home() {
     const [data, setData] = useState({ src: "" })
     const [output, setOutput] = useState("")
     const [error, setError] = useState("")
+    const {user} = useAuth()
 
     const handleChange = ({ currentTarget: input }) => {
         setData({ ...data, [input.name]: input.value })
     }
     const handleSubmit = async () => {
-        const res = await fetch(`http://localhost:3000/api/rce/submit`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        })
+        const res = await api.post(`http://localhost:3000/api/rce/submit`, data)
 
-        const ans = await res.json()
+        const ans = await res.data
         let data1 = null
 
         let response = await fetch(
@@ -36,6 +32,7 @@ export default function Home() {
 
     return (
         <div className='App'>
+            <h1>{JSON.stringify(user)}</h1>
             <textarea
                 onChange={handleChange}
                 name='src'

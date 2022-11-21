@@ -1,9 +1,46 @@
-POST http://localhost:3000/api/rce/submit
+# --- Authentication ---
+GET http://localhost:3000/api/me
+
+
+###
+POST  http://localhost:3000/api/superuser/createFacultyCredentials
 Content-Type: application/json
 
 {
-    "language": "python/nme"
+    "facultyId" : "1234",
+    "firstName" : "fatema",
+    "lastName" : "nafa",
+    "password" : "fnafa"
 }
 
 ###
-GET http://localhost:3000/api/rce/getJob/ec65898e-0014-4a2b-8560-1938bfa5981
+POST  http://localhost:3000/api/faculty/login
+Content-Type: application/json
+
+{
+   "facultyId" : "1234",
+    "password" : "fnafa"
+}
+
+###
+
+POST  http://localhost:3000/api/users/signup
+Content-Type: application/json
+
+{
+   "username" : "tochitak",
+    "email" : "tdev2@salemstate.edu",
+    "password" : "dev"
+}
+
+###
+POST  http://localhost:3000/api/student/login
+Content-Type: application/json
+
+{
+   "email" : "tdev2@salemstate.edu",
+    "password" : "dev"
+}
+
+
+# --- Authentication ---
