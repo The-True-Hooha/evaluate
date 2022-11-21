@@ -1,4 +1,4 @@
-import getItem from "../../../../aws-sdk/dynamo/getItem"
+import getItem from  '../../../../../aws-sdk/dynamo/getItem'
 export default async function retrieveJob(req, res) {
     const { jobId } = req.query
     console.log(jobId)

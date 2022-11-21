@@ -6,11 +6,10 @@ Hero :
 * login page v1
 
 Tochi: 
+* clean up/validate auth flow --done
 * Write rce algorithm and routes *working on
 * add test case feature to rce
-* clean up/validate auth flow
 * login page v1
 
 Beacklog
-
 add allowed domains for cookie 
