@@ -8,12 +8,13 @@
         "start": "next start",
         "lint": "next lint",
         "prettier": "prettier --write .",
-        "prepare" : "husky install"
+        "prepare": "husky install"
     },
     "dependencies": {
         "@aws-sdk/client-dynamodb": "^3.204.0",
         "@aws-sdk/client-sqs": "^3.199.0",
         "@prisma/client": "^4.5.0",
+        "@uiw/react-codemirror": "^4.15.1",
         "bcrypt": "^5.1.0",
         "cookie": "^0.5.0",
         "jsonwebtoken": "^8.5.1",
