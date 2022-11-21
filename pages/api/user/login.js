@@ -1,4 +1,4 @@
-import prisma from "../../../config/prisma.connect"
+import prisma from "../../../src/config/prisma.connect"
 import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
