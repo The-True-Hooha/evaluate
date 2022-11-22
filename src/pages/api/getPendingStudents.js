@@ -1,6 +1,6 @@
-import prisma from "../../../config/prisma.connect"
+import prisma from "../../config/prisma.connect"
 
-export default async function handler(req, res) {
+export default async function getPendingStudents(req, res) {
     try {
         const getAll = await prisma.user.findMany({
             where: {
@@ -8,9 +8,7 @@ export default async function handler(req, res) {
             },
 
             orderBy: {
-                email: "asc",
-                // best use case is to orderBy createdAt(Date/Time)
-                //i agree
+                email: "asc", //Date and time
             },
         })
         if (getAll) {
