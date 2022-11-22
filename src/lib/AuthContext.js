@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from "react"
-import Cookies from "js-cookie"
 import api from "../lib/api"
-
+import router from 'next/router'
+import Cookies from 'js-cookie'
 let window_obj = undefined
 
 const AuthContext = createContext({})
@@ -37,6 +37,7 @@ export const AuthProvider = ({ children }) => {
             const token = Cookies.get("evaluate")
             api.defaults.headers.Authorization = `Bearer ${token}`
             const { data: user } = await api.get("api/auth/me")
+            router.push('/')
             setUser(user)
         }
     }
@@ -57,7 +58,7 @@ export const AuthProvider = ({ children }) => {
 }
 
 export const ProtectRoutes = ({ children }) => {
-    const { user, isAuthenticated, isLoading } = useAuth()
+    const {isAuthenticated, isLoading, user } = useAuth()
     if (isLoading || (!isAuthenticated && window_obj !== "/login")) {
         return <div>Please login </div>
     }
@@ -69,3 +70,5 @@ export const ProtectRoutes = ({ children }) => {
 }
 
 export const useAuth = () => useContext(AuthContext)
+
+

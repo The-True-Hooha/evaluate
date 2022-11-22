@@ -8,27 +8,31 @@ datasource db {
 }
 
 model User {
-  userId     String       @id @default(uuid())
-  email      String
-  username   String
-  role       Role         @default(BASIC)
-  password   String
-  submission Submission[]
-  isEnabled  Boolean      @default(false)
-  isVerified Boolean      @default(false)
-  createdAt  DateTime     @default(now())
+  userId         String       @id @default(uuid())
+  email          String
+  username       String
+  role           Role         @default(BASIC)
+  password       String
+  submission     Submission[]
+  isEnabled      Boolean      @default(false)
+  isVerified     Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+  course         Course       @relation(fields: [courseCourseId], references: [courseId])
+  courseCourseId String
 
   @@unique([email])
   @@unique([username])
 }
 
 model faculty {
-  fid        String   @id @default(uuid())
-  facultyId  String
-  firstName  String
-  lastName   String
-  createdAt  DateTime     @default(now())
-  password String
+  fid            String   @id @default(uuid())
+  facultyId      String
+  firstName      String
+  lastName       String
+  createdAt      DateTime @default(now())
+  password       String
+  course         Course   @relation(fields: [courseCourseId], references: [courseId])
+  courseCourseId String
 
   @@unique([facultyId])
 }
@@ -43,6 +47,8 @@ model Course {
   academicterm      String
   activity          Activity[]
   LearningObjective LearningObjective[]
+  User              User[]
+  faculty           faculty[]
 
   @@unique([title])
 }

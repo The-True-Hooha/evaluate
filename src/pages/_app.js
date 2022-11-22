@@ -1,4 +1,6 @@
 import "../styles/globals.css"
+import App from "next/app"
+import { getUser } from "../lib/AuthContext"
 import { AuthProvider, ProtectRoutes } from "../lib/AuthContext"
 
 function MyApp({ Component, pageProps }) {

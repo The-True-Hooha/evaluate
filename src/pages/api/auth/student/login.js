@@ -5,6 +5,7 @@ import { createAccessToken } from "../../../../lib/auth"
 import { userLoginValidation } from "../../../../lib/validate"
 
 export default async function handler(req, res) {
+    console.log(req.body)
     const error = userLoginValidation(req.body)
     if (error) return res.status(400).send(error)
 
