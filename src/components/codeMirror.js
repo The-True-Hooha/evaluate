@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
-import { python } from '@codemirror/lang-python'
+import { langs } from '@uiw/codemirror-extensions-langs';
 import { dracula } from '@uiw/codemirror-theme-dracula';
 
 export default function CodeUi(){
@@ -16,7 +16,7 @@ export default function CodeUi(){
                 placeholder="enter code here"
                 theme={dracula}
                 height="545px"
-                //extensions={[StreamLanguage.define(python)]}
+                extensions={[langs.python()]}
                 options={{            
                     keyMap: 'sublime',
                     mode: "python",
