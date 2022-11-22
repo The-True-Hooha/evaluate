@@ -1,7 +1,7 @@
-import prisma from "../../../config/prisma.connect"
-import hashPassword from "../../../lib/hashPassword"
-import { userSignupValidation } from "../../../lib/validate"
-import _isAvailable from "../../../lib/_isAvailable"
+import { prisma } from "../../../../../config/prisma.connect"
+import hashPassword from "../../../../../lib/hashPassword"
+import { userSignupValidation } from "../../../../../lib/validate"
+import _isAvailable from "../../../../../lib/_isAvailable"
 
 export default async function handler(req, res) {
     const error = userSignupValidation(req.body)
@@ -27,6 +27,7 @@ export default async function handler(req, res) {
                   message: "email is taken and this account is verified",
               })
     } catch (error) {
+        console.log(error)
         return res.status(400).json({
             message: error.message,
         })

@@ -1,4 +1,4 @@
-import prisma from "../config/prisma.connect"
+import {prisma} from "../config/prisma.connect"
 
 //checks if user credentials can be allocated to others
 export default async function _isAvailable(email) {

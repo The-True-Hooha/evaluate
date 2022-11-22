@@ -1,13 +1,12 @@
 import React, { useState } from "react"
 import { useAuth } from "../lib/AuthContext"
-import api from '../lib/api'
-
+import api from "../lib/api"
 
 export default function Home() {
     const [data, setData] = useState({ src: "" })
     const [output, setOutput] = useState("")
     const [error, setError] = useState("")
-    const {user} = useAuth()
+    const { user } = useAuth()
 
     const handleChange = ({ currentTarget: input }) => {
         setData({ ...data, [input.name]: input.value })

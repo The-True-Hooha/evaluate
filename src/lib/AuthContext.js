@@ -10,12 +10,14 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
 
-    useEffect(() => { 
+    useEffect(() => {
         async function loadUserFromCookies() {
             const token = Cookies.get("evaluate")
             if (token) {
                 api.defaults.headers.Authorization = `Bearer ${token}`
-                const { data: user } = await api.get("api/me")
+                const { data: user } = await api
+                    .get("api/auth/me")
+                    .catch((e) => console.log(e))
                 if (user) setUser(user)
             }
             setLoading(false)
@@ -25,14 +27,16 @@ export const AuthProvider = ({ children }) => {
     }, [])
 
     const login = async (email, password) => {
-        const { data: {accessToken} } = await api.post("api/student/login", {
+        const {
+            data: { accessToken },
+        } = await api.post("api/auth/student/login", {
             email,
             password,
         })
         if (accessToken) {
             const token = Cookies.get("evaluate")
             api.defaults.headers.Authorization = `Bearer ${token}`
-            const { data: user } = await api.get("api/me")
+            const { data: user } = await api.get("api/auth/me")
             setUser(user)
         }
     }
@@ -52,14 +56,16 @@ export const AuthProvider = ({ children }) => {
     )
 }
 
-export const ProtectRoute = ({ children }) => {
-    const { isAuthenticated, isLoading } = useAuth();
-    if (isLoading || (!isAuthenticated && window_obj !== '/login')){
-      return <div>Please login </div>; 
+export const ProtectRoutes = ({ children }) => {
+    const { user, isAuthenticated, isLoading } = useAuth()
+    if (isLoading || (!isAuthenticated && window_obj !== "/login")) {
+        return <div>Please login </div>
     }
-    return children;
-  };
 
-
+    if(user && !user.isVerified){
+        return <div>You need to verify your account to continue</div>
+    }
+    return children
+}
 
 export const useAuth = () => useContext(AuthContext)

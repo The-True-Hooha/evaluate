@@ -1,17 +1,14 @@
-import prisma from "../../../config/prisma.connect"
+import {prisma} from "../../../../config/prisma.connect"
 import bcrypt from "bcrypt"
-import jwt from "jsonwebtoken"
+import { createAccessToken } from "../../../../lib/auth"
 import { serialize } from "cookie"
-import { facultyLoginValidation } from "../../../lib/validate"
+import { facultyLoginValidation } from "../../../../lib/validate"
 
 export default async function handler(req, res) {
     const error = facultyLoginValidation(req.body)
     if (error) return res.status(400).send(error)
 
     const { facultyId, password } = req.body
-    const cookie = jwt.sign({ facultyId }, process.env.SECRET, {
-        expiresIn: process.env.TIME,
-    })
 
     const admin = await prisma.faculty.findUnique({
         where: {
@@ -26,8 +23,8 @@ export default async function handler(req, res) {
                 message: "incorrect email or password",
             })
         } else {
-            const serialized = serialize("evaluate", cookie, {
-                httpOnly: true,
+            const serialized = serialize("evaluate", createAccessToken(admin), {
+                httpOnly: false,
                 sameSite: "strict",
                 secure: process.env.PHASE,
                 maxAge: 60 * 60 * 24 * 7, // expires in 1 week

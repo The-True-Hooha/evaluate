@@ -1,15 +1,14 @@
 import "../styles/globals.css"
-import { AuthProvider, ProtectRoute } from "../lib/AuthContext"
+import { AuthProvider, ProtectRoutes } from "../lib/AuthContext"
 
 function MyApp({ Component, pageProps }) {
     return (
         <AuthProvider>
-            <ProtectRoute>
+            <ProtectRoutes>
                 <Component {...pageProps} />
-            </ProtectRoute>
+            </ProtectRoutes>
         </AuthProvider>
     )
 }
-
 
 export default MyApp

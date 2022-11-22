@@ -1,12 +1,10 @@
 import bcrypt from "bcrypt"
 import { serialize } from "cookie"
-import jwt from "jsonwebtoken"
-import { prisma } from "../../../config/prisma.connect"
-import { createAccessToken, createRefreshToken } from "../../../lib/auth"
-import { userLoginValidation } from "../../../lib/validate"
+import { prisma } from "../../../../config/prisma.connect"
+import { createAccessToken } from "../../../../lib/auth"
+import { userLoginValidation } from "../../../../lib/validate"
 
 export default async function handler(req, res) {
-  
     const error = userLoginValidation(req.body)
     if (error) return res.status(400).send(error)
 
@@ -24,7 +22,7 @@ export default async function handler(req, res) {
                 message: "incorrect email or password",
             })
         } else {
-            const atCookie = serialize("evaluate", createRefreshToken(user), {
+            const atCookie = serialize("evaluate", createAccessToken(user), {
                 httpOnly: false,
                 sameSite: "strict",
                 secure: process.env.PHASE,
@@ -36,7 +34,6 @@ export default async function handler(req, res) {
             return res.status(201).json({
                 message: "login successful",
                 user: user,
-                accessToken : createAccessToken(user)
             })
         }
     } else {
