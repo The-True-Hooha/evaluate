@@ -1,7 +1,7 @@
 import Head from "next/head"
 import CodeUi from "../../../../components/codeMirror"
 
-export default function Home() {
+export default function StudentActivity() {
     return (
         <div className='App'>
             <Head>
