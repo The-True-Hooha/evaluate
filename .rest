@@ -44,3 +44,77 @@ Content-Type: application/json
 
 
 # --- Authentication ---
+###
+# --- Operations --- 
+
+# --- Course ---
+GET  http://localhost:3000/api/ops/course/read
+
+###
+GET  http://localhost:3000/api/ops/course/read/a819deb2-c45c-4eca-84b2-f8a5c1617fa1
+###
+DELETE   http://localhost:3000/api/ops/course/delete
+
+###
+DELETE   http://localhost:3000/api/ops/course/delete/0fc23c26-15fb-4fa5-8172-a26c49f347e0
+
+###
+POST  http://localhost:3000/api/ops/course/create
+Content-Type: application/json
+
+{
+    "facultyname" : "Fatema Nafa",
+    "coursename" : "Machine Learning v2801",
+    "academicyear" : "Spring 22",
+    "academicterm" : "Fall 22 - Spring 22",
+    "learningObjectives" : "1. Get better at java.",
+    "facultyId" : "1234"
+}
+
+# --- Course ---
+
+# --- Activity ---
+
+###
+POST  http://localhost:3000/api/ops/activity/create
+Content-Type: application/json
+
+{
+    "topic" : "Strings",
+    "points" : 4,
+    "numofattempts" : 1,
+    "availablefrom" : "",
+    "availableto" : "",
+    "codingActivity" : {
+        "question": "How can you split a string so that we can use it in an array"
+    },
+    "learningObjectives": {
+        "description" : "You should have better syntax and be able to tell"
+    },
+    "courseId" : ""
+}
+
+###
+GET  http://localhost:3000/api/ops/activity/read
+
+###
+GET http://localhost:3000/api/ops/activity/read/dd7e7e4a-6e39-4566-b587-dae93acdd3f7
+
+###
+DELETE http://localhost:3000/api/ops/activity/delete/dd7e7e4a-6e39-4566-b587-dae93acdd3f7
+
+###
+DELETE http://localhost:3000/api/ops/activity/delete
+
+# --- Activity ---
+
+# --- Student ---
+###
+GET  http://localhost:3000/api/ops/student/read  
+
+# --- Student ---
+
+
+
+
+#--- Operations ---

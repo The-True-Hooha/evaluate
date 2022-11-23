@@ -1,4 +1,4 @@
-import {prisma} from "../../../../config/prisma.connect"
+import { prisma } from "../../../../config/prisma.connect"
 import bcrypt from "bcrypt"
 import { createAccessToken } from "../../../../lib/auth"
 import { serialize } from "cookie"
