@@ -2,27 +2,27 @@ import bcrypt from "bcrypt"
 import { serialize } from "cookie"
 import { prisma } from "../../../../config/prisma.connect"
 import { createAccessToken } from "../../../../lib/auth"
-import { userLoginValidation } from "../../../../lib/validate"
+import { studentLoginValidation } from "../../../../lib/validate"
 
 export default async function handler(req, res) {
-    const error = userLoginValidation(req.body)
+    const error = studentLoginValidation(req.body)
     if (error) return res.status(400).send(error)
 
     const { email, password } = req.body
-    const user = await prisma.user.findUnique({
+    const student = await prisma.student.findUnique({
         where: {
             email: email,
         },
     })
 
-    if (user) {
-        const checkPassword = await bcrypt.compare(password, user.password)
+    if (student) {
+        const checkPassword = await bcrypt.compare(password, student.password)
         if (!checkPassword) {
             return res.status(401).json({
                 message: "incorrect email or password",
             })
         } else {
-            const atCookie = serialize("evaluate", createAccessToken(user), {
+            const atCookie = serialize("evaluate", createAccessToken(student.sid, student.role), {
                 httpOnly: false,
                 sameSite: "strict",
                 secure: process.env.PHASE,
@@ -33,7 +33,7 @@ export default async function handler(req, res) {
             res.setHeader("Set-Cookie", atCookie)
             return res.status(201).json({
                 message: "login successful",
-                user: user,
+                student: student,
             })
         }
     } else {

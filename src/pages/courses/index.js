@@ -6,9 +6,6 @@ export default function Home({ course }) {
     const { auth } = useAuth()
     const router = useRouter()
 
-    if (auth.status == "SIGNED_OUT") {
-        return <h1>Not Authenticated</h1>
-    }
     const {
         user: { username },
     } = auth
@@ -26,11 +23,19 @@ export default function Home({ course }) {
 }
 
 export async function getServerSideProps(ctx) {
-    const { user } = await getUser(ctx)
+    const { user, status } = await getUser(ctx)
+    if (status == "SIGNED_OUT") {
+        return {
+            redirect: {
+                permanent: false,
+                destination: "/login",
+            },
+        }
+    }
     const {
         data: { course },
     } = await api.post("api/ops/student/read/getStudentCourses", {
-        userId: user.userId,
+        sid: user.sid,
     })
     return {
         props: {

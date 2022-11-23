@@ -1,8 +1,8 @@
 import { sign } from "jsonwebtoken"
 
-export const createAccessToken = (user) => {
+export const createAccessToken = (id, role) => {
     return sign(
-        { email: user.email, role: user.role },
+        { id : id, role : role },
         process.env.ACCESS_TOKEN_SECRET,
         {
             expiresIn: process.env.ACCESS_TOKEN_REFRESH_TIME,

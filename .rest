@@ -1,5 +1,6 @@
 # --- Authentication ---
-GET http://localhost:3000/api/me
+GET http://localhost:3000/api/auth/me
+Cookie: evaluate=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImUwZDNlZDZlLWVkOWItNDA0NC1hMzYxLWM1ZmZhNWUxYjVjMSIsInJvbGUiOiJGQUNVTFRZIiwiaWF0IjoxNjY5MTg3NjMxLCJleHAiOjE2Njk1MzMyMzF9.nTfogGCaEbAoipkRMgkWjLAus4rB9i9mZrb99m1hDRg
 
 
 ###
@@ -28,8 +29,8 @@ POST  http://localhost:3000/api/auth/student/signup
 Content-Type: application/json
 
 {
-   "username" : "tochiishere",
-    "email" : "tochiishere@salemstate.edu",
+   "username" : "tochi",
+    "email" : "tdev@salemstate.edu",
     "password" : "dev"
 }
 
@@ -38,7 +39,7 @@ POST  http://localhost:3000/api/auth/student/login
 Content-Type: application/json
 
 {
-   "email" : "tochiishere@salemstate.edu",
+   "email" : "tdev@salemstate.edu",
     "password" : "dev"
 }
 

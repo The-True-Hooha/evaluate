@@ -4,7 +4,7 @@ const prisma = new PrismaClient()
 
 export default async function (req, res) {
     return prismaErrorWrapper(res, async () => {
-        return await prisma.user.findMany({
+        return await prisma.student.findMany({
             include: {
                 course: true,
                 submission: true,

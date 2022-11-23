@@ -1,19 +1,19 @@
 import { useRouter } from "next/router"
-import api from "../../../lib/api"
+import api from "../../../../lib/api"
 
 export default function Index({ info }) {
+    console.log(info)
     const { LearningObjective, activity } = info
     const router = useRouter()
     const handleClick = (e) => {
-   
-        router.push(`${router.asPath}/activity/${e.activityId}`)
+        router.push(`${router.asPath}/createActivity`)
     }
     return (
         <div>
             {activity.map((e) => {
                 return (
                     <button
-                    key={e.activityId}
+                        key={e.activityId}
                         style={{
                             margin: "20px",
                             color: "red",
@@ -24,6 +24,14 @@ export default function Index({ info }) {
                     </button>
                 )
             })}
+            <button
+                style={{
+                    margin: "10px",
+                    color: "green",
+                    background: "black",
+                }} onClick={(e) => handleClick(e)}>
+                CREATE ACTIVITY
+            </button>
         </div>
     )
 }

@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react"
-import Router, { useRouter } from "next/router"
-import { getUser, useAuth } from "../lib/AuthContext"
+import {useRouter} from "next/router"
+import { useAuth } from "../../lib/AuthContext"
 import Link from "next/link"
 
 export default function Login() {
     const router = useRouter()
-    const [data, setData] = useState({ email: "", password: "" })
+    const [data, setData] = useState({ facultyId: "", password: "" })
     const [error, setError] = useState("")
-    const { studentLogin } = useAuth()
+    const { facultyLogin } = useAuth()
+
 
     const handleChange = ({ currentTarget: input }) => {
         setData({ ...data, [input.name]: input.value })
@@ -16,10 +17,10 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const { email, password } = data
+            const { facultyId, password } = data
             const {
                 data: { accessToken },
-            } = await studentLogin(email, password)
+            } = await facultyLogin(facultyId, password)
         } catch (error) {
             if (
                 error.response &&
@@ -51,16 +52,16 @@ export default function Login() {
                                             </h4>
                                         </div>
                                         <form>
-                                            <p class='mb-4'>
+                                        <p class='mb-4'>
                                                 Please login to your account
                                             </p>
                                             <div class='mb-4'>
                                                 <input
                                                     type='text'
-                                                    name='email'
+                                                    name='facultyId'
                                                     class='form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none'
                                                     id='exampleFormControlInput1'
-                                                    placeholder='Enter your SSU email'
+                                                    placeholder='Faculty Identification Number'
                                                     onChange={(e) =>
                                                         handleChange(e)
                                                     }
@@ -92,9 +93,11 @@ export default function Login() {
                                                     Log in
                                                 </button>
                                                 <p>
-                                                    Faculty?{" "}
+                                                    Student?{" "}
                                                     <span>
-                                                        <Link href='/faculty/login'>Sign in here</Link>
+                                                        <Link href='/login'>
+                                                           Sign in here
+                                                            </Link>
                                                     </span>
                                                 </p>
                                             </div>
@@ -141,27 +144,3 @@ export default function Login() {
     )
 }
 
-export async function getServerSideProps(ctx) {
-    const res = await getUser(ctx)
-    if (res.status === "SIGNED_OUT") {
-        return {
-            props: {},
-        }
-    }
-    const {
-        status,
-        user: { role },
-    } = res
-    console.log(res)
-    if (status === "SIGNED_IN" && role === "STUDENT") {
-        return {
-            redirect: {
-                permanent: false,
-                destination: "/courses",
-            },
-        }
-    }
-    return {
-        props: {},
-    }
-}

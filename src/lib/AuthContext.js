@@ -1,10 +1,8 @@
-
 import { useContext, createContext } from "react"
-import {  useRouter } from "next/router"
+import { useRouter } from "next/router"
 import api from "./api"
 
 const AuthContext = createContext()
-
 
 export const getUser = async (ctx) => {
     api.defaults.headers = ctx?.req?.headers?.cookie
@@ -28,7 +26,7 @@ export const getUser = async (ctx) => {
 export const AuthProvider = (props) => {
     const router = useRouter()
     const auth = props.myAuth || { status: "SIGNED_OUT", user: null }
-    const login = async (email, password) => {
+    const studentLogin = async (email, password) => {
         const data = {
             email,
             password,
@@ -39,7 +37,22 @@ export const AuthProvider = (props) => {
             })
             .then(() => {
                 router.push("/courses")
-                console.log("user signed in")
+            })
+            .catch((error) => {
+                console.error("Incorrect email or password entered.")
+            })
+    }
+    const facultyLogin = async (facultyId, password) => {
+        const data = {
+            facultyId,
+            password,
+        }
+        return await api
+            .post("api/auth/faculty/login", data, {
+                withCredentials: true,
+            })
+            .then(() => {
+                router.push("/faculty/dashboard")
             })
             .catch((error) => {
                 console.error("Incorrect email or password entered.")
@@ -47,11 +60,13 @@ export const AuthProvider = (props) => {
     }
     const register = async (email, password) => {
         const data = {
-            email, password
+            email,
+            password,
         }
-        return await api.post('signup route here', data, {
-            withCredentials: true,
-        })
+        return await api
+            .post("signup route here", data, {
+                withCredentials: true,
+            })
             .then(function (response) {
                 router.push("/")
                 console.log("user registered")
@@ -76,7 +91,7 @@ export const AuthProvider = (props) => {
 
     return (
         <AuthContext.Provider
-            value={{ auth, logout, register, login }}
+            value={{ auth, logout, register, studentLogin, facultyLogin }}
             {...props}
         />
     )

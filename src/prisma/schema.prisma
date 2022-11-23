@@ -7,13 +7,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  userId     String       @id @default(uuid())
+model Student {
+  sid        String       @id @default(uuid())
   email      String
   username   String
-  role       Role         @default(BASIC)
   password   String
   submission Submission[]
+  role       ROLE         @default(STUDENT)
   isEnabled  Boolean      @default(false)
   isVerified Boolean      @default(false)
   createdAt  DateTime     @default(now())
@@ -29,6 +29,7 @@ model faculty {
   facultyId String
   firstName String
   lastName  String
+  role      ROLE     @default(FACULTY)
   createdAt DateTime @default(now())
   password  String
   course    Course?  @relation(fields: [courseId], references: [courseId])
@@ -46,7 +47,7 @@ model Course {
   academicterm      String
   activity          Activity[]
   LearningObjective LearningObjective[]
-  User              User[]
+  Student           Student[]
   faculty           faculty[]
 
   @@unique([coursename])
@@ -75,25 +76,19 @@ model Activity {
 
 model CodingActivity {
   codingactivityId String       @id @default(uuid())
-  activity   Activity?    @relation(fields: [activityId], references: [activityId], onDelete: Cascade )
-  activityId       String? @unique
+  activity         Activity?    @relation(fields: [activityId], references: [activityId], onDelete: Cascade)
+  activityId       String?      @unique
   question         String
   Submission       Submission[]
 }
 
 model Submission {
   submissionId     String         @id @default(uuid())
-  user             User           @relation(fields: [userId], references: [userId])
+  student          Student        @relation(fields: [sid], references: [sid])
   activity         CodingActivity @relation(fields: [codingActivityId], references: [codingactivityId])
   sumbittedAt      DateTime       @default(now())
-  userId           String
+  sid              String
   codingActivityId String
-}
-
-enum Role {
-  BASIC
-  FACULTY
-  SUPERUSER
 }
 
 enum Type {
@@ -102,6 +97,11 @@ enum Type {
   TrueFalse
   FillInBlank
   Matching
+}
+
+enum ROLE {
+  STUDENT
+  FACULTY
 }
 
 // a course has a many to many relationship with an activity ?? debating

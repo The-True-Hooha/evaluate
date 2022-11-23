@@ -3,11 +3,11 @@ import prismaErrorWrapper from "../../../../../lib/prismaErrorWrapper"
 const prisma = new PrismaClient()
 
 export default async function (req, res) {
-    const { userId } = req.body
+    const { sid } = req.body
     return prismaErrorWrapper(res, async () => {
-        return await prisma.user.findUnique({
+        return await prisma.student.findUnique({
             where: {
-                userId: userId,
+                sid: sid,
             },
             select: {
                 course: true,
