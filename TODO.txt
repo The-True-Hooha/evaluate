@@ -11,5 +11,5 @@ Tochi:
 * add test case feature to rce
 * login page v1
 
-Beacklog
+Backlog
 add allowed domains for cookie 
