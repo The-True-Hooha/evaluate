@@ -8,16 +8,29 @@ datasource db {
 }
 
 model User {
-  userId     String       @id @default(uuid()) //pk
-  username   String
+  userId     String       @id @default(uuid())
   email      String
+  username   String
   role       Role         @default(BASIC)
   password   String
   submission Submission[]
   isEnabled  Boolean      @default(false)
+  isVerified Boolean      @default(false)
+  createdAt  DateTime     @default(now())
 
   @@unique([email])
-  @@unique([password])
+  @@unique([username])
+}
+
+model faculty {
+  fid        String   @id @default(uuid())
+  facultyId  String
+  firstName  String
+  lastName   String
+  createdAt  DateTime     @default(now())
+  password String
+
+  @@unique([facultyId])
 }
 
 model Course {
@@ -30,7 +43,8 @@ model Course {
   academicterm      String
   activity          Activity[]
   LearningObjective LearningObjective[]
- @@unique([title])
+
+  @@unique([title])
 }
 
 model LearningObjective {
@@ -77,6 +91,7 @@ model Submission {
 enum Role {
   BASIC
   FACULTY
+  SUPERUSER
 }
 
 enum Level {

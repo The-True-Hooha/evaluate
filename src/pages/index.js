@@ -1,27 +1,26 @@
-import { Main } from "next/document";
 import Head from "next/head"
-// import React, { useState } from "react"
-import CodeUi from "../components/codeMirror";
+import Image from "next/image"
+import React, { useState } from "react"
 
 export default function Home() {
-    // const [data, setData] = useState({ src: "" })
-    // const [output, setOutput] = useState("")
-    // const [error, setError] = useState("")
+    const [data, setData] = useState({ src: "" })
+    const [output, setOutput] = useState("")
+    const [error, setError] = useState("")
 
-    // const handleChange = ({ currentTarget: input }) => {
-    //     setData({ ...data, [input.name]: input.value })
-    // }
-    // const handleSubmit = async () => {
-    //     const res = await fetch(`http://localhost:3000/api/rce/submit`, {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify(data),
-    //     })
+    const handleChange = ({ currentTarget: input }) => {
+        setData({ ...data, [input.name]: input.value })
+    }
+    const handleSubmit = async () => {
+        const res = await fetch(`http://localhost:3000/api/rce/submit`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
 
-    //     const ans = await res.json()
-    //     let data1 = null
+        const ans = await res.json()
+        let data1 = null
 
     //     let response = await fetch(
     //         `http://localhost:3000/api/rce/getJob/${ans.jobId}`
@@ -37,11 +36,7 @@ export default function Home() {
 
     return (
         <div className='App'>
-            <Head>
-                <title>evaluate</title>
-                <meta name="description" content="web editor based rce" />
-            </Head>
-            {/* <textarea
+            <textarea
                 onChange={handleChange}
                 name='src'
                 className=' w-60 border-solid border-indigo-200 text-green-600 '
@@ -50,7 +45,7 @@ export default function Home() {
             {error && <div>{error}</div>}
             <button onClick={handleSubmit} className='text-sky-600'>
                 submit
-            </button> */}
+            </button>
 
             <div className="flex justify-center">
                 <h2 className="text-green-600 text-center"> welcome </h2>
@@ -58,5 +53,5 @@ export default function Home() {
                 <CodeUi/>
             </div>
         </div>
-    )
+    )}
 }
