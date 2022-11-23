@@ -1,71 +1,100 @@
-import React, { createContext, useState, useContext, useEffect } from "react"
-import Cookies from "js-cookie"
-import api from "../lib/api"
+import { useContext, createContext } from "react"
+import { useRouter } from "next/router"
+import api from "./api"
 
-let window_obj = undefined
+const AuthContext = createContext()
 
-const AuthContext = createContext({})
-
-export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null)
-    const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        async function loadUserFromCookies() {
-            const token = Cookies.get("evaluate")
-            if (token) {
-                api.defaults.headers.Authorization = `Bearer ${token}`
-                const { data: user } = await api
-                    .get("api/auth/me")
-                    .catch((e) => console.log(e))
-                if (user) setUser(user)
+export const getUser = async (ctx) => {
+    api.defaults.headers = ctx?.req?.headers?.cookie
+        ? { cookie: ctx.req.headers.cookie }
+        : undefined
+    return await api
+        .get("api/auth/me", {
+            withCredentials: true,
+        })
+        .then((response) => {
+            if (response.data) {
+                return { status: "SIGNED_IN", user: response.data }
+            } else {
+                return { status: "SIGNED_OUT", user: null }
             }
-            setLoading(false)
-            window_obj = window.location.pathname
-        }
-        loadUserFromCookies()
-    }, [])
-
-    const login = async (email, password) => {
-        const {
-            data: { accessToken },
-        } = await api.post("api/auth/student/login", {
+        })
+        .catch((error) => {
+            return { status: "SIGNED_OUT", user: null }
+        })
+}
+export const AuthProvider = (props) => {
+    const router = useRouter()
+    const auth = props.myAuth || { status: "SIGNED_OUT", user: null }
+    const studentLogin = async (email, password) => {
+        const data = {
             email,
             password,
-        })
-        if (accessToken) {
-            const token = Cookies.get("evaluate")
-            api.defaults.headers.Authorization = `Bearer ${token}`
-            const { data: user } = await api.get("api/auth/me")
-            setUser(user)
         }
+        return await api
+            .post("api/auth/student/login", data, {
+                withCredentials: true,
+            })
+            .then(() => {
+                router.push("/courses")
+            })
+            .catch((error) => {
+                console.error("Incorrect email or password entered.")
+            })
     }
-
-    const logout = (email, password) => {
-        Cookies.remove("token")
-        setUser(null)
-        delete api.defaults.headers.Authorization
-        window.location.pathname = "/login"
+    const facultyLogin = async (facultyId, password) => {
+        const data = {
+            facultyId,
+            password,
+        }
+        return await api
+            .post("api/auth/faculty/login", data, {
+                withCredentials: true,
+            })
+            .then(() => {
+                router.push("/faculty/dashboard")
+            })
+            .catch((error) => {
+                console.error("Incorrect email or password entered.")
+            })
+    }
+    const register = async (email, password) => {
+        const data = {
+            email,
+            password,
+        }
+        return await api
+            .post("signup route here", data, {
+                withCredentials: true,
+            })
+            .then(function (response) {
+                router.push("/")
+                console.log("user registered")
+            })
+            .catch(function (error) {
+                console.error(error.message)
+            })
+    }
+    const logout = async () => {
+        return await api
+            .get(`${process.env.NEXT_PUBLIC_API_URL}/logout`, {
+                withCredentials: true,
+            })
+            .then(() => {
+                router.push("/")
+                console.log("user logged out")
+            })
+            .catch((error) => {
+                console.error(error.message)
+            })
     }
 
     return (
         <AuthContext.Provider
-            value={{ isAuthenticated: !!user, user, login, loading, logout }}>
-            {children}
-        </AuthContext.Provider>
+            value={{ auth, logout, register, studentLogin, facultyLogin }}
+            {...props}
+        />
     )
 }
-
-export const ProtectRoutes = ({ children }) => {
-    const { user, isAuthenticated, isLoading } = useAuth()
-    if (isLoading || (!isAuthenticated && window_obj !== "/login")) {
-        return <div>Please login </div>
-    }
-
-    if(user && !user.isVerified){
-        return <div>You need to verify your account to continue</div>
-    }
-    return children
-}
-
 export const useAuth = () => useContext(AuthContext)
+export const AuthConsumer = AuthContext.Consumer

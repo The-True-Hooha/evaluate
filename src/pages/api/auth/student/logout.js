@@ -10,7 +10,7 @@ export default async function handler(req, res) {
         })
     } else {
         const serialized = serialize("evaluate", null, {
-            httpOnly: true,
+            httpOnly: false,
             sameSite: "strict",
             secure: process.env.PHASE,
             maxAge: -1,

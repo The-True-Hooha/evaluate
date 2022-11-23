@@ -1,11 +1,13 @@
-import { useState } from "react"
-import route from "next/router"
-import { useAuth } from "../lib/AuthContext"
+import { useState, useEffect } from "react"
+import Router, { useRouter } from "next/router"
+import { getUser, useAuth } from "../lib/AuthContext"
+import Link from "next/link"
 
-export default function LoginPage() {
+export default function Login() {
+    const router = useRouter()
     const [data, setData] = useState({ email: "", password: "" })
     const [error, setError] = useState("")
-    const { login } = useAuth()
+    const { studentLogin } = useAuth()
 
     const handleChange = ({ currentTarget: input }) => {
         setData({ ...data, [input.name]: input.value })
@@ -17,8 +19,7 @@ export default function LoginPage() {
             const { email, password } = data
             const {
                 data: { accessToken },
-            } = await login(email, password)
-            return route.push("/")
+            } = await studentLogin(email, password)
         } catch (error) {
             if (
                 error.response &&
@@ -31,66 +32,136 @@ export default function LoginPage() {
     }
 
     return (
-        <div className='flex justify-between'>
-            <div className='w-[50%] bg-white'>
-                <div className='py-4'>
-                    <div className='py-[160px] px-[150px]'>
-                        <h2 className='text-[30px] font-semibold'>
-                            Welcome back
-                        </h2>
-                        <p className='text-[15px] font-semibold text-[#51555a]'>
-                            please enter your login credentials.
-                        </p>
-                        <div className='pt-6'>
-                            <form onSubmit={handleSubmit}>
-                                <label
-                                    for='email'
-                                    className='mb-2 block font-medium text-gray-900'>
-                                    email
-                                </label>
-                                <input
-                                    type='email'
-                                    name='email'
-                                    onChange={handleChange}
-                                    required
-                                    placeholder='enter email'
-                                    className='block w-full rounded-lg border border-green-500 bg-white p-2.5 text-sm focus:border-green-500 focus:outline-green-500'
-                                />
-                                <div className='mt-6'>
-                                    <label
-                                        for='password'
-                                        className='mb-2 block font-medium text-gray-900'>
-                                        password
-                                    </label>
-                                    <input
-                                        type='password'
-                                        name='password'
-                                        required
-                                        onChange={handleChange}
-                                        placeholder='enter password'
-                                        className='block w-full rounded-lg border border-green-500 bg-white p-2.5 text-sm focus:border-green-500 focus:outline-green-500'
-                                    />
+        <section class='gradient-form h-full bg-gray-200 md:h-screen'>
+            <div class='container h-full py-12 px-6'>
+                <div class='g-6 flex h-full flex-wrap items-center justify-center text-gray-800'>
+                    <div class='xl:w-10/12'>
+                        <div class='block rounded-lg bg-white shadow-lg'>
+                            <div class='g-0 lg:flex lg:flex-wrap'>
+                                <div class='px-4 md:px-0 lg:w-6/12'>
+                                    <div class='md:mx-6 md:p-12'>
+                                        <div class='text-center'>
+                                            <img
+                                                class='mx-auto w-48'
+                                                src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp'
+                                                alt='logo'
+                                            />
+                                            <h4 class='mt-1 mb-12 pb-1 text-xl font-semibold'>
+                                                Welcome to Evaluate
+                                            </h4>
+                                        </div>
+                                        <form>
+                                            <p class='mb-4'>
+                                                Please login to your account
+                                            </p>
+                                            <div class='mb-4'>
+                                                <input
+                                                    type='text'
+                                                    name='email'
+                                                    class='form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none'
+                                                    id='exampleFormControlInput1'
+                                                    placeholder='Enter your SSU email'
+                                                    onChange={(e) =>
+                                                        handleChange(e)
+                                                    }
+                                                />
+                                            </div>
+                                            <div class='mb-4'>
+                                                <input
+                                                    type='password'
+                                                    name='password'
+                                                    class='form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none'
+                                                    id='exampleFormControlInput2'
+                                                    placeholder='Password'
+                                                    onChange={(e) =>
+                                                        handleChange(e)
+                                                    }
+                                                />
+                                            </div>
+                                            <div class='mb-12 pt-1 pb-1 text-center'>
+                                                <button
+                                                    class='mb-3 inline-block w-full rounded px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg'
+                                                    type='button'
+                                                    data-mdb-ripple='true'
+                                                    data-mdb-ripple-color='light'
+                                                    style={{
+                                                        background:
+                                                            "linear-gradient( to right,#ee7724, #d8363a,#dd3675, #b44593 )",
+                                                    }}
+                                                    onClick={handleSubmit}>
+                                                    Log in
+                                                </button>
+                                                <p>
+                                                    Faculty?{" "}
+                                                    <span>
+                                                        <Link href='/faculty/login'>Sign in here</Link>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <div class='flex items-center justify-between pb-6'>
+                                                <p class='mb-0 mr-2'></p>
+                                                <button
+                                                    type='button'
+                                                    class='inline-block rounded border-2 border-red-600 px-6 py-2 text-xs font-medium uppercase leading-tight text-red-600 transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0'
+                                                    data-mdb-ripple='true'
+                                                    data-mdb-ripple-color='light'>
+                                                    Danger
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
-                                <div className='mt-3 text-sm text-red-500'>
-                                    {error && <div>{error}</div>}
+                                <div
+                                    class='flex items-center rounded-b-lg lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none'
+                                    style={{
+                                        background:
+                                            "linear-gradient( to right,#ee7724, #d8363a,#dd3675, #b44593 )",
+                                    }}>
+                                    <div class='px-4 py-6 text-white md:mx-6 md:p-12'>
+                                        <h4 class='mb-6 text-xl font-semibold'>
+                                            Smart and Intuitive grading platform
+                                        </h4>
+                                        <p class='text-sm'>
+                                            Lorem ipsum dolor sit amet,
+                                            consectetur adipisicing elit, sed do
+                                            eiusmod tempor incididunt ut labore
+                                            et dolore magna aliqua. Ut enim ad
+                                            minim veniam, quis nostrud
+                                            exercitation ullamco laboris nisi ut
+                                            aliquip ex ea commodo consequat.
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className='mt-4'></div>
-                                <button
-                                    type='submit'
-                                    className='mt-4 w-full rounded-lg bg-green-500 px-[235px] py-2.5 text-center text-sm font-medium text-white hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-300 sm:w-auto'
-                                    onClick={handleSubmit}>
-                                    login
-                                </button>
-                            </form>
-                            <div className='flex w-full justify-center'>
-                                <p className='pt-4 text-[15px] text-[#51555a]'>
-                                    dont have an account?
-                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     )
+}
+
+export async function getServerSideProps(ctx) {
+    const res = await getUser(ctx)
+    if (res.status === "SIGNED_OUT") {
+        return {
+            props: {},
+        }
+    }
+    const {
+        status,
+        user: { role },
+    } = res
+    console.log(res)
+    if (status === "SIGNED_IN" && role === "STUDENT") {
+        return {
+            redirect: {
+                permanent: false,
+                destination: "/courses",
+            },
+        }
+    }
+    return {
+        props: {},
+    }
 }

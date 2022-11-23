@@ -2,7 +2,7 @@ import { fromZodError } from "zod-validation-error"
 
 const z = require("zod")
 
-export function userSignupValidation(data) {
+export function studentSignupValidation(data) {
     const registerValidationSchema = z.object({
         username: z
             .string()
@@ -27,7 +27,7 @@ export function userSignupValidation(data) {
     }
 }
 
-export function userLoginValidation(data) {
+export function studentLoginValidation(data) {
     const loginValidationSchema = z.object({
         email: z.string().email().endsWith("@salemstate.edu").trim(),
         password: z

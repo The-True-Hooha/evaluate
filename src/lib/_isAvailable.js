@@ -1,16 +1,16 @@
-import {prisma} from "../config/prisma.connect"
+import { prisma } from "../config/prisma.connect"
 
-//checks if user credentials can be allocated to others
+//checks if student credentials can be allocated to others
 export default async function _isAvailable(email) {
-    const user = await prisma.user.findUnique({
+    const student = await prisma.student.findUnique({
         where: {
             email: email,
         },
     })
 
-    if (user && user.isVerified) return false
-    if (user && !user.isVerified) {
-        await prisma.user.delete({
+    if (student && student.isVerified) return false
+    if (student && !student.isVerified) {
+        await prisma.student.delete({
             where: {
                 email: email,
             },
@@ -19,5 +19,5 @@ export default async function _isAvailable(email) {
         return true
     }
 
-    return !user ? true : false
+    return !student ? true : false
 }
