@@ -10,6 +10,7 @@
       "codemirror",
       "colour",
       "commitlint",
+      "coursename",
       "datacentres",
       "devs",
       "Eagleson",
@@ -107,5 +108,10 @@
         "Vercel",
         "Viewports",
         "WEBP"
-    ]
+
+    ],
+
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    }
 }

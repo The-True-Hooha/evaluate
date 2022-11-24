@@ -1,20 +1,17 @@
-// import { v4 } from "uuid"
-// import publishMessage from "../../../aws-sdk/sqs/publishMessage"
+import { v4 } from "uuid"
+import publishMessage from "../../../../aws-sdk/sqs/publishMessage"
 
 export default async function submit(req, res) {
-    const { headers } = req
+    const { src, language } = req.body
+    const jobId = v4()
 
-    console.log(headers)
-    // const { src, language } = req.body
-    // const jobId = v4()
+    const input = {
+        jobId,
+        src,
+        language,
+    }
 
-    // const input = {
-    //     jobId,
-    //     src,
-    //     language,
-    // }
+    await publishMessage(input) //handle err
 
-    // await publishMessage(input) //handle err
-
-    // return res.status(200).json({ jobId: jobId })
+    return res.status(200).json({ jobId: jobId })
 }

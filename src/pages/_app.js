@@ -4,6 +4,7 @@ import { getUser } from "../lib/AuthContext"
 import { AuthProvider, ProtectRoutes } from "../lib/AuthContext"
 
 function MyApp({ Component, pageProps, auth }) {
+    console.log(auth)
     return (
         <AuthProvider myAuth={auth}>
             <Component {...pageProps} />
@@ -16,4 +17,5 @@ MyApp.getInitialProps = async (appContext) => {
     const auth = await getUser(appContext.ctx)
     return { ...appProps, auth: auth }
 }
+
 export default MyApp

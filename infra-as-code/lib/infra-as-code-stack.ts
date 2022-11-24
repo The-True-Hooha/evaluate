@@ -68,22 +68,38 @@ export class InfraAsCodeStack extends Stack {
         //   securityGroups: [evaluateSG]
         // })
 
-        const queue = new sqs.Queue(this, "code-submission-queue", {
-            queueName: "codeSubmission.fifo",
+        const pythonQueue = new sqs.Queue(this, "python-code-submission-queue", {
+            queueName: "pythonCodeSubmission.fifo",
             visibilityTimeout: Duration.minutes(15),
             retentionPeriod: Duration.seconds(1209600),
         })
 
-        const trigger = new SqsEventSource(queue)
+        const pythonTrigger = new SqsEventSource(pythonQueue)
 
-        const fn = new lambda.Function(this, "lambda-fn", {
+        const pythonFn = new lambda.Function(this, "python-lambda-fn", {
             runtime: lambda.Runtime.PYTHON_3_9,
             handler: "index.lambda_handler",
             code: lambda.Code.fromAsset("lambda/python"),
-            timeout: Duration.seconds(5),
-            events: [trigger],
+            timeout: Duration.seconds(3),
+            events: [pythonTrigger],
         })
 
+        // const javaQueue = new sqs.Queue(this, "java-code-submission-queue", {
+        //     queueName: "javaCodeSubmission.fifo",
+        //     visibilityTimeout: Duration.minutes(15),
+        //     retentionPeriod: Duration.seconds(1209600),
+        // })
+
+        // const javaTrigger = new SqsEventSource(javaQueue)
+
+        // const javaFn = new lambda.Function(this, "java-lambda-fn", {
+        //     runtime: lambda.Runtime.JAVA_11,
+        //     handler: "index.Handler",
+        //     code: lambda.Code.fromAsset("lambda/java"),
+        //     timeout: Duration.seconds(3),
+        //     events: [javaTrigger],
+        // })
+   
         const table = new dynamodb.Table(this, "evaluate-table", {
             tableName: "evaluateCacheStore",
             partitionKey: {
@@ -92,7 +108,7 @@ export class InfraAsCodeStack extends Stack {
             },
             removalPolicy: RemovalPolicy.DESTROY,
         })
-
-        table.grantWriteData(fn)
+        // table.grantWriteData(javaFn)
+        table.grantWriteData(pythonFn)
     }
 }

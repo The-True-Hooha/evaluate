@@ -1,5 +1,5 @@
 import Head from "next/head"
-import CodeUi from "../../../../components/codeMirror"
+import CodeUi from "../../../../../components/codeMirror"
 
 export default function StudentActivity() {
     return (

@@ -1,17 +1,16 @@
-import api from "../../lib/api"
-import { getUser, useAuth } from "../../lib/AuthContext"
+import api from "../../../lib/api"
+import { getUser, useAuth } from "../../../lib/AuthContext"
 import { useRouter } from "next/router"
 
 export default function Home({ course }) {
     const { auth } = useAuth()
     const router = useRouter()
-
     const {
         user: { username },
     } = auth
 
     const handleClick = () => {
-        router.push(`/courses/${course.courseId}`)
+        router.push(`/student/courses/${course.courseId}`)
     }
     return (
         <div>
