@@ -11,7 +11,8 @@ export default async function (req, res) {
                 activityId: activityId,
             },
             include: {
-                learningobjectives: true,
+                course : true,
+                learningObjectives: true,
                 codingActivity: true,
             },
         })

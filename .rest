@@ -4,7 +4,7 @@ Cookie: evaluate=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImUwZDNlZDZlLWVkOW
 
 
 ###
-POST  http://localhost:3000/api/superuser/createFacultyCredentials
+POST  http://localhost:3000/api/ops/superuser/createFacultyCredentials
 Content-Type: application/json
 
 {
@@ -44,28 +44,27 @@ Content-Type: application/json
 }
 
 
-# --- Authentication ---
 ###
+# --- Authentication ---
 # --- Operations --- 
 
 # --- Course ---
 GET  http://localhost:3000/api/ops/course/read
 
 ###
-GET  http://localhost:3000/api/ops/course/read/a819deb2-c45c-4eca-84b2-f8a5c1617fa1
+GET  http://localhost:3000/api/ops/course/read/dffbdcd2-5040-4319-8555-45f0a332b012
 ###
 DELETE   http://localhost:3000/api/ops/course/delete
 
 ###
-DELETE   http://localhost:3000/api/ops/course/delete/0fc23c26-15fb-4fa5-8172-a26c49f347e0
+DELETE   http://localhost:3000/api/ops/course/delete/9910e381-5de2-46a2-9708-651c29b283ea
 
 ###
 POST  http://localhost:3000/api/ops/course/create
 Content-Type: application/json
 
 {
-    "facultyname" : "Fatema Nafa",
-    "coursename" : "Machine Learning v2801",
+    "coursename" : "Machine Learning",
     "academicyear" : "Spring 22",
     "academicterm" : "Fall 22 - Spring 22",
     "learningObjectives" : "1. Get better at java.",
@@ -92,17 +91,18 @@ Content-Type: application/json
     "learningObjectives": {
         "description" : "You should have better syntax and be able to tell"
     },
-    "courseId" : ""
+    "courseId" : "a51a00cc-7b99-406d-96cb-78417128c7e4",
+    "testCases" : {"test1" : [1, 3]}
 }
 
 ###
 GET  http://localhost:3000/api/ops/activity/read
 
 ###
-GET http://localhost:3000/api/ops/activity/read/dd7e7e4a-6e39-4566-b587-dae93acdd3f7
+GET http://localhost:3000/api/ops/activity/read/726a6b05-36a9-4914-9a70-81494e324fa1
 
 ###
-DELETE http://localhost:3000/api/ops/activity/delete/dd7e7e4a-6e39-4566-b587-dae93acdd3f7
+DELETE http://localhost:3000/api/ops/activity/delete/db8ee3dd-43e6-41b3-9b0e-036942674b97
 
 ###
 DELETE http://localhost:3000/api/ops/activity/delete
@@ -112,6 +112,17 @@ DELETE http://localhost:3000/api/ops/activity/delete
 # --- Student ---
 ###
 GET  http://localhost:3000/api/ops/student/read  
+
+###
+GET http://localhost:3000/api/ops/student/read/267dc833-9cf4-4793-a6e1-b0f7b3333660
+###
+POST   http://localhost:3000/api/ops/student/create/enrollStudent
+Content-Type: application/json
+
+{
+    "sid" : "267dc833-9cf4-4793-a6e1-b0f7b3333660",
+    "courseId" : "2197b0be-184c-48f6-91ad-ddc47a710d72"
+}
 
 # --- Student ---
 

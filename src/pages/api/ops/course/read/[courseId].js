@@ -11,13 +11,26 @@ export default async function (req, res) {
                 courseId: courseId,
             },
             include: {
-                LearningObjective: true,
-                faculty: true,
-                activity: {
-                    include: {
-                        codingActivity: true,
-                    },
+                students : {
+                    select : {
+                        email : true
+                    }
                 },
+                learningObjectives: {
+                    select : {
+                        description : true
+                    }
+                },
+                instructor: {
+                    select : {
+                        firstName: true
+                    }
+                },
+                activities: {
+                    select : {
+                        topic : true
+                    }
+                }
             },
         })
     })

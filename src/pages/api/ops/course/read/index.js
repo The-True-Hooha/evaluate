@@ -7,13 +7,26 @@ export default async function getAll(req, res) {
     return prismaErrorWrapper(res, async () => {
         return await prisma.course.findMany({
             include: {
-                LearningObjective: true,
-                faculty: true,
-                activity: {
-                    include: {
-                        codingActivity: true,
-                    },
+                students : {
+                    select : {
+                        email : true
+                    }
                 },
+                learningObjectives: {
+                    select : {
+                        description : true
+                    }
+                },
+                instructor: {
+                    select : {
+                        firstName: true
+                    }
+                },
+                activities: {
+                    select : {
+                        topic : true
+                    }
+                }
             },
         })
     })

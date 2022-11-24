@@ -1,19 +1,19 @@
-import prisma from "../../config/prisma.connect"
+import prisma from "../../../../config/prisma.connect"
 
 export default async function getPendingStudents(req, res) {
     try {
-        const getAll = await prisma.user.findMany({
+        const getAll = await prisma.student.findMany({
             where: {
                 isEnabled: false,
             },
 
             orderBy: {
-                email: "asc", //Date and time
+                createdAt: "asc", //Date and time
             },
         })
         if (getAll) {
             res.status(200).json({
-                message: "returned all users awaiting access",
+                message: "returned all students awaiting access",
                 data: getAll.map((v) => ({
                     username: v.username,
                     email: v.email,

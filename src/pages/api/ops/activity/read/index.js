@@ -8,7 +8,7 @@ export default async function (req, res) {
             include: {
                 course: true,
                 codingActivity: true,
-                learningobjectives : true
+                learningObjectives : true
             },
         })
     })

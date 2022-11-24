@@ -1,5 +1,5 @@
 import { facultyCredentialsValidation } from "../../../../lib/validate"
-import prisma from "../../../../config/prisma.connect"
+import {prisma} from "../../../../config/prisma.connect"
 import hashPassword from "../../../../lib/hashPassword"
 
 export default async function createFacultyCredentials(req, res) {
