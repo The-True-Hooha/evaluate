@@ -32,13 +32,13 @@ export default function Login() {
     }
 
     return (
-        <section className='gradient-form h-full bg-gray-200 md:h-screen'>
+        <section className='gradient-form h-full bg-blue_black-100 text-white md:h-screen'>
             <div className='container h-full py-12 px-6'>
                 <div className='g-6 flex h-full flex-wrap items-center justify-center text-gray-800'>
                     <div className='xl:w-10/12'>
-                        <div className='block rounded-lg bg-white shadow-lg'>
+                        <div className='block rounded-lg bg-blue_black-100 shadow-lg'>
                             <div className='g-0 lg:flex lg:flex-wrap'>
-                                <div className='px-4 md:px-0 lg:w-6/12'>
+                                <div className='px-4 md:px-0 lg:w-6/12 border-l border-t border-b'>
                                     <div className='md:mx-6 md:p-12'>
                                         <div className='text-center'>
                                             <img
@@ -46,12 +46,12 @@ export default function Login() {
                                                 src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp'
                                                 alt='logo'
                                             />
-                                            <h4 className='mt-1 mb-12 pb-1 text-xl font-semibold'>
+                                            <h4 className='mt-1 mb-12 text-white pb-1 text-xl font-semibold'>
                                                 Welcome to Evaluate
                                             </h4>
                                         </div>
                                         <form>
-                                            <p className='mb-4'>
+                                            <p className='mb-4 text-white'>
                                                 Please login to your account
                                             </p>
                                             <div className='mb-4'>
@@ -91,7 +91,7 @@ export default function Login() {
                                                     onClick={handleSubmit}>
                                                     Log in
                                                 </button>
-                                                <p>
+                                                <p className="text-white">
                                                     Faculty?{" "}
                                                     <span>
                                                         <Link href='/faculty/login'>Sign in here</Link>
