@@ -11,6 +11,7 @@ export default async function create(req, res) {
         availablefrom,
         availableto,
         courseId,
+        testCases,
         codingActivity: { question },
         learningObjectives: { description },
     } = req.body
@@ -23,12 +24,13 @@ export default async function create(req, res) {
                 numofattempts: numofattempts,
                 availablefrom: new Date().toISOString(),
                 availableto: new Date().toISOString(),
+                testCases : testCases,
                 course: {
                     connect: {
-                        coursename: "Machine Learning v2801", //replace with courseId
+                        courseId : courseId, //replace with courseId
                     },
                 },
-                learningobjectives: {
+                learningObjectives: {
                     create: {
                         description : description
                     },

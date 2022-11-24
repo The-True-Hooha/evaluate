@@ -6,8 +6,8 @@ export default async function (req, res) {
     return prismaErrorWrapper(res, async () => {
         return await prisma.student.findMany({
             include: {
-                course: true,
-                submission: true,
+                courses: true,
+                submissions: true,
             },
         })
     })

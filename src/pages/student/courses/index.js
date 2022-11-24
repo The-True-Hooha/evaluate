@@ -36,6 +36,8 @@ export async function getServerSideProps(ctx) {
     } = await api.post("api/ops/student/read/getStudentCourses", {
         sid: user.sid,
     })
+
+    console.log(course)
     return {
         props: {
             course,

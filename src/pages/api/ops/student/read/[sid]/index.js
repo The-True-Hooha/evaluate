@@ -5,22 +5,14 @@ import prismaErrorWrapper from "../../../../../../lib/prismaErrorWrapper"
 export default async function (req, res) {
     const { sid } = req.query
     return prismaErrorWrapper(res, async () => {
-        return await prisma.student.update({
+        return await prisma.student.findUnique({
             where: {
                 sid: sid,
             },
-            data : {
-                course : {
-                    connect : {
-                        coursename : "Machine Learning v2881"
-                    }
-                }
-            }
-            // include: {
-            //     codingActivity: true,
-            //     course: true,
-            //     learningobjectives: true,
-            // },
+            include: {
+                courses: true,
+                submissions: true,
+            },
         })
     })
 }
