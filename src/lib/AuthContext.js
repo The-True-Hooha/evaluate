@@ -68,13 +68,30 @@ export const AuthProvider = (props) => {
             .post("api/auth/student/signup", data, {
                 withCredentials: true,
             })
-            .then(function (response) {
+            .then(() => {
                 router.push("/")
             })
             .catch(function (error) {
                 console.error(error.message)
             })
     }
+
+    const facultyRegister = async ( facultyId, firstName, lastName, password ) => {
+        const data = {
+            facultyId,
+            firstName,
+            lastName,
+            password
+        }
+        return await api
+            .post("api/ops/superuser/createFacultyCredentials", data, {
+                withCredentials: true,
+            })
+            .then(function (error) {
+                console.log(error.message)
+            })
+    }
+
     const logout = async () => {
         return await api
             .get(`${process.env.NEXT_PUBLIC_API_URL}/logout`, {
@@ -90,7 +107,7 @@ export const AuthProvider = (props) => {
 
     return (
         <AuthContext.Provider
-            value={{ auth, logout, studentRegister, studentLogin, facultyLogin }}
+            value={{ auth, logout, facultyRegister, studentRegister, studentLogin, facultyLogin }}
             {...props}
         />
     )
