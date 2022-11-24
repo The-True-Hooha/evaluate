@@ -123,9 +123,12 @@ export default function FacultyRegister(){
                                             <p className="text-white">
                                                 Student?{" "}
                                                 <span>
-                                                    <Link href='/register'>
+                                                    <Link 
+                                                        href='/register'
+                                                        className="hover:underline hover:text-neon_carrot-100"
+                                                        >
                                                        Sign up here
-                                                        </Link>
+                                                    </Link>
                                                 </span>
                                             </p>
                                         </div>

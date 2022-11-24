@@ -2,6 +2,8 @@ import { useState, useEffect } from "react"
 import Router, { useRouter } from "next/router"
 import { getUser, useAuth } from "../lib/AuthContext"
 import Link from "next/link"
+import SalemState from '../styles/assets/images/salem state.jpg'
+import Image from 'next/image'
 
 export default function Login() {
     const router = useRouter()
@@ -94,7 +96,11 @@ export default function Login() {
                                                 <p className="text-white">
                                                     Faculty?{" "}
                                                     <span>
-                                                        <Link href='/faculty/login'>Sign in here</Link>
+                                                        <Link
+                                                            href='/faculty/login'
+                                                            className="hover:underline hover:text-neon_carrot-100">
+                                                            Sign in here
+                                                        </Link>
                                                     </span>
                                                 </p>
                                             </div>
@@ -117,19 +123,15 @@ export default function Login() {
                                         background:
                                             "linear-gradient( to right,#ee7724, #d8363a,#dd3675, #b44593 )",
                                     }}>
+                                        <Image
+                                            src={SalemState}
+                                            alt="salem state university"
+                                            loading="lazy"
+                                        />
                                     <div className='px-4 py-6 text-white md:mx-6 md:p-12'>
                                         <h4 className='mb-6 text-xl font-semibold'>
                                             Smart and Intuitive grading platform
                                         </h4>
-                                        <p className='text-sm'>
-                                            Lorem ipsum dolor sit amet,
-                                            consectetur adipisicing elit, sed do
-                                            eiusmod tempor incididunt ut labore
-                                            et dolore magna aliqua. Ut enim ad
-                                            minim veniam, quis nostrud
-                                            exercitation ullamco laboris nisi ut
-                                            aliquip ex ea commodo consequat.
-                                        </p>
                                     </div>
                                 </div>
                             </div>

@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { useAuth } from '../lib/AuthContext'
+import SalemState from '../styles/assets/images/salem state.jpg'
+import Image from 'next/image'
 
 
 export default function Register() {
@@ -45,9 +47,14 @@ export default function Register() {
                                                 src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp'
                                                 alt='logo'
                                             />
-                                            <h4 className='mt-1 mb-12 pb-1 text-xl font-semibold text-white'>
-                                                Welcome to Evaluate
-                                            </h4>
+                                            <div className='mb-8'>
+                                                <h4 className='mt-1 pb-1 text-xl font-semibold text-white'>
+                                                    Welcome to Evaluate
+                                                </h4>
+                                                <p className='text-white text-sm font-semibold'>
+                                                    Smart and Intuitive grading platform
+                                                </p>
+                                            </div>
                                         </div>
                                         <form>
                                             <p className='mb-4 text-white'>
@@ -105,8 +112,9 @@ export default function Register() {
                                                 <p className='text-white'>
                                                     Faculty?{" "}
                                                     <span>
-                                                        <Link href='/faculty/login'>
-                                                            Sign in here
+                                                        <Link href='/faculty/register'
+                                                            className='hover:underline hover:text-neon_carrot-100'>
+                                                            Sign register here
                                                         </Link>
                                                     </span>
                                                 </p>
@@ -130,20 +138,14 @@ export default function Register() {
                                         background:
                                             "linear-gradient( to right,#ee7724, #d8363a,#dd3675, #b44593 )",
                                     }}>
-                                    <div className='px-4 py-6 text-white md:mx-6 md:p-12'>
-                                        <h4 className='mb-6 text-xl font-semibold'>
-                                            Smart and Intuitive grading platform
-                                        </h4>
-                                        <p className='text-sm'>
-                                            Lorem ipsum dolor sit amet,
-                                            consectetur adipisicing elit, sed do
-                                            eiusmod tempor incididunt ut labore
-                                            et dolore magna aliqua. Ut enim ad
-                                            minim veniam, quis nostrud
-                                            exercitation ullamco laboris nisi ut
-                                            aliquip ex ea commodo consequat.
-                                        </p>
-                                    </div>
+                                        <Image
+                                            
+                                            src={SalemState}
+                                            alt="salem state university"
+                                            loading='lazy'
+                                            />
+                                    {/* <div className='px-4 py-6 text-white md:mx-6 md:p-12'>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>

@@ -101,9 +101,12 @@ export default function Login() {
                                                 <p className="text-white">
                                                     Student?{" "}
                                                     <span>
-                                                        <Link href='/login'>
+                                                        <Link 
+                                                            href='/login'
+                                                            className="hover:underline hover:text-neon_carrot-100"
+                                                            >
                                                            Sign in here
-                                                            </Link>
+                                                        </Link>
                                                     </span>
                                                 </p>
                                             </div>
