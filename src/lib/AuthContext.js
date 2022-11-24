@@ -58,13 +58,14 @@ export const AuthProvider = (props) => {
                 console.error("Incorrect email or password entered.")
             })
     }
-    const register = async (email, password) => {
+    const studentRegister = async (email, username, password) => {
         const data = {
             email,
+            username,
             password,
         }
         return await api
-            .post("signup route here", data, {
+            .post("api/auth/student/signup", data, {
                 withCredentials: true,
             })
             .then(function (response) {
@@ -89,7 +90,7 @@ export const AuthProvider = (props) => {
 
     return (
         <AuthContext.Provider
-            value={{ auth, logout, register, studentLogin, facultyLogin }}
+            value={{ auth, logout, studentRegister, studentLogin, facultyLogin }}
             {...props}
         />
     )
