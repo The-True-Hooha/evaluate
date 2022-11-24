@@ -1,46 +1,45 @@
-import { useState, useEffect } from "react"
-import Router, { useRouter } from "next/router"
-import { getUser, useAuth } from "../lib/AuthContext"
-import Link from "next/link"
+import Link from 'next/link'
+import { useState } from 'react'
+import { useAuth } from '../lib/AuthContext'
 import SalemState from '../styles/assets/images/salem state.jpg'
 import Image from 'next/image'
 
-export default function Login() {
-    const router = useRouter()
-    const [data, setData] = useState({ email: "", password: "" })
-    const [error, setError] = useState("")
-    const { studentLogin } = useAuth()
 
-    const handleChange = ({ currentTarget: input }) => {
-        setData({ ...data, [input.name]: input.value })
+export default function Register() {
+    const [data, setData] = useState({ email: "", username: "", password: ""})
+    const [error, setError] = useState("")
+    const { studentRegister } = useAuth();
+
+    const handleChange = ({ currentTarget: input}) => {
+        setData({ ...data, [input.name]: input.value})
     }
 
-    const handleSubmit = async (e) => {
+    const studentRegisterSubmit = async (e) => {
         e.preventDefault()
-        try {
-            const { email, password } = data
+        try{
+            const {email, username, password } = data
             const {
-                data: { accessToken },
-            } = await studentLogin(email, password)
-        } catch (error) {
-            if (
-                error.response &&
-                error.response.status >= 400 &&
-                error.response.status <= 500
-            ) {
-                setError(error.response.data.message)
-            }
+                data: { accessToken},
+            } = await studentRegister(email, username, password)
+        } catch (error){
+           if (
+            error.response &&
+            error.response.status >= 400 &&
+            error.response.status <= 500
+           ) {
+            setError(error.response.data.message)
+           }
         }
     }
 
     return (
-        <section className='gradient-form h-full bg-blue_black-100 text-white md:h-screen'>
+        <div className='gradient-form h-full bg-blue_black-100 text-white md:h-screen'>
             <div className='container h-full py-12 px-6'>
                 <div className='g-6 flex h-full flex-wrap items-center justify-center text-gray-800'>
                     <div className='xl:w-10/12'>
                         <div className='block rounded-lg bg-blue_black-100 shadow-lg'>
                             <div className='g-0 lg:flex lg:flex-wrap'>
-                                <div className='px-4 md:px-0 lg:w-6/12 border-l border-t border-b'>
+                                <div className='border-l border-t border-b px-4 md:px-0 lg:w-6/12'>
                                     <div className='md:mx-6 md:p-12'>
                                         <div className='text-center'>
                                             <img
@@ -48,13 +47,18 @@ export default function Login() {
                                                 src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp'
                                                 alt='logo'
                                             />
-                                            <h4 className='mt-1 mb-12 text-white pb-1 text-xl font-semibold'>
-                                                Welcome to Evaluate
-                                            </h4>
+                                            <div className='mb-8'>
+                                                <h4 className='mt-1 pb-1 text-xl font-semibold text-white'>
+                                                    Welcome to Evaluate
+                                                </h4>
+                                                <p className='text-white text-sm font-semibold'>
+                                                    Smart and Intuitive grading platform
+                                                </p>
+                                            </div>
                                         </div>
                                         <form>
                                             <p className='mb-4 text-white'>
-                                                Please login to your account
+                                                Register to gain access
                                             </p>
                                             <div className='mb-4'>
                                                 <input
@@ -70,11 +74,23 @@ export default function Login() {
                                             </div>
                                             <div className='mb-4'>
                                                 <input
+                                                    type='text'
+                                                    name='username'
+                                                    className='form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none'
+                                                    id='exampleFormControlInput1'
+                                                    placeholder='Enter your username'
+                                                    onChange={(e) =>
+                                                        handleChange(e)
+                                                    }
+                                                />
+                                            </div>
+                                            <div className='mb-4'>
+                                                <input
                                                     type='password'
                                                     name='password'
                                                     className='form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none'
                                                     id='exampleFormControlInput2'
-                                                    placeholder='Password'
+                                                    placeholder='enter your password'
                                                     onChange={(e) =>
                                                         handleChange(e)
                                                     }
@@ -90,16 +106,15 @@ export default function Login() {
                                                         background:
                                                             "linear-gradient( to right,#ee7724, #d8363a,#dd3675, #b44593 )",
                                                     }}
-                                                    onClick={handleSubmit}>
-                                                    Log in
+                                                    onClick={studentRegisterSubmit}>
+                                                    Register
                                                 </button>
-                                                <p className="text-white">
+                                                <p className='text-white'>
                                                     Faculty?{" "}
                                                     <span>
-                                                        <Link
-                                                            href='/faculty/login'
-                                                            className="hover:underline hover:text-neon_carrot-100">
-                                                            Sign in here
+                                                        <Link href='/faculty/register'
+                                                            className='hover:underline hover:text-neon_carrot-100'>
+                                                            Sign register here
                                                         </Link>
                                                     </span>
                                                 </p>
@@ -124,45 +139,19 @@ export default function Login() {
                                             "linear-gradient( to right,#ee7724, #d8363a,#dd3675, #b44593 )",
                                     }}>
                                         <Image
+                                            
                                             src={SalemState}
                                             alt="salem state university"
-                                            loading="lazy"
-                                        />
-                                    <div className='px-4 py-6 text-white md:mx-6 md:p-12'>
-                                        <h4 className='mb-6 text-xl font-semibold'>
-                                            Smart and Intuitive grading platform
-                                        </h4>
-                                    </div>
+                                            loading='lazy'
+                                            />
+                                    {/* <div className='px-4 py-6 text-white md:mx-6 md:p-12'>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     )
-}
-
-export async function getServerSideProps(ctx) {
-    const res = await getUser(ctx)
-    if (res.status === "SIGNED_OUT") {
-        return {
-            props: {},
-        }
-    }
-    const {
-        status,
-        user: { role },
-    } = res
-    if (status === "SIGNED_IN" && role === "STUDENT") {
-        return {
-            redirect: {
-                permanent: false,
-                destination: "/student/courses",
-            },
-        }
-    }
-    return {
-        props: {},
-    }
 }

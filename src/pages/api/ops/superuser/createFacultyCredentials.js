@@ -17,7 +17,6 @@ export default async function createFacultyCredentials(req, res) {
                 password: await hashPassword(password),
             },
         })
-
         return res.status(201).json({ message: newFaculty })
     } catch (error) {
         return res.status(400).json({

@@ -6,6 +6,42 @@
         "source.organizeImports": true
     },
     "cSpell.words": [
+      "codenames",
+      "codemirror",
+      "colour",
+      "commitlint",
+      "coursename",
+      "datacentres",
+      "devs",
+      "Eagleson",
+      "esbenp",
+      "Etyo",
+      "Kasper",
+      "keymap",
+      "leerob",
+      "monokai",
+      "nextauth",
+      "nextjs",
+      "npmrc",
+      "okaidia",
+      "pravatar",
+      "preload",
+      "prettierignore",
+      "prettierrc",
+      "regexes",
+      "rgba",
+      "scaleable",
+      "signin",
+      "Supabase",
+      "superpowered",
+      "tailwindcss",
+      "typeof",
+      "typesafe",
+      "unoptimized",
+      "userinfo",
+      "Vercel",
+      "Viewports",
+      "WEBP",
         "codenames",
         "codemirror",
         "colour",
@@ -72,7 +108,9 @@
         "Vercel",
         "Viewports",
         "WEBP"
+
     ],
+
     "[python]": {
         "editor.defaultFormatter": "ms-python.python"
     }

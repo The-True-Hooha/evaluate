@@ -2,7 +2,7 @@ Always check this before you start work on the repo.
 PRIORITY RANKS FROM TOP.
 
 Hero :
-*(working on) Online web editor implementation. Look into libraries like code mirror (https://codemirror.net/try/)
+*(working on) Online web editor implementation. Look into libraries like code mirror (https://codemirror.net/try/) - done
 * login page v1
 
 Tochi: 
@@ -11,7 +11,7 @@ Tochi:
 * add test case feature to rce
 * login page v1
 
-Beacklog
+Backlog
 add allowed domains for cookie 
 making custom code mirro theme : https://uiwjs.github.io/react-codemirror/#/theme/editor/single
 refresh user access tokens --- necessary for uninterupted workflows
