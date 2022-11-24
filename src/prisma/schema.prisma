@@ -9,94 +9,95 @@ datasource db {
 
 model Student {
   sid        String       @id @default(uuid())
-  email      String
-  username   String
+  email      String       @unique
+  username   String       @unique
   password   String
-  submission Submission[]
   role       ROLE         @default(STUDENT)
   isEnabled  Boolean      @default(false)
   isVerified Boolean      @default(false)
   createdAt  DateTime     @default(now())
-  course     Course?      @relation(fields: [courseId], references: [courseId])
-  courseId   String?
+  courses    Course[]
+  Submission Submission[]
 
-  @@unique([email])
-  @@unique([username])
+  @@index([sid])
 }
 
 model faculty {
   fid       String   @id @default(uuid())
-  facultyId String
+  facultyId String   @unique
   firstName String
   lastName  String
   role      ROLE     @default(FACULTY)
   createdAt DateTime @default(now())
   password  String
-  course    Course?  @relation(fields: [courseId], references: [courseId])
-  courseId  String?
+  isAdmin   Boolean  @default(false)
+  Course    Course[]
 
-  @@unique([facultyId])
+  @@index([fid])
 }
 
 model Course {
-  courseId          String              @id @default(uuid()) //pk
+  courseId          String              @id @default(uuid())
   major             String              @default("Computer Science")
   facultyname       String
-  coursename        String
+  coursename        String              @unique
   academicyear      String
   academicterm      String
-  activity          Activity[]
+  createdAt         DateTime            @default(now())
+  students          Student[]
+  instructor        faculty             @relation(fields: [instructorId], references: [fid])
+  Activity          Activity[]
   LearningObjective LearningObjective[]
-  Student           Student[]
-  faculty           faculty[]
+  instructorId      String
 
-  @@unique([coursename])
+  @@index([courseId])
 }
 
 model LearningObjective {
-  learningObjId String     @id @default(uuid())
+  learningObjId String   @id @default(uuid())
   description   String
-  course        Course?    @relation(fields: [courseId], references: [courseId], onDelete: Cascade)
-  activity      Activity[]
-  courseId      String?
+  course        Course   @relation(fields: [courseId], references: [courseId])
+  courseId      String
+  activity      Activity @relation(fields: [activityId], references: [activityId])
+  activityId    String
+
+  @@index([learningObjId])
 }
 
 model Activity {
-  activityId         String              @id @default(uuid())
-  course             Course              @relation(fields: [courseId], references: [courseId], onDelete: Cascade)
-  learningobjectives LearningObjective[]
-  courseId           String
-  topic              String
-  points             Int
-  numofattempts      Int
-  availablefrom      DateTime
-  availableto        DateTime
-  codingActivity     CodingActivity?
+  activityId        String              @id @default(uuid())
+  topic             String              @unique
+  points            Int
+  numofattempts     Int
+  availablefrom     DateTime            @default(now())
+  availableto       DateTime
+  course            Course              @relation(fields: [courseId], references: [courseId])
+  courseId          String
+  testCases         Json
+  LearningObjective LearningObjective[]
+  CodingActivity    CodingActivity?
+
+  @@index([activityId])
 }
 
 model CodingActivity {
   codingactivityId String       @id @default(uuid())
-  activity         Activity?    @relation(fields: [activityId], references: [activityId], onDelete: Cascade)
-  activityId       String?      @unique
-  question         String
+  question         String       @unique
   Submission       Submission[]
+  actitvity        Activity     @relation(fields: [activityId], references: [activityId])
+  activityId       String       @unique
 }
 
 model Submission {
-  submissionId     String         @id @default(uuid())
-  student          Student        @relation(fields: [sid], references: [sid])
-  activity         CodingActivity @relation(fields: [codingActivityId], references: [codingactivityId])
-  sumbittedAt      DateTime       @default(now())
-  sid              String
-  codingActivityId String
-}
+  submissionId             String         @id @default(uuid())
+  sumbittedAt              DateTime       @default(now())
+  score                    Int
+  student                  Student        @relation(fields: [studentid], references: [sid])
+  studentid                String
+  codingActitvySubmissions CodingActivity @relation(fields: [codingActivityId], references: [codingactivityId])
+  codingActivityId         String
 
-enum Type {
-  Coding
-  MultipleChoice
-  TrueFalse
-  FillInBlank
-  Matching
+  @@index([submissionId])
 }
 
 enum ROLE {
@@ -104,4 +105,13 @@ enum ROLE {
   FACULTY
 }
 
-// a course has a many to many relationship with an activity ?? debating
+// Relationships => {
+// * A Student can take many courses, Many courses can be taken by many students (M - M) -
+// * A Student can have many submissions, Many submission can belong to only one student (1 - M) - 
+// * A Faculty can teach many courses, Many courses can be taught by one faculty (1 - M) - 
+// * A Course can have many activities, Many activities can be linked to one course (1- M) - 
+// * A Course can have many LO's, Many LO's can be linked one course ( 1 - M) -
+// * An Activity can have many LO's, Many LO's can be linked to an activity (1 - M) -
+// * An Activity can have one codingActivity, One codingActivity can be linked to on activity (1 - 1) -
+// * A codingActivity can have many submissions, Many submission can be linked to a codingActivity (1 - M )
+// }

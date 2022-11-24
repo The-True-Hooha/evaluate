@@ -1,6 +1,6 @@
 import { useContext, createContext } from "react"
 import { useRouter } from "next/router"
-import api from "./api"
+import api from './api'
 
 const AuthContext = createContext()
 
@@ -36,7 +36,7 @@ export const AuthProvider = (props) => {
                 withCredentials: true,
             })
             .then(() => {
-                router.push("/courses")
+                router.push("/student/courses")
             })
             .catch((error) => {
                 console.error("Incorrect email or password entered.")
@@ -69,7 +69,6 @@ export const AuthProvider = (props) => {
             })
             .then(function (response) {
                 router.push("/")
-                console.log("user registered")
             })
             .catch(function (error) {
                 console.error(error.message)
@@ -82,7 +81,6 @@ export const AuthProvider = (props) => {
             })
             .then(() => {
                 router.push("/")
-                console.log("user logged out")
             })
             .catch((error) => {
                 console.error(error.message)

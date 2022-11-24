@@ -119,3 +119,10 @@ GET  http://localhost:3000/api/ops/student/read
 
 
 #--- Operations ---
+###
+
+POST https://wjq5fc3jdk.execute-api.us-east-1.amazonaws.com/dev/
+
+{
+    "src" : "tochi"
+}

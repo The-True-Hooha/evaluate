@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import api from "../../../lib/api"
+import api from "../../../../lib/api"
 
 export default function Index({ info }) {
     const { LearningObjective, activity } = info

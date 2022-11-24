@@ -1,25 +1,30 @@
 import { useState } from "react"
-import axios from "axios"
+import api from "../lib/api"
 import CodeMirror from "@uiw/react-codemirror"
 import { langs } from "@uiw/codemirror-extensions-langs"
 import { dracula } from "@uiw/codemirror-theme-dracula"
 import { githubDark } from "@uiw/codemirror-themes-all"
-import { javaDefault } from "../lib/defaults"
+import { pythonDefault } from "../lib/defaults"
+import { rceHttpClient } from "../lib/api"
 
 export default function CodeUi() {
-    const [codeActivity, setCodeActivity] = useState(javaDefault)
+    const [codeActivity, setCodeActivity] = useState(pythonDefault)
     const [codeActivityResult, setCodeActivityResult] = useState([])
+    const [output, setOutput] = useState(null)
+    const [error, setError] = useState(null)
 
     const submitCodeActivity = async () => {
         try {
-            await axios.post(
-                "http://localhost:3000/api/rce/submit",
-                { codeActivity },
-                { timeout: 5000 }
-            )
-            // .then(({ data }) => {
-            //     setCodeActivityResult(data.codeActivityResult);
-            // })
+            await rceHttpClient
+                .post(
+                    "https://wjq5fc3jdk.execute-api.us-east-1.amazonaws.com/dev/",
+                    { src: codeActivity, lang: "python" },
+                    { timeout: 5000 }
+                )
+                .then(async ({ data: { error, output } }) => {
+                    setError(error)
+                    setOutput(output)
+                })
         } catch (error) {
             alert(error.message)
         }
@@ -27,7 +32,6 @@ export default function CodeUi() {
 
     return (
         <div className='h-[] pt-[30px]'>
-            <h1 className='font-bold text-red-500'>hello world</h1>
             <div className='absolute top-20 bottom-40 left-20 right-20 mt-10 w-[70%] text-left'>
                 <CodeMirror
                     value={codeActivity}
@@ -42,8 +46,10 @@ export default function CodeUi() {
                     onChange={(value) => {
                         setCodeActivity(value)
                     }}
-                    className='border border-black p-1'
+                    className='border border-black p-1 '
                 />
+                {error && <div className='text-red-500'>{error}</div>}
+                {output && <div className='text-green-500'>{output}</div>}
                 <div className='mt-3'>
                     <button
                         onClick={() => submitCodeActivity()}

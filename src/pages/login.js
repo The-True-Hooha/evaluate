@@ -152,12 +152,11 @@ export async function getServerSideProps(ctx) {
         status,
         user: { role },
     } = res
-    console.log(res)
     if (status === "SIGNED_IN" && role === "STUDENT") {
         return {
             redirect: {
                 permanent: false,
-                destination: "/courses",
+                destination: "/student/courses",
             },
         }
     }

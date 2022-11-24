@@ -18,11 +18,6 @@ export default async function handler(req, res) {
                     password: await hashPassword(password),
                     isEnabled: false,
                     isVerified: false,
-                    course : {
-                        connect : {
-                            coursename : "Machine Learning v2801"
-                        }
-                    }
                 },
             })
             res.status(201).json({ message: newStudent })
