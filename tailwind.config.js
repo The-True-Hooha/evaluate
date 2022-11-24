@@ -5,11 +5,16 @@ module.exports = {
         "./src/components/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
-        colors: {
-            neon_carrot: '#e79935',
-            blue_black: '#02041b',
+        extend: {
+            colors: {
+                neon_carrot: {
+                    100: '#e79935'
+                },
+                blue_black: {
+                    100: '#02041b'
+                },
+            },
         },
-        extend: {},
     },
     plugins: [],
 }
