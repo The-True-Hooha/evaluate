@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import CodeUi from '../components/codeMirror'
+// import CodeUi from '../components/codeMirror'
 export default function Home() {
     return (
         <div className='App'>
@@ -8,9 +8,17 @@ export default function Home() {
                 <meta name="description" content="web editor based rce" />
             </Head>
 
-            <div className="flex justify-center">
-                <h2 className="text-green-600 text-center"> welcome </h2>
-                <CodeUi/>
+            <div className="flex justify-center pt-8">
+                <div className='text-center'>
+                    <img
+                        className='mx-auto w-48'
+                        src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp'
+                        alt='logo'
+                    />
+                    <h4 className='mt-1 mb-12 pb-1 text-[30px] font-semibold text-white'>
+                        Welcome to Evaluate
+                    </h4>
+                </div>
             </div>
         </div>
     )}
