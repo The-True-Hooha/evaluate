@@ -2,7 +2,6 @@
 GET http://localhost:3000/api/auth/me
 Cookie: evaluate=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImUwZDNlZDZlLWVkOWItNDA0NC1hMzYxLWM1ZmZhNWUxYjVjMSIsInJvbGUiOiJGQUNVTFRZIiwiaWF0IjoxNjY5MTg3NjMxLCJleHAiOjE2Njk1MzMyMzF9.nTfogGCaEbAoipkRMgkWjLAus4rB9i9mZrb99m1hDRg
 
-
 ###
 POST  http://localhost:3000/api/ops/superuser/createFacultyCredentials
 Content-Type: application/json
@@ -120,8 +119,8 @@ POST   http://localhost:3000/api/ops/student/create/enrollStudent
 Content-Type: application/json
 
 {
-    "sid" : "267dc833-9cf4-4793-a6e1-b0f7b3333660",
-    "courseId" : "2197b0be-184c-48f6-91ad-ddc47a710d72"
+    "sid" : "9b122fb7-7aae-4563-ada4-8d6943815950",
+    "courseId" : "38975005-867e-4f6e-b44f-e2488929ba88"
 }
 
 # --- Student ---

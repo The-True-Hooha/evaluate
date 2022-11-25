@@ -2,7 +2,7 @@ import api from "../../../lib/api"
 import { getUser, useAuth } from "../../../lib/AuthContext"
 import { useRouter } from "next/router"
 
-export default function Home({ course }) {
+export default function Home({ courses }) {
     const { auth } = useAuth()
     const router = useRouter()
     const {
@@ -10,13 +10,13 @@ export default function Home({ course }) {
     } = auth
 
     const handleClick = () => {
-        router.push(`/student/courses/${course.courseId}`)
+        router.push(`/student/courses/${courses.courseId}`)
     }
     return (
-        <div>
+        <div className="text-white">
             <h1>Welcome {username}</h1>
             <h1>Your classes are </h1>
-            <button onClick={handleClick}>{JSON.stringify(course)}</button>
+            <button onClick={handleClick}>{JSON.stringify(courses)}</button>
         </div>
     )
 }
@@ -32,15 +32,15 @@ export async function getServerSideProps(ctx) {
         }
     }
     const {
-        data: { course },
+        data: { courses },
     } = await api.post("api/ops/student/read/getStudentCourses", {
         sid: user.sid,
     })
 
-    console.log(course)
+    console.log(courses)
     return {
         props: {
-            course,
+            courses,
         },
     }
 }

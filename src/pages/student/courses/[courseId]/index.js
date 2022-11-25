@@ -32,6 +32,7 @@ export async function getServerSideProps(ctx) {
     const { courseId } = ctx.query
     const res = await api.get(`api/ops/course/read/${courseId}`)
     const info = res.data
+    console.log(courseId)
 
     return {
         props: {
