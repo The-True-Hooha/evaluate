@@ -11,7 +11,7 @@ export default function(req, res){
                 fid : fid
             },
             select : {
-                course : true
+                courses : true
             }
         })
     })

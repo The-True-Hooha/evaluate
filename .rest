@@ -8,10 +8,10 @@ POST  http://localhost:3000/api/ops/superuser/createFacultyCredentials
 Content-Type: application/json
 
 {
-    "facultyId" : "1234",
-    "firstName" : "fatema",
-    "lastName" : "nafa",
-    "password" : "fnafa"
+    "facultyId" : "2345",
+    "firstName" : "tochi",
+    "lastName" : "don",
+    "password" : "dev"
 }
 
 ###
@@ -64,11 +64,20 @@ POST  http://localhost:3000/api/ops/course/create
 Content-Type: application/json
 
 {
-    "coursename" : "Machine Learning",
+    "coursename" : "Software Engineering",
     "academicyear" : "Spring 22",
     "academicterm" : "Fall 22 - Spring 22",
     "learningObjectives" : "1. Get better at java.",
     "facultyId" : "1234"
+}
+
+###
+
+POST  http://localhost:3000/api/ops/course/update/enroll/771852fc-1d78-4b1f-89df-7331c95298bd
+Content-Type: application/json
+
+{
+    "accessCode" : "c3fc1ec8-689a-423f-8f29-e61a2f284f18"
 }
 
 # --- Course ---
@@ -85,13 +94,14 @@ Content-Type: application/json
     "numofattempts" : 1,
     "availablefrom" : "",
     "availableto" : "",
+    "language" : "PYTHON",
     "codingActivity" : {
         "question": "How can you split a string so that we can use it in an array"
     },
     "learningObjectives": {
         "description" : "You should have better syntax and be able to tell"
     },
-    "courseId" : "a51a00cc-7b99-406d-96cb-78417128c7e4",
+    "courseId" : "558747c3-cfe4-4e4c-a3e6-fd442a71905c",
     "testCases" : {"test1" : [1, 3]}
 }
 
@@ -99,7 +109,7 @@ Content-Type: application/json
 GET  http://localhost:3000/api/ops/activity/read
 
 ###
-GET http://localhost:3000/api/ops/activity/read/726a6b05-36a9-4914-9a70-81494e324fa1
+GET http://localhost:3000/api/ops/activity/read/c629e632-c692-4562-808f-2d2c5c105d17
 
 ###
 DELETE http://localhost:3000/api/ops/activity/delete/db8ee3dd-43e6-41b3-9b0e-036942674b97
@@ -116,13 +126,7 @@ GET  http://localhost:3000/api/ops/student/read
 ###
 GET http://localhost:3000/api/ops/student/read/267dc833-9cf4-4793-a6e1-b0f7b3333660
 ###
-POST   http://localhost:3000/api/ops/student/create/enrollStudent
-Content-Type: application/json
 
-{
-    "sid" : "267dc833-9cf4-4793-a6e1-b0f7b3333660",
-    "courseId" : "2197b0be-184c-48f6-91ad-ddc47a710d72"
-}
 
 # --- Student ---
 

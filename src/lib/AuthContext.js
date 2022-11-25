@@ -36,7 +36,7 @@ export const AuthProvider = (props) => {
                 withCredentials: true,
             })
             .then(() => {
-                router.push("/student/courses")
+                router.push("/student/dashboard")
             })
             .catch((error) => {
                 console.error("Incorrect email or password entered.")

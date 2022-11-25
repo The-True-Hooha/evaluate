@@ -4,7 +4,6 @@ import { getUser } from "../lib/AuthContext"
 import { AuthProvider, ProtectRoutes } from "../lib/AuthContext"
 
 function MyApp({ Component, pageProps, auth }) {
-    console.log(auth)
     return (
         <AuthProvider myAuth={auth}>
             <Component {...pageProps} />

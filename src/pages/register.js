@@ -52,7 +52,7 @@ export default function Register() {
                                                     Welcome to Evaluate
                                                 </h4>
                                                 <p className='text-white text-sm font-semibold'>
-                                                    Smart and Intuitive grading platform
+                                                    A Smart and Intuitive grading platform
                                                 </p>
                                             </div>
                                         </div>

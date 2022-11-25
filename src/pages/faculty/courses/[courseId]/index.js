@@ -3,14 +3,14 @@ import api from "../../../../lib/api"
 
 export default function Index({ info }) {
     console.log(info)
-    const { LearningObjective, activity } = info
+    const { activities } = info
     const router = useRouter()
     const handleClick = (e) => {
         router.push(`${router.asPath}/createActivity`)
     }
     return (
         <div>
-            {activity.map((e) => {
+            {activities.map((e) => {
                 return (
                     <button
                         key={e.activityId}
