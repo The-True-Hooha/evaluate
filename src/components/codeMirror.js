@@ -2,24 +2,28 @@ import { useState } from "react"
 import api from "../lib/api"
 import CodeMirror from "@uiw/react-codemirror"
 import { langs } from "@uiw/codemirror-extensions-langs"
-import { dracula } from "@uiw/codemirror-theme-dracula"
-import { githubDark } from "@uiw/codemirror-themes-all"
+import { githubLight } from "@uiw/codemirror-themes-all"
 import { pythonDefault } from "../lib/defaults"
 import { rceHttpClient } from "../lib/api"
+// for creating a custom theme
+// import { createTheme } from "@uiw/codemirror-themes"
+// import { tags as t } from '@lezer/highlight';
+
 
 export default function CodeUi() {
     const [codeActivity, setCodeActivity] = useState(pythonDefault)
     const [codeActivityResult, setCodeActivityResult] = useState([])
     const [output, setOutput] = useState(null)
     const [error, setError] = useState(null)
+   
+
 
     const submitCodeActivity = async () => {
         try {
             await rceHttpClient
                 .post(
                     "https://wjq5fc3jdk.execute-api.us-east-1.amazonaws.com/dev/",
-                    { src: codeActivity, lang: "python" },
-                    { timeout: 5000 }
+                    { src: codeActivity, lang: "python" }
                 )
                 .then(async ({ data: { error, output } }) => {
                     setError(error)
@@ -36,7 +40,7 @@ export default function CodeUi() {
                 <CodeMirror
                     value={codeActivity}
                     placeholder='enter your code here'
-                    theme={githubDark}
+                    theme={githubLight}
                     height='545px'
                     extensions={[langs.python()]}
                     // options={{

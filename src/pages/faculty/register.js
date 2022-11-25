@@ -18,9 +18,7 @@ export default function FacultyRegister(){
         e.preVentDefault()
         try{
             const { facultyId, firstName, lastName, password } = data
-            const {
-                data: {}, 
-            } = await facultyRegister(facultyId, firstName, lastName, password)
+             await facultyRegister(facultyId, firstName, lastName, password)
         } catch(error) {
             if(
                 error.response &&

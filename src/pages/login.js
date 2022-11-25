@@ -53,7 +53,7 @@ export default function Login() {
                                             </h4>
                                         </div>
                                         <form>
-                                            <p className='mb-4 text-white'>
+                                            <p className='mb-4 text-white '>
                                                 Please login to your account
                                             </p>
                                             <div className='mb-4'>
@@ -129,9 +129,9 @@ export default function Login() {
                                             loading="lazy"
                                         />
                                     <div className='px-4 py-6 text-white md:mx-6 md:p-12'>
-                                        <h4 className='mb-6 text-xl font-semibold'>
+                                        {/* <h4 className='mb-6 text-xl font-semibold'>
                                             Smart and Intuitive grading platform
-                                        </h4>
+                                        </h4> */}
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +158,7 @@ export async function getServerSideProps(ctx) {
         return {
             redirect: {
                 permanent: false,
-                destination: "/student/courses",
+                destination: "/student/dashboard",
             },
         }
     }
