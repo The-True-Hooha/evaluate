@@ -8,10 +8,10 @@ module.exports = {
         extend: {
             colors: {
                 neon_carrot: {
-                    100: '#e79935'
+                    100: "#e79935",
                 },
                 blue_black: {
-                    100: '#02041b'
+                    100: "#02041b",
                 },
             },
         },

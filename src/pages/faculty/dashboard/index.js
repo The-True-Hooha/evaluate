@@ -8,23 +8,20 @@ export default function Dashboard({ courses }) {
         router.push(`/faculty/courses/${course.courseId}`)
     }
 
-    if(courses.length === 0){
-        return (
-            <div className="text-red-800">You have no courses</div>
-        )
+    if (courses.length === 0) {
+        return <div className='text-red-800'>You have no courses</div>
     }
     return (
         <div className='text-neon_carrot-100'>
-           
             {courses.map((e) => {
                 return (
                     <>
-                    <button
-                        onClick={() => handleClick(e)}
-                        className='text-neon_carrot-100'>
-                        {e.coursename}{" "}{e.accessCode}
-                    </button>
-                    <br />
+                        <button
+                            onClick={() => handleClick(e)}
+                            className='text-neon_carrot-100'>
+                            {e.coursename} {e.accessCode}
+                        </button>
+                        <br />
                     </>
                 )
             })}

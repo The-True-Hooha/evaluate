@@ -1,17 +1,15 @@
 import {
     Duration,
-    RemovalPolicy,
-    SecretValue,
     Stack,
     StackProps,
 } from "aws-cdk-lib"
-import * as sqs from "aws-cdk-lib/aws-sqs"
 import { Construct } from "constructs"
 import * as lambda from "aws-cdk-lib/aws-lambda"
 import { SqsEventSource } from "aws-cdk-lib/aws-lambda-event-sources"
 import * as rds from "aws-cdk-lib/aws-rds"
 import * as ec2 from "aws-cdk-lib/aws-ec2"
-import * as dynamodb from "aws-cdk-lib/aws-dynamodb"
+import * as apigw from "aws-cdk-lib/aws-apigateway"
+import * as cdk from "aws-cdk-lib"
 
 export class InfraAsCodeStack extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
@@ -67,48 +65,45 @@ export class InfraAsCodeStack extends Stack {
         //   instanceType: ec2.InstanceType.of(ec2.InstanceClass.T2, ec2.InstanceSize.MICRO),
         //   securityGroups: [evaluateSG]
         // })
-
-        const pythonQueue = new sqs.Queue(this, "python-code-submission-queue", {
-            queueName: "pythonCodeSubmission.fifo",
-            visibilityTimeout: Duration.minutes(15),
-            retentionPeriod: Duration.seconds(1209600),
-        })
-
-        const pythonTrigger = new SqsEventSource(pythonQueue)
-
-        const pythonFn = new lambda.Function(this, "python-lambda-fn", {
+        const python_run_code = new lambda.Function(this, "python_run_code_lambda", {
             runtime: lambda.Runtime.PYTHON_3_9,
             handler: "index.lambda_handler",
-            code: lambda.Code.fromAsset("lambda/python"),
+            code: lambda.Code.fromAsset("lambda/python/run_code"),
             timeout: Duration.seconds(3),
-            events: [pythonTrigger],
+            memorySize : 300
         })
 
-        // const javaQueue = new sqs.Queue(this, "java-code-submission-queue", {
-        //     queueName: "javaCodeSubmission.fifo",
-        //     visibilityTimeout: Duration.minutes(15),
-        //     retentionPeriod: Duration.seconds(1209600),
-        // })
-
-        // const javaTrigger = new SqsEventSource(javaQueue)
-
-        // const javaFn = new lambda.Function(this, "java-lambda-fn", {
-        //     runtime: lambda.Runtime.JAVA_11,
-        //     handler: "index.Handler",
-        //     code: lambda.Code.fromAsset("lambda/java"),
-        //     timeout: Duration.seconds(3),
-        //     events: [javaTrigger],
-        // })
-   
-        const table = new dynamodb.Table(this, "evaluate-table", {
-            tableName: "evaluateCacheStore",
-            partitionKey: {
-                name: "jobId",
-                type: dynamodb.AttributeType.STRING,
-            },
-            removalPolicy: RemovalPolicy.DESTROY,
+        const python_grade_code = new lambda.Function(this, "python_grade_code_lambda", {
+            runtime: lambda.Runtime.PYTHON_3_9,
+            handler: "index.lambda_handler",
+            code: lambda.Code.fromAsset("lambda/python/grade_code"),
+            timeout: Duration.seconds(5),
+            memorySize : 1200
         })
-        // table.grantWriteData(javaFn)
-        table.grantWriteData(pythonFn)
+
+        const evaluate_rce_api = new apigw.LambdaRestApi(this, "evalaute_rce_api", {
+            handler: python_grade_code,
+            proxy: false,
+            restApiName: "evaluateRCE",
+            defaultCorsPreflightOptions : {
+                allowOrigins : apigw.Cors.ALL_ORIGINS
+            }
+        })
+
+        const run_code = evaluate_rce_api.root.addResource("run-code")
+        const grade_code = evaluate_rce_api.root.addResource("grade-code")
+
+        run_code.addMethod("POST", new apigw.LambdaIntegration(python_run_code))
+        grade_code.addMethod("POST", new apigw.LambdaIntegration(python_grade_code))
+
+        new cdk.CfnOutput(this, "grade_code_path", {
+            value: grade_code.path,
+        })
+
+        new cdk.CfnOutput(this, "run_code_path", {
+            value: run_code.path,
+        })
+
+
     }
 }

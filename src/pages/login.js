@@ -2,8 +2,8 @@ import { useState, useEffect } from "react"
 import Router, { useRouter } from "next/router"
 import { getUser, useAuth } from "../lib/AuthContext"
 import Link from "next/link"
-import SalemState from '../styles/assets/images/salem state.jpg'
-import Image from 'next/image'
+import SalemState from "../styles/assets/images/salem state.jpg"
+import Image from "next/image"
 
 export default function Login() {
     const router = useRouter()
@@ -40,7 +40,7 @@ export default function Login() {
                     <div className='xl:w-10/12'>
                         <div className='block rounded-lg bg-blue_black-100 shadow-lg'>
                             <div className='g-0 lg:flex lg:flex-wrap'>
-                                <div className='px-4 md:px-0 lg:w-6/12 border-l border-t border-b'>
+                                <div className='border-l border-t border-b px-4 md:px-0 lg:w-6/12'>
                                     <div className='md:mx-6 md:p-12'>
                                         <div className='text-center'>
                                             <img
@@ -48,7 +48,7 @@ export default function Login() {
                                                 src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp'
                                                 alt='logo'
                                             />
-                                            <h4 className='mt-1 mb-12 text-white pb-1 text-xl font-semibold'>
+                                            <h4 className='mt-1 mb-12 pb-1 text-xl font-semibold text-white'>
                                                 Welcome to Evaluate
                                             </h4>
                                         </div>
@@ -93,12 +93,12 @@ export default function Login() {
                                                     onClick={handleSubmit}>
                                                     Log in
                                                 </button>
-                                                <p className="text-white">
+                                                <p className='text-white'>
                                                     Faculty?{" "}
                                                     <span>
                                                         <Link
                                                             href='/faculty/login'
-                                                            className="hover:underline hover:text-neon_carrot-100">
+                                                            className='hover:text-neon_carrot-100 hover:underline'>
                                                             Sign in here
                                                         </Link>
                                                     </span>
@@ -123,11 +123,11 @@ export default function Login() {
                                         background:
                                             "linear-gradient( to right,#ee7724, #d8363a,#dd3675, #b44593 )",
                                     }}>
-                                        <Image
-                                            src={SalemState}
-                                            alt="salem state university"
-                                            loading="lazy"
-                                        />
+                                    <Image
+                                        src={SalemState}
+                                        alt='salem state university'
+                                        loading='lazy'
+                                    />
                                     <div className='px-4 py-6 text-white md:mx-6 md:p-12'>
                                         {/* <h4 className='mb-6 text-xl font-semibold'>
                                             Smart and Intuitive grading platform

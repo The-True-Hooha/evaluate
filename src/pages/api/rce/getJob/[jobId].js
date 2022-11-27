@@ -1,7 +1,7 @@
 import getItem from "../../../../../aws-sdk/dynamo/getItem"
 export default async function retrieveJob(req, res) {
     const { jobId } = req.query
-   
+
     let response = await getItem(jobId)
 
     while (!response.Item) {

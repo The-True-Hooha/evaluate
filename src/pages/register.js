@@ -1,34 +1,33 @@
-import Link from 'next/link'
-import { useState } from 'react'
-import { useAuth } from '../lib/AuthContext'
-import SalemState from '../styles/assets/images/salem state.jpg'
-import Image from 'next/image'
-
+import Link from "next/link"
+import { useState } from "react"
+import { useAuth } from "../lib/AuthContext"
+import SalemState from "../styles/assets/images/salem state.jpg"
+import Image from "next/image"
 
 export default function Register() {
-    const [data, setData] = useState({ email: "", username: "", password: ""})
+    const [data, setData] = useState({ email: "", username: "", password: "" })
     const [error, setError] = useState("")
-    const { studentRegister } = useAuth();
+    const { studentRegister } = useAuth()
 
-    const handleChange = ({ currentTarget: input}) => {
-        setData({ ...data, [input.name]: input.value})
+    const handleChange = ({ currentTarget: input }) => {
+        setData({ ...data, [input.name]: input.value })
     }
 
     const studentRegisterSubmit = async (e) => {
         e.preventDefault()
-        try{
-            const {email, username, password } = data
+        try {
+            const { email, username, password } = data
             const {
-                data: { accessToken},
+                data: { accessToken },
             } = await studentRegister(email, username, password)
-        } catch (error){
-           if (
-            error.response &&
-            error.response.status >= 400 &&
-            error.response.status <= 500
-           ) {
-            setError(error.response.data.message)
-           }
+        } catch (error) {
+            if (
+                error.response &&
+                error.response.status >= 400 &&
+                error.response.status <= 500
+            ) {
+                setError(error.response.data.message)
+            }
         }
     }
 
@@ -51,8 +50,9 @@ export default function Register() {
                                                 <h4 className='mt-1 pb-1 text-xl font-semibold text-white'>
                                                     Welcome to Evaluate
                                                 </h4>
-                                                <p className='text-white text-sm font-semibold'>
-                                                    A Smart and Intuitive grading platform
+                                                <p className='text-sm font-semibold text-white'>
+                                                    A Smart and Intuitive
+                                                    grading platform
                                                 </p>
                                             </div>
                                         </div>
@@ -106,14 +106,17 @@ export default function Register() {
                                                         background:
                                                             "linear-gradient( to right,#ee7724, #d8363a,#dd3675, #b44593 )",
                                                     }}
-                                                    onClick={studentRegisterSubmit}>
+                                                    onClick={
+                                                        studentRegisterSubmit
+                                                    }>
                                                     Register
                                                 </button>
                                                 <p className='text-white'>
                                                     Faculty?{" "}
                                                     <span>
-                                                        <Link href='/faculty/register'
-                                                            className='hover:underline hover:text-neon_carrot-100'>
+                                                        <Link
+                                                            href='/faculty/register'
+                                                            className='hover:text-neon_carrot-100 hover:underline'>
                                                             Sign register here
                                                         </Link>
                                                     </span>
@@ -138,12 +141,11 @@ export default function Register() {
                                         background:
                                             "linear-gradient( to right,#ee7724, #d8363a,#dd3675, #b44593 )",
                                     }}>
-                                        <Image
-                                            
-                                            src={SalemState}
-                                            alt="salem state university"
-                                            loading='lazy'
-                                            />
+                                    <Image
+                                        src={SalemState}
+                                        alt='salem state university'
+                                        loading='lazy'
+                                    />
                                     {/* <div className='px-4 py-6 text-white md:mx-6 md:p-12'>
                                     </div> */}
                                 </div>

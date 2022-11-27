@@ -9,11 +9,12 @@ export default async function me(req, res) {
 
     try {
         const payload = verify(authorization, process.env.ACCESS_TOKEN_SECRET)
-        const { role } = payload
+       
+        const { role, id } = payload
         if (role === "STUDENT") {
             const student = await prisma.student.findUnique({
                 where: {
-                    sid: payload.id,
+                    sid: id,
                 },
             })
 
@@ -22,7 +23,7 @@ export default async function me(req, res) {
         if (role === "FACULTY") {
             const faculty = await prisma.faculty.findUnique({
                 where: {
-                    fid: payload.id,
+                    fid: id,
                 },
             })
 

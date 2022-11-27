@@ -1,13 +1,13 @@
-import Head from 'next/head'
+import Head from "next/head"
 export default function Home() {
     return (
         <div className='App'>
             <Head>
                 <title>evaluate</title>
-                <meta name="description" content="web editor based rce" />
+                <meta name='description' content='web editor based rce' />
             </Head>
 
-            <div className="flex justify-center pt-8">
+            <div className='flex justify-center pt-8'>
                 <div className='text-center'>
                     <img
                         className='mx-auto w-48'
@@ -20,4 +20,5 @@ export default function Home() {
                 </div>
             </div>
         </div>
-    )}
+    )
+}

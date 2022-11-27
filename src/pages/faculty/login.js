@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react"
-import {useRouter} from "next/router"
+import { useRouter } from "next/router"
 import { useAuth } from "../../lib/AuthContext"
 import Link from "next/link"
 import Image from "next/image"
-import SalemState from '../../styles/assets/images/salem state.jpg'
-
+import SalemState from "../../styles/assets/images/salem state.jpg"
 
 export default function Login() {
     const router = useRouter()
     const [data, setData] = useState({ facultyId: "", password: "" })
     const [error, setError] = useState("")
     const { facultyLogin } = useAuth()
-
 
     const handleChange = ({ currentTarget: input }) => {
         setData({ ...data, [input.name]: input.value })
@@ -36,13 +34,13 @@ export default function Login() {
     }
 
     return (
-        <section className='gradient-form h-full text-white bg-blue_black-100 md:h-screen'>
+        <section className='gradient-form h-full bg-blue_black-100 text-white md:h-screen'>
             <div className='container h-full py-12 px-6'>
                 <div className='g-6 flex h-full flex-wrap items-center justify-center text-gray-800'>
                     <div className='xl:w-10/12'>
                         <div className='block rounded-lg shadow-lg'>
                             <div className='g-0 lg:flex lg:flex-wrap'>
-                                <div className='px-4 md:px-0 lg:w-6/12 border-l border-t border-b'>
+                                <div className='border-l border-t border-b px-4 md:px-0 lg:w-6/12'>
                                     <div className='md:mx-6 md:p-12'>
                                         <div className='text-center text-white'>
                                             <img
@@ -58,7 +56,7 @@ export default function Login() {
                                         </h4> */}
                                         </div>
                                         <form>
-                                        <p className='mb-4 text-white'>
+                                            <p className='mb-4 text-white'>
                                                 Please login to your account
                                             </p>
                                             <div className='mb-4'>
@@ -87,7 +85,7 @@ export default function Login() {
                                             </div>
                                             <div className='mb-12 pt-1 pb-1 text-center'>
                                                 <button
-                                                    className='mb-3 inline-block w-full text-white rounded px-6 py-2.5 text-xs font-medium uppercase leading-tight shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg'
+                                                    className='mb-3 inline-block w-full rounded px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg'
                                                     type='button'
                                                     data-mdb-ripple='true'
                                                     data-mdb-ripple-color='light'
@@ -98,14 +96,13 @@ export default function Login() {
                                                     onClick={handleSubmit}>
                                                     Log in
                                                 </button>
-                                                <p className="text-white">
+                                                <p className='text-white'>
                                                     Student?{" "}
                                                     <span>
-                                                        <Link 
+                                                        <Link
                                                             href='/login'
-                                                            className="hover:underline hover:text-neon_carrot-100"
-                                                            >
-                                                           Sign in here
+                                                            className='hover:text-neon_carrot-100 hover:underline'>
+                                                            Sign in here
                                                         </Link>
                                                     </span>
                                                 </p>
@@ -129,12 +126,12 @@ export default function Login() {
                                         background:
                                             "linear-gradient( to right,#ee7724, #d8363a,#dd3675, #b44593 )",
                                     }}>
-                                        <Image
-                                            className="mt-6"
-                                            src={SalemState}
-                                            alt="salem state university"
-                                            loading="lazy"
-                                        />
+                                    <Image
+                                        className='mt-6'
+                                        src={SalemState}
+                                        alt='salem state university'
+                                        loading='lazy'
+                                    />
                                     {/* <div className='px-4 py-6 text-white md:mx-6 md:p-12'>
                                     
                                     </div> */}
@@ -147,4 +144,3 @@ export default function Login() {
         </section>
     )
 }
-

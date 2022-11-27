@@ -43,7 +43,7 @@ model Course {
   academicyear       String
   academicterm       String
   createdAt          DateTime            @default(now())
-  accessCode         String              @default(uuid()) @unique
+  accessCode         String              @unique @default(uuid())
   students           Student[]
   instructor         faculty             @relation(fields: [instructorId], references: [fid])
   activities         Activity[]
@@ -86,7 +86,8 @@ model CodingActivity {
   submissions      Submission[]
   actitvity        Activity            @relation(fields: [activityId], references: [activityId], onDelete: Cascade)
   activityId       String              @unique
-  testCases        Json
+  testCases        String
+  skeletonCode     String
 }
 
 model Submission {
@@ -95,6 +96,7 @@ model Submission {
   score                    Int
   student                  Student        @relation(fields: [studentid], references: [sid], onDelete: Cascade)
   studentid                String
+  sourceCode               String
   codingActitvySubmissions CodingActivity @relation(fields: [codingActivityId], references: [codingactivityId])
   codingActivityId         String
 

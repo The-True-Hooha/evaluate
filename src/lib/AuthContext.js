@@ -1,6 +1,6 @@
 import { useContext, createContext } from "react"
 import { useRouter } from "next/router"
-import api from './api'
+import api from "./api"
 
 const AuthContext = createContext()
 
@@ -12,9 +12,10 @@ export const getUser = async (ctx) => {
         .get("api/auth/me", {
             withCredentials: true,
         })
-        .then((response) => {
-            if (response.data) {
-                return { status: "SIGNED_IN", user: response.data }
+        .then(({data}) => {
+            
+            if (data) {
+                return { status: "SIGNED_IN", user: data }
             } else {
                 return { status: "SIGNED_OUT", user: null }
             }
@@ -76,12 +77,17 @@ export const AuthProvider = (props) => {
             })
     }
 
-    const facultyRegister = async ( facultyId, firstName, lastName, password ) => {
+    const facultyRegister = async (
+        facultyId,
+        firstName,
+        lastName,
+        password
+    ) => {
         const data = {
             facultyId,
             firstName,
             lastName,
-            password
+            password,
         }
         return await api
             .post("api/ops/superuser/createFacultyCredentials", data, {
@@ -107,7 +113,14 @@ export const AuthProvider = (props) => {
 
     return (
         <AuthContext.Provider
-            value={{ auth, logout, facultyRegister, studentRegister, studentLogin, facultyLogin }}
+            value={{
+                auth,
+                logout,
+                facultyRegister,
+                studentRegister,
+                studentLogin,
+                facultyLogin,
+            }}
             {...props}
         />
     )

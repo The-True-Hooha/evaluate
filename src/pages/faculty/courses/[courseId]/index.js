@@ -29,7 +29,8 @@ export default function Index({ info }) {
                     margin: "10px",
                     color: "green",
                     background: "black",
-                }} onClick={(e) => handleClick(e)}>
+                }}
+                onClick={(e) => handleClick(e)}>
                 CREATE ACTIVITY
             </button>
         </div>

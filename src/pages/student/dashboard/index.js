@@ -26,7 +26,6 @@ export default function Home({ courses }) {
                     accessCode: accessCode,
                 }
             )
-           
         } catch (error) {
             if (
                 error.response &&

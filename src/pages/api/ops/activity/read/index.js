@@ -1,6 +1,5 @@
-import { PrismaClient } from "@prisma/client"
+import { prisma } from "../../../../../config/prisma.connect"
 import prismaErrorWrapper from "../../../../../lib/prismaErrorWrapper"
-const prisma = new PrismaClient()
 
 export default async function (req, res) {
     return prismaErrorWrapper(res, async () => {
@@ -8,7 +7,7 @@ export default async function (req, res) {
             include: {
                 course: true,
                 codingActivity: true,
-                learningObjectives : true
+                learningObjectives: true,
             },
         })
     })
