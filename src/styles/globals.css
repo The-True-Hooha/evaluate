@@ -4,7 +4,7 @@
 
 @layer base {
     body {
-        @apply bg-blue_black-100 tracking-wide;
+        @apply bg-primary tracking-wide;
     }
 }
 

@@ -28,8 +28,8 @@ POST  http://localhost:3000/api/auth/student/signup
 Content-Type: application/json
 
 {
-   "username" : "tochi",
-    "email" : "tdev@salemstate.edu",
+   "username" : "Tochi Amanze",
+    "email" : "tdev3@salemstate.edu",
     "password" : "dev"
 }
 
@@ -63,20 +63,20 @@ POST  http://localhost:3000/api/ops/course/create
 Content-Type: application/json
 
 {
-    "coursename" : "Hero course",
+    "coursename" : "Operating Systems",
     "academicyear" : "Spring 22",
-    "academicterm" : "Fall 22 - Spring 22",
-    "learningObjectives" : "1. Get better at java.",
+    "academicterm" : "Fall 22/Spring 23",
+    "learningObjectives" : "Understand the core principles of different Operating Systems",
     "facultyId" : "1234"
 }
 
 ###
 
-POST  http://localhost:3000/api/ops/course/update/enroll/771852fc-1d78-4b1f-89df-7331c95298bd
+POST  http://localhost:3000/api/ops/course/update/enroll/1e987b94-0f61-448b-9ffe-11f711bbc65d
 Content-Type: application/json
 
 {
-    "accessCode" : "c3fc1ec8-689a-423f-8f29-e61a2f284f18"
+    "accessCode" : "199ac7ca-eb1d-4e6f-9998-3bce5425a28e"
 }
 ### 
 POST  http://localhost:3000/api/ops/course/read/getEnrolledStudents/2463eff2-93d1-4b77-98a0-aa6a273f9aa9
