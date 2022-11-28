@@ -5,5 +5,7 @@ export const javaDefault = `public class Main {
     }
   }`
 
-export const pythonDefault = `def main():
-# write code here\n\tpass\n\n\n\nif __name__ == "__main__":\n\t main()`
+export const pythonDefault = 
+`class Solution:
+  def main(self):
+   # Write Solution Here`

@@ -1,5 +1,4 @@
-import { PrismaClient } from "@prisma/client"
-const prisma = new PrismaClient()
+import { prisma } from "../../../../../config/prisma.connect"
 import prismaErrorWrapper from "../../../../../lib/prismaErrorWrapper"
 
 export default async function (req, res) {
@@ -19,12 +18,12 @@ export default async function (req, res) {
                 instructor: {
                     select: {
                         firstName: true,
-                        lastName : true
+                        lastName: true,
                     },
                 },
                 activities: {
                     select: {
-                        activityId :true,
+                        activityId: true,
                         topic: true,
                         points: true,
                         numofattempts: true,

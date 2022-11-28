@@ -1,18 +1,17 @@
-import { PrismaClient } from "@prisma/client"
+import { prisma } from "../../../../../config/prisma.connect"
 import prismaErrorWrapper from "../../../../../lib/prismaErrorWrapper"
-const prisma = new PrismaClient()
 
-export default function(req, res){
-    const {fid} = req.body
+export default function (req, res) {
+    const { fid } = req.body
 
-    return prismaErrorWrapper(res, async () =>{
+    return prismaErrorWrapper(res, async () => {
         return await prisma.faculty.findUnique({
-            where : {
-                fid : fid
+            where: {
+                fid: fid,
             },
-            select : {
-                courses : true
-            }
+            select: {
+                courses: true,
+            },
         })
     })
-}   
+}

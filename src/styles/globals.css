@@ -2,13 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-
-@layer base{
-    body{
-        @apply tracking-wide bg-blue_black-100
+@layer base {
+    body {
+        @apply bg-primary tracking-wide;
     }
 }
 
-html{
+html {
     scroll-behavior: smooth;
 }

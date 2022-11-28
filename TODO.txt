@@ -7,11 +7,13 @@ Hero :
 
 Tochi: 
 * clean up/validate auth flow --done
-* Write rce algorithm and routes *working on
-* add test case feature to rce
+* Write rce algorithm and routes --done
+* add test case feature to rce --done
+* calculate student score from test case
+* ui run_code / grade_code feature
 * login page v1
 
 Backlog
 add allowed domains for cookie 
-making custom code mirro theme : https://uiwjs.github.io/react-codemirror/#/theme/editor/single
+making custom code mirror theme : https://uiwjs.github.io/react-codemirror/#/theme/editor/single
 refresh user access tokens --- necessary for uninterupted workflows

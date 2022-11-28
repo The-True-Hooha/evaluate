@@ -1,7 +1,5 @@
-// import { prisma } from "../../../../config/prisma.connect"
+import { prisma } from "../../../../../config/prisma.connect"
 import prismaErrorWrapper from "../../../../../lib/prismaErrorWrapper"
-import { PrismaClient } from "@prisma/client"
-const prisma = new PrismaClient()
 
 export default async function create(req, res) {
     const {
@@ -13,6 +11,7 @@ export default async function create(req, res) {
         courseId,
         testCases,
         language,
+        skeleton,
         codingActivity: { question },
         learningObjectives: { description },
     } = req.body
@@ -25,22 +24,22 @@ export default async function create(req, res) {
                 numofattempts: numofattempts,
                 availablefrom: new Date().toISOString(),
                 availableto: new Date().toISOString(),
-               
                 course: {
                     connect: {
-                        courseId : courseId, //replace with courseId
+                        courseId: courseId, //replace with courseId
                     },
                 },
                 learningObjectives: {
                     create: {
-                        description : description
+                        description: description,
                     },
                 },
                 codingActivity: {
                     create: {
                         question: question,
-                        testCases : testCases,
-                        language : language
+                        testCases: testCases,
+                        language: language,
+                        skeletonCode : skeleton
                     },
                 },
             },

@@ -23,13 +23,17 @@ export default async function handler(req, res) {
                 message: "incorrect email or password",
             })
         } else {
-            const serialized = serialize("evaluate", createAccessToken(faculty.fid, faculty.role), {
-                httpOnly: false,
-                sameSite: "strict",
-                secure: process.env.PHASE,
-                maxAge: 60 * 60 * 24 * 7, // expires in 1 week
-                path : "/"
-            })
+            const serialized = serialize(
+                "evaluate",
+                createAccessToken(faculty.fid, faculty.role),
+                {
+                    httpOnly: false,
+                    sameSite: "strict",
+                    secure: process.env.PHASE,
+                    maxAge: 60 * 60 * 24 * 7, // expires in 1 week
+                    path: "/",
+                }
+            )
 
             res.setHeader("Set-Cookie", serialized)
             return res.status(201).json({

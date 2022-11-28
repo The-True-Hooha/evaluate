@@ -1,6 +1,5 @@
-import { PrismaClient } from "@prisma/client"
+import { prisma } from "../../../../../config/prisma.connect"
 import prismaErrorWrapper from "../../../../../lib/prismaErrorWrapper"
-const prisma = new PrismaClient()
 
 export default async function (req, res) {
     const { sid } = req.body
@@ -9,9 +8,27 @@ export default async function (req, res) {
             where: {
                 sid: sid,
             },
-            select: {
-                courses: true,
-            },
+           include : {
+            courses : {
+                select : {
+                    courseId : true,
+                    coursename : true,
+                    academicterm : true,
+                    learningObjectives : {
+                        select : {
+                            description : true
+                        }
+                    },
+                    instructor : {
+                        select : {
+                            firstName : true,
+                            lastName : true
+                        }
+                    }
+                }
+            }
+           }
+            
         })
     })
 }

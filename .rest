@@ -1,6 +1,6 @@
 # --- Authentication ---
 GET http://localhost:3000/api/auth/me
-Cookie: evaluate=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImUwZDNlZDZlLWVkOWItNDA0NC1hMzYxLWM1ZmZhNWUxYjVjMSIsInJvbGUiOiJGQUNVTFRZIiwiaWF0IjoxNjY5MTg3NjMxLCJleHAiOjE2Njk1MzMyMzF9.nTfogGCaEbAoipkRMgkWjLAus4rB9i9mZrb99m1hDRg
+Cookie: evaluate=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY2ZGE3NmNjLWRkZTMtNGEzNS04MzhlLWNiYTY2NzgzOWM5NCIsInJvbGUiOiJTVFVERU5UIiwiaWF0IjoxNjY5NDUxODkyLCJleHAiOjE2Njk3OTc0OTJ9.ToTofFQNnwz1EUbUCAqEFBwhgiAbqgS0r0Fvhnd1x-w
 
 ###
 POST  http://localhost:3000/api/ops/superuser/createFacultyCredentials
@@ -28,8 +28,8 @@ POST  http://localhost:3000/api/auth/student/signup
 Content-Type: application/json
 
 {
-   "username" : "tochi",
-    "email" : "tdev@salemstate.edu",
+   "username" : "Tochi Amanze",
+    "email" : "tdev3@salemstate.edu",
     "password" : "dev"
 }
 
@@ -51,7 +51,7 @@ Content-Type: application/json
 GET  http://localhost:3000/api/ops/course/read
 
 ###
-GET  http://localhost:3000/api/ops/course/read/dffbdcd2-5040-4319-8555-45f0a332b012
+GET  http://localhost:3000/api/ops/course/read/2463eff2-93d1-4b77-98a0-aa6a273f9aa9
 ###
 DELETE   http://localhost:3000/api/ops/course/delete
 
@@ -63,21 +63,24 @@ POST  http://localhost:3000/api/ops/course/create
 Content-Type: application/json
 
 {
-    "coursename" : "Software Engineering",
+    "coursename" : "Operating Systems",
     "academicyear" : "Spring 22",
-    "academicterm" : "Fall 22 - Spring 22",
-    "learningObjectives" : "1. Get better at java.",
+    "academicterm" : "Fall 22/Spring 23",
+    "learningObjectives" : "Understand the core principles of different Operating Systems",
     "facultyId" : "1234"
 }
 
 ###
 
-POST  http://localhost:3000/api/ops/course/update/enroll/771852fc-1d78-4b1f-89df-7331c95298bd
+POST  http://localhost:3000/api/ops/course/update/enroll/1e987b94-0f61-448b-9ffe-11f711bbc65d
 Content-Type: application/json
 
 {
-    "accessCode" : "c3fc1ec8-689a-423f-8f29-e61a2f284f18"
+    "accessCode" : "199ac7ca-eb1d-4e6f-9998-3bce5425a28e"
 }
+### 
+POST  http://localhost:3000/api/ops/course/read/getEnrolledStudents/2463eff2-93d1-4b77-98a0-aa6a273f9aa9
+Content-Type: application/json 
 
 # --- Course ---
 
@@ -95,20 +98,21 @@ Content-Type: application/json
     "availableto" : "",
     "language" : "PYTHON",
     "codingActivity" : {
-        "question": "How can you split a string so that we can use it in an array"
+        "question": "Write a function that takes in two parameters and returns the sum of them"
     },
     "learningObjectives": {
         "description" : "You should have better syntax and be able to tell"
     },
     "courseId" : "38975005-867e-4f6e-b44f-e2488929ba88",
-    "testCases" : {"test1" : [1, 3]}
+    "testCases" : "1 2 3\n4 5 9\n10 50 60\n100 100 200\n20 30 50\n4 4 8\n21 21 42\n 10 1 11\n20 20 40",
+    "skeleton" : "solution = Solution()\na = int(sys.argv[1])\nb = int(sys.argv[2])\nexpected = int(sys.argv[3])\nprint(solution.main(a, b) == expected)"
 }
 
 ###
 GET  http://localhost:3000/api/ops/activity/read
 
 ###
-GET http://localhost:3000/api/ops/activity/read/c629e632-c692-4562-808f-2d2c5c105d17
+GET http://localhost:3000/api/ops/activity/read/668d6818-dea1-472f-b421-d637c120059d
 
 ###
 DELETE http://localhost:3000/api/ops/activity/delete/db8ee3dd-43e6-41b3-9b0e-036942674b97
@@ -123,20 +127,17 @@ DELETE http://localhost:3000/api/ops/activity/delete
 GET  http://localhost:3000/api/ops/student/read  
 
 ###
-GET http://localhost:3000/api/ops/student/read/267dc833-9cf4-4793-a6e1-b0f7b3333660
+GET http://localhost:3000/api/ops/student/read/771852fc-1d78-4b1f-89df-7331c95298bd
 ###
 
 
 # --- Student ---
 
-
-
-
 #--- Operations ---
 ###
 
-POST https://wjq5fc3jdk.execute-api.us-east-1.amazonaws.com/dev/
+POST https://la31aurjlk.execute-api.us-east-1.amazonaws.com/prod/run-code
 
 {
-    "src" : "tochi"
+    "src" : "print('tocbnhi')"
 }

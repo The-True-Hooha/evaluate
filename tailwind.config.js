@@ -7,12 +7,14 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                neon_carrot: {
-                    100: '#e79935'
-                },
-                blue_black: {
-                    100: '#02041b'
-                },
+                primary : 'white',
+                secondary : '#e79935'
+                // neon_carrot: {
+                //     100: "#e79935",
+                // },
+                // blue_black: {
+                //     100: "#02041b",
+                // },
             },
         },
     },

@@ -2,28 +2,33 @@ import { useState } from "react"
 import api from "../lib/api"
 import CodeMirror from "@uiw/react-codemirror"
 import { langs } from "@uiw/codemirror-extensions-langs"
-import { githubLight } from "@uiw/codemirror-themes-all"
+import { githubDark, githubLight } from "@uiw/codemirror-themes-all"
 import { pythonDefault } from "../lib/defaults"
 import { rceHttpClient } from "../lib/api"
 // for creating a custom theme
 // import { createTheme } from "@uiw/codemirror-themes"
 // import { tags as t } from '@lezer/highlight';
 
-
-export default function CodeUi() {
+export default function CodeUi({
+    testCases,
+    skeletonCode,
+    sid,
+    language,
+    codingactivityId,
+}) {
     const [codeActivity, setCodeActivity] = useState(pythonDefault)
     const [codeActivityResult, setCodeActivityResult] = useState([])
     const [output, setOutput] = useState(null)
     const [error, setError] = useState(null)
-   
-
-
+    
+    
     const submitCodeActivity = async () => {
+        const data = { src: codeActivity, testCases: testCases, lang: language, skeletonCode : skeletonCode }
         try {
             await rceHttpClient
                 .post(
-                    "https://wjq5fc3jdk.execute-api.us-east-1.amazonaws.com/dev/",
-                    { src: codeActivity, lang: "python" }
+                    "https://la31aurjlk.execute-api.us-east-1.amazonaws.com/prod/grade-code",
+                    data
                 )
                 .then(async ({ data: { error, output } }) => {
                     setError(error)
@@ -40,7 +45,7 @@ export default function CodeUi() {
                 <CodeMirror
                     value={codeActivity}
                     placeholder='enter your code here'
-                    theme={githubLight}
+                    theme={githubDark}
                     height='545px'
                     extensions={[langs.python()]}
                     // options={{
@@ -53,7 +58,17 @@ export default function CodeUi() {
                     className='border border-black p-1 '
                 />
                 {error && <div className='text-red-500'>{error}</div>}
-                {output && <div className='text-green-500'>{output}</div>}
+                {output && (
+                    <div className='text-green-500'>
+                        {output.map((e, index) => {
+                            return (
+                                <ul key={index}>
+                                    <li>{e == "True" ? "✅" : "❌"}</li>
+                                </ul>
+                            )
+                        })}
+                    </div>
+                )}
                 <div className='mt-3'>
                     <button
                         onClick={() => submitCodeActivity()}

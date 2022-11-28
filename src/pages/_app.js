@@ -2,12 +2,16 @@ import "../styles/globals.css"
 import App from "next/app"
 import { getUser } from "../lib/AuthContext"
 import { AuthProvider, ProtectRoutes } from "../lib/AuthContext"
+import Navbar from "../components/Navbar"
 
 function MyApp({ Component, pageProps, auth }) {
     return (
-        <AuthProvider myAuth={auth}>
-            <Component {...pageProps} />
-        </AuthProvider>
+        <main className='bg-white md:px-20 lg:px-40'>
+            <AuthProvider myAuth={auth}>
+                {auth.user && <Navbar />}
+                <Component {...pageProps} />
+            </AuthProvider>
+        </main>
     )
 }
 
