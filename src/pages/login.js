@@ -117,23 +117,23 @@ export default function Login() {
                                         </form>
                                     </div>
                                 </div>
-                                <div
+                                <div className="flex items-center justify-center rounded-b-lg border border-white lg:w-[50%] lg:rounded-r-lg lg:rounded-bl-none">
+                                <Image
+                                    src={SalemState}
+                                    alt="salem state university"
+                                    loading="lazy"
+                                    width={600}                                    
+                                    className="flex justify-center w-full h-[90%] object-cover"
+                                />
+                                </div>
+
+                                {/* <div
                                     className='flex items-center rounded-b-lg lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none'
                                     style={{
                                         background:
                                             "linear-gradient( to right,#ee7724, #d8363a,#dd3675, #b44593 )",
                                     }}>
-                                        <Image
-                                            src={SalemState}
-                                            alt="salem state university"
-                                            loading="lazy"
-                                        />
-                                    <div className='px-4 py-6 text-white md:mx-6 md:p-12'>
-                                        {/* <h4 className='mb-6 text-xl font-semibold'>
-                                            Smart and Intuitive grading platform
-                                        </h4> */}
-                                    </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

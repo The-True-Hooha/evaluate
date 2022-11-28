@@ -100,7 +100,7 @@ Content-Type: application/json
     "learningObjectives": {
         "description" : "You should have better syntax and be able to tell"
     },
-    "courseId" : "558747c3-cfe4-4e4c-a3e6-fd442a71905c",
+    "courseId" : "38975005-867e-4f6e-b44f-e2488929ba88",
     "testCases" : {"test1" : [1, 3]}
 }
 
