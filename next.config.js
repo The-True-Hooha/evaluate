@@ -2,6 +2,7 @@
 const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
+    baseUrl: 'https://main.dn1yub99dp50a.amplifyapp.com/',
     images: {
         remotePatterns: [
           {

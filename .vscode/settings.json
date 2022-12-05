@@ -111,5 +111,6 @@
 
     "[python]": {
         "editor.defaultFormatter": "ms-python.python"
-    }
+    },
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

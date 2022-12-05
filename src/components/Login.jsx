@@ -64,7 +64,7 @@ export default function Login({
                                                     Log in
                                                 </button>
                                                 <p className='text-secondary '>
-                                                    {identity}?{" "}
+                                                    {identity == "Student" ? "Faculty" : "Student"}?{" "}
                                                     <span>
                                                         <Link
                                                             href={redir}
