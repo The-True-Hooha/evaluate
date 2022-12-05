@@ -44,6 +44,7 @@ export class InfraAsCodeStack extends Stack {
             subnets: vpc.publicSubnets,
           }
         })
+        //test
 
         const evaluateSG = new ec2.SecurityGroup(this, "evaluate-rds-secG", {
           vpc,
