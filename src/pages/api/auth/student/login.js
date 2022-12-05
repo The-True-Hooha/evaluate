@@ -15,6 +15,7 @@ export default async function handler(req, res) {
         },
     })
 
+    console.log(student)
     if (student) {
         const checkPassword = await bcrypt.compare(password, student.password)
         if (!checkPassword) {

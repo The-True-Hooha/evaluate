@@ -24,17 +24,17 @@ Content-Type: application/json
 
 ###
 
-POST  http://localhost:3000/api/auth/student/signup
+POST  https://main.dn1yub99dp50a.amplifyapp.com/api/auth/student/signup
 Content-Type: application/json
 
 {
    "username" : "Tochi Amanze",
-    "email" : "tdev3@salemstate.edu",
+    "email" : "tdev@salemstate.edu",
     "password" : "dev"
 }
 
 ###
-POST  http://localhost:3000/api/auth/student/login
+POST  https://main.dn1yub99dp50a.amplifyapp.com/api/auth/student/login
 Content-Type: application/json
 
 {
