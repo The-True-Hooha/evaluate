@@ -6,7 +6,7 @@ import Navbar from "../components/Navbar"
 
 function MyApp({ Component, pageProps, auth }) {
     return (
-        <main className='bg-white md:px-20 lg:px-40'>
+        <main className=' bg-primary md:px-20 lg:px-40'>
             <AuthProvider myAuth={auth}>
                 {auth.user && <Navbar />}
                 <Component {...pageProps} />

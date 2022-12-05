@@ -65,45 +65,50 @@ export class InfraAsCodeStack extends Stack {
         //   instanceType: ec2.InstanceType.of(ec2.InstanceClass.T2, ec2.InstanceSize.MICRO),
         //   securityGroups: [evaluateSG]
         // })
-        const python_run_code = new lambda.Function(this, "python_run_code_lambda", {
-            runtime: lambda.Runtime.PYTHON_3_9,
-            handler: "index.lambda_handler",
-            code: lambda.Code.fromAsset("lambda/python/run_code"),
-            timeout: Duration.seconds(3),
-            memorySize : 300
-        })
 
-        const python_grade_code = new lambda.Function(this, "python_grade_code_lambda", {
-            runtime: lambda.Runtime.PYTHON_3_9,
-            handler: "index.lambda_handler",
-            code: lambda.Code.fromAsset("lambda/python/grade_code"),
-            timeout: Duration.seconds(5),
-            memorySize : 1200
-        })
+        // const python_run_code = new lambda.Function(this, "python_run_code_lambda", {
+        //     runtime: lambda.Runtime.PYTHON_3_9,
+        //     handler: "index.lambda_handler",
+        //     code: lambda.Code.fromAsset("lambda/python/run_code"),
+        //     timeout: Duration.seconds(3),
+        //     memorySize : 300
+        // })
+
+        const custom_docker_runtime = new lambda.DockerImageFunction(this, 'AssetFunction', {
+            code: lambda.DockerImageCode.fromImageAsset("lambda"),
+        });
+
+
+        // const python_grade_code = new lambda.Function(this, "python_grade_code_lambda", {
+        //     runtime: lambda.Runtime.PYTHON_3_9,
+        //     handler: "index.lambda_handler",
+        //     code: lambda.Code.fromAsset("lambda/python/grade_code"),
+        //     timeout: Duration.seconds(5),
+        //     memorySize : 1200
+        // })
 
         const evaluate_rce_api = new apigw.LambdaRestApi(this, "evalaute_rce_api", {
-            handler: python_grade_code,
+            handler: custom_docker_runtime,
             proxy: false,
             restApiName: "evaluateRCE",
-            defaultCorsPreflightOptions : {
-                allowOrigins : apigw.Cors.ALL_ORIGINS
+            defaultCorsPreflightOptions: {
+                allowOrigins: apigw.Cors.ALL_ORIGINS
             }
         })
 
         const run_code = evaluate_rce_api.root.addResource("run-code")
-        const grade_code = evaluate_rce_api.root.addResource("grade-code")
+        const submit_code = evaluate_rce_api.root.addResource("submit-code")
 
-        run_code.addMethod("POST", new apigw.LambdaIntegration(python_run_code))
-        grade_code.addMethod("POST", new apigw.LambdaIntegration(python_grade_code))
+        run_code.addMethod("POST", new apigw.LambdaIntegration(custom_docker_runtime))
+        submit_code.addMethod("POST", new apigw.LambdaIntegration(custom_docker_runtime))
 
-        new cdk.CfnOutput(this, "grade_code_path", {
-            value: grade_code.path,
+        new cdk.CfnOutput(this, "submit_code_path", {
+            value:submit_code.path,
         })
 
         new cdk.CfnOutput(this, "run_code_path", {
             value: run_code.path,
         })
-
 
     }
 }

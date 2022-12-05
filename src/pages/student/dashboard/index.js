@@ -28,13 +28,15 @@ export default function Home({ courses }) {
                 }
             )
             setAccessCode("")
+            window.location.reload();
         } catch (error) {
             if (
                 error.response &&
                 error.response.status >= 400 &&
                 error.response.status <= 500
             ) {
-                setError(error.response.data.message)
+               
+                setError(error.response.data)
             }
         }
     }
@@ -47,7 +49,7 @@ export default function Home({ courses }) {
         <section>
             {courses.length !== 0 ? (
                 <>
-                    <h1 className='text-center text-xl md:text-start'>
+                    <h1 className='text-center text-xl md:text-start text-white font-bold'>
                         Welcome{" "}
                         <span className='font-bold uppercase text-secondary'>{username}</span>,
                         Here are your courses:{" "}
@@ -82,15 +84,16 @@ export default function Home({ courses }) {
                 <input
                     type='text'
                     placeholder='Course Access Code'
-                    className='rounded-sm border border-secondary py-2 px-3 outline-none'
+                    className='rounded-sm border border-white bg-black py-2 px-3 outline-none text-white'
                     onChange={handleChange}
                     value={accessCode}
                 />
                 <button
-                    className='ml-3 rounded-sm bg-orange-700 py-1 px-4 uppercase text-white'
+                    className='ml-3 rounded-sm bg-gradient-to-r from-secondary to-orange-700 py-1 px-4 uppercase text-white'
                     onClick={(e) => handleEnroll(e)}>
                     Enroll
                 </button>
+                {error && <div className="text-secondary font-bold py-3">{error}</div>}
             </div>
         </section>
     )

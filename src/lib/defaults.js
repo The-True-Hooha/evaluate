@@ -1,7 +1,8 @@
-export const javaDefault = `public class Main {
+export const javaDefault = `public class Solution {
+  // write function here
+  
     public static void main(String[] args) {
-        // write code here
-        return
+      Solution solution = new Solution(); 
     }
   }`
 

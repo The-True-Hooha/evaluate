@@ -1,4 +1,5 @@
 import { useRouter } from "next/router"
+import StudentActivities from "../../../../components/StudentActivities"
 import api from "../../../../lib/api"
 
 export default function Index({ info }) {
@@ -14,26 +15,12 @@ export default function Index({ info }) {
             </h1>
         )
     }
-    const handleClick = (e) => {
-        console.log(e)
-        router.push(`${router.asPath}/activity/${e.activityId}`)
-    }
 
     return (
         <div>
-            {activities.map((e) => {
-                return (
-                    <button
-                        key={e.activityId}
-                        style={{
-                            margin: "20px",
-                            color: "red",
-                            background: "black",
-                        }}
-                        onClick={() => handleClick(e)}>
-                        {e.topic}
-                    </button>
-                )
+            {activities.map((e, index) => {
+            
+               return  <StudentActivities topic={e.topic} point={e.points} numberOfAttempts={e.numofattempts} available={true} availableto={e.availableto} activityId={e.activityId} key={index} />
             })}
         </div>
     )

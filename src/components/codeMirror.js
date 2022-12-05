@@ -3,8 +3,9 @@ import api from "../lib/api"
 import CodeMirror from "@uiw/react-codemirror"
 import { langs } from "@uiw/codemirror-extensions-langs"
 import { githubDark, githubLight } from "@uiw/codemirror-themes-all"
-import { pythonDefault } from "../lib/defaults"
+import { javaDefault } from "../lib/defaults"
 import { rceHttpClient } from "../lib/api"
+import axios from "axios"
 // for creating a custom theme
 // import { createTheme } from "@uiw/codemirror-themes"
 // import { tags as t } from '@lezer/highlight';
@@ -16,26 +17,43 @@ export default function CodeUi({
     language,
     codingactivityId,
 }) {
-    const [codeActivity, setCodeActivity] = useState(pythonDefault)
+    const [codeActivity, setCodeActivity] = useState(javaDefault)
     const [codeActivityResult, setCodeActivityResult] = useState([])
     const [output, setOutput] = useState(null)
     const [error, setError] = useState(null)
-    
-    
-    const submitCodeActivity = async () => {
-        const data = { src: codeActivity, testCases: testCases, lang: language, skeletonCode : skeletonCode }
+
+    const runCodeActivity = async () => {
+        const data = {
+            code: codeActivity,
+            testCases: testCases,
+            language: language,
+            skeletonCode: skeletonCode,
+        }
         try {
-            await rceHttpClient
-                .post(
-                    "https://la31aurjlk.execute-api.us-east-1.amazonaws.com/prod/grade-code",
-                    data
-                )
-                .then(async ({ data: { error, output } }) => {
-                    setError(error)
-                    setOutput(output)
-                })
+            await axios.post("https://bcxpmoqj0b.execute-api.us-east-1.amazonaws.com/prod/run-code", data)
+            .then(async ({ data: { result} }) => {
+                setOutput(result)
+            })
         } catch (error) {
-            alert(error.message)
+            alert(error)
+        }
+    }
+
+
+    const submitCodeActivity = async () => {
+        const data = {
+            code: codeActivity,
+            testCases: testCases,
+            language: language,
+            skeletonCode: skeletonCode,
+        }
+        try {
+            await axios.post("https://bcxpmoqj0b.execute-api.us-east-1.amazonaws.com/prod/submit-code", data)
+            .then(async ({ data: { result} }) => {
+                setOutput(result)
+            })
+        } catch (error) {
+            alert(error)
         }
     }
 
@@ -47,33 +65,23 @@ export default function CodeUi({
                     placeholder='enter your code here'
                     theme={githubDark}
                     height='545px'
-                    extensions={[langs.python()]}
-                    // options={{
-                    //     keyMap: 'sublime',
-                    //     mode: "python",
-                    // }}
+                    extensions={[langs.java()]}
                     onChange={(value) => {
                         setCodeActivity(value)
                     }}
                     className='border border-black p-1 '
                 />
-                {error && <div className='text-red-500'>{error}</div>}
-                {output && (
-                    <div className='text-green-500'>
-                        {output.map((e, index) => {
-                            return (
-                                <ul key={index}>
-                                    <li>{e == "True" ? "✅" : "❌"}</li>
-                                </ul>
-                            )
-                        })}
-                    </div>
-                )}
+                {output && <div className='text-red-500'>{output}</div>}
                 <div className='mt-3'>
                     <button
+                        onClick={() => runCodeActivity()}
+                        className='rounded-md border border-white p-2 mx-2 text-secondary  hover:font-bold'>
+                        Run Code
+                    </button>
+                    <button
                         onClick={() => submitCodeActivity()}
-                        className='rounded-md border border-green-700 bg-green-500 p-2'>
-                        submit
+                        className='rounded-md border border-white p-2 mx-2 text-secondary  hover:font-bold'>
+                        Sumbit
                     </button>
                 </div>
             </div>
