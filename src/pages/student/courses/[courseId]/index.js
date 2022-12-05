@@ -1,9 +1,8 @@
-import { useRouter } from "next/router"
 import StudentActivities from "../../../../components/StudentActivities"
 import api from "../../../../lib/api"
 
 export default function Index({ info }) {
-    const router = useRouter()
+
     const {
         instructor: { firstname, lastname },
         activities,

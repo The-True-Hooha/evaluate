@@ -16,6 +16,7 @@ export default function CodeUi({
     sid,
     language,
     codingactivityId,
+    apiUrl
 }) {
     const [codeActivity, setCodeActivity] = useState(javaDefault)
     const [codeActivityResult, setCodeActivityResult] = useState([])
@@ -30,7 +31,7 @@ export default function CodeUi({
             skeletonCode: skeletonCode,
         }
         try {
-            await axios.post("https://bcxpmoqj0b.execute-api.us-east-1.amazonaws.com/prod/run-code", data)
+            await axios.post(process.env.NEXT_PUBLIC_LAMBDA_RUN_CODE_URL, data)
             .then(async ({ data: { result} }) => {
                 setOutput(result)
             })
@@ -48,14 +49,16 @@ export default function CodeUi({
             skeletonCode: skeletonCode,
         }
         try {
-            await axios.post("https://bcxpmoqj0b.execute-api.us-east-1.amazonaws.com/prod/submit-code", data)
+            await axios.post(process.env.NEXT_PUBLIC_LAMBDA_GRADE_CODE_URL, data)
             .then(async ({ data: { result} }) => {
                 setOutput(result)
             })
         } catch (error) {
+            console.log(error)
             alert(error)
         }
     }
+
 
     return (
         <div className='h-[] pt-[30px]'>
