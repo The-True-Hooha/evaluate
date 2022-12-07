@@ -3,7 +3,7 @@ import { verify } from "jsonwebtoken"
 
 export default async function me(req, res) {
     const { cookies } = req
-
+    console.log(cookies)
     const authorization = cookies.evaluate
     if (!authorization) return res.status(403).json("Not Authenticated")
 
