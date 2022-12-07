@@ -17,3 +17,4 @@ Backlog
 add allowed domains for cookie 
 making custom code mirror theme : https://uiwjs.github.io/react-codemirror/#/theme/editor/single
 refresh user access tokens --- necessary for uninterupted workflows
+  "prepare": "husky install"
