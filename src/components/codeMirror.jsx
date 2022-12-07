@@ -31,7 +31,7 @@ export default function CodeUi({
             skeletonCode: skeletonCode,
         }
         try {
-            await axios.post(process.env.NEXT_PUBLIC_LAMBDA_RUN_CODE_URL, data)
+            await axios.post("https://c10f08lcnd.execute-api.us-east-1.amazonaws.com/prod/run-code", data)
             .then(async ({ data: { result} }) => {
                 setOutput(result)
             })
@@ -49,7 +49,7 @@ export default function CodeUi({
             skeletonCode: skeletonCode,
         }
         try {
-            await axios.post(process.env.NEXT_PUBLIC_LAMBDA_GRADE_CODE_URL, data)
+            await axios.post("https://c10f08lcnd.execute-api.us-east-1.amazonaws.com/prod/submit-code", data)
             .then(async ({ data: { result} }) => {
                 setOutput(result)
             })

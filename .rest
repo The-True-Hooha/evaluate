@@ -29,7 +29,7 @@ Content-Type: application/json
 
 {
    "username" : "Tochi Amanze",
-    "email" : "tdev2@salemstate.edu",
+    "email" : "tdev@salemstate.edu",
     "password" : "dev"
 }
 
