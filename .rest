@@ -24,12 +24,12 @@ Content-Type: application/json
 
 ###
 
-POST  https://main.dn1yub99dp50a.amplifyapp.com/api/auth/student/signup
+POST  https://evaluate-1lejcr0ow-tochey.vercel.app/api/auth/student/signup
 Content-Type: application/json
 
 {
    "username" : "Tochi Amanze",
-    "email" : "tdev@salemstate.edu",
+    "email" : "tdev2@salemstate.edu",
     "password" : "dev"
 }
 

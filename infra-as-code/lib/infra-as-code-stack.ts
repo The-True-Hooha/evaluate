@@ -95,11 +95,11 @@ export class InfraAsCodeStack extends Stack {
         submit_code.addMethod("POST", new apigw.LambdaIntegration(custom_docker_runtime))
 
         new cdk.CfnOutput(this, "submit_code_path", {
-            value:submit_code.path,
+            value: evaluate_rce_api.url + submit_code.path
         })
 
         new cdk.CfnOutput(this, "run_code_path", {
-            value: run_code.path,
+            value: evaluate_rce_api.url + run_code.path,
         })
 
     }
