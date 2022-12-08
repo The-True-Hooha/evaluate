@@ -15,13 +15,12 @@ export default async function handler(req, res) {
         },
     })
 
-    console.log(student)
     if (student) {
         const checkPassword = await bcrypt.compare(password, student.password)
         if (!checkPassword) {
-            return res.status(401).json({
-                message: "incorrect email or password",
-            })
+            return res.status(401).json(
+                "incorrect email or password"
+            )
         } else {
             const atCookie = serialize(
                 "evaluate",
@@ -36,14 +35,11 @@ export default async function handler(req, res) {
             )
 
             res.setHeader("Set-Cookie", atCookie)
-            return res.status(201).json({
-                message: "login successful",
-                student: student,
-            })
+            return res.status(201).json("logging in")
         }
     } else {
-        return res.status(404).json({
-            message: "account does not exist",
-        })
+        return res.status(404).json(
+           "account does not exist"
+        )
     }
 }

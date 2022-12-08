@@ -6,7 +6,7 @@ export function studentSignupValidation(data) {
     const registerValidationSchema = z.object({
         username: z
             .string()
-            .min(1, "Username must be 6 characters or more")
+            .min(5, "Username must be 6 characters or more")
             .max(12, "Username is too long")
             .trim(),
         email: z
@@ -16,7 +16,7 @@ export function studentSignupValidation(data) {
             .trim(),
         password: z
             .string()
-            .min(1, "Password must be 8 or more characters")
+            .min(8, "Password must be 8 or more characters")
             .max(12, "Password is too long")
             .trim(),
     })
@@ -50,7 +50,7 @@ export function facultyCredentialsValidation(data) {
         lastName: z.string().trim(),
         password: z
             .string()
-            .min(1, "Password must be 8 or more characters")
+            .min(8, "Password must be 8 or more characters")
             .max(12, "Password is too long")
             .trim(),
     })
@@ -66,7 +66,7 @@ export function facultyLoginValidation(data) {
         facultyId: z.string().length(4, "Invalid faculty Id").trim(),
         password: z
             .string()
-            .min(1, "Password must be 8 or more characters")
+            .min(8, "Password must be 8 or more characters")
             .max(12, "Password is too long")
             .trim(),
     })

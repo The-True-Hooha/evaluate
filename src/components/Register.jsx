@@ -2,14 +2,9 @@ import salemstate from "../public/salemstate.jpeg"
 import Link from "next/link"
 import Image from "next/image"
 
-
-export default function Login({
+export default function Register({
     handleChange,
     handleSubmit,
-    redir,
-    emailPlaceHolder,
-    identity,
-    inputName,
     error,
 }) {
     return (
@@ -22,25 +17,35 @@ export default function Login({
                                 <div className='border-l border-t border-b border-secondary px-4 md:px-0 lg:w-6/12'>
                                     <div className='md:mx-6 md:p-12'>
                                         <div className='text-center'>
-                                        
                                             <h4 className='mt-1 mb-12 pb-1 text-xl font-semibold text-secondary'>
                                                 Welcome to Evaluate
                                             </h4>
                                         </div>
                                         <form>
                                             <p className='mb-4 text-secondary '>
-                                                Please login to your account
+                                                Please Create an account
                                             </p>
-                                        
+
                                             <div className='mb-4'>
                                                 <input
                                                     type='text'
-                                                    name={inputName}
+                                                    name={"username"}
                                                     className='form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none'
                                                     id='exampleFormControlInput1'
-                                                    placeholder={
-                                                        emailPlaceHolder
+                                                    placeholder="Username"
+                                                    onChange={(e) =>
+                                                        handleChange(e)
                                                     }
+                                                />
+                                            </div>
+
+                                            <div className='mb-4'>
+                                                <input
+                                                    type='text'
+                                                    name="email"
+                                                    className='form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none'
+                                                    id='exampleFormControlInput1'
+                                                    placeholder="Enter your ssu email"
                                                     onChange={(e) =>
                                                         handleChange(e)
                                                     }
@@ -58,27 +63,20 @@ export default function Login({
                                                     }
                                                 />
                                             </div>
-                                            {error && (
-                                                <p className=' text-red-500'>
-                                                    {error}
-                                                </p>
-                                            )}
+                                            {error && <p className="text-red-500 text-xl">{error}</p>}
                                             <div className='mb-12 pt-1 pb-1 text-center'>
                                                 <button
                                                     className='mb-3 inline-block w-full rounded px-6 py-2.5 text-xs font-medium uppercase leading-tight text-secondary shadow-md  hover:shadow-lg  active:shadow-lg'
                                                     type='button'
                                                     onClick={handleSubmit}>
-                                                    Log in
+                                                    SIGN UP
                                                 </button>
 
                                                 <p className='text-secondary'>
-                                                    {identity == "Student"
-                                                        ? "Faculty"
-                                                        : "Student"}
-                                                    ?{" "}
+                                                    Already have an account?{" "}
                                                     <span>
                                                         <Link
-                                                            href={redir}
+                                                            href={"/login"}
                                                             className='hover:text-neon_carrot-100 hover:underline'>
                                                             Sign in here
                                                         </Link>

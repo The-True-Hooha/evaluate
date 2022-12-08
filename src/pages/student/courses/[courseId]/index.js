@@ -7,9 +7,10 @@ export default function Index({ info }) {
         instructor: { firstname, lastname },
         activities,
     } = info
+    
     if (activities.length === 0) {
         return (
-            <h1 className='text-neon_carrot-100'>
+            <h1 className='text-secondary'>
                 You have no activities available
             </h1>
         )

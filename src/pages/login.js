@@ -8,7 +8,7 @@ import Login from "../components/Login"
 export default function StudentLogin() {
     const router = useRouter()
     const [data, setData] = useState({ email: "", password: "" })
-    const [error, setError] = useState("")
+    const [error, setError] = useState([])
     const { studentLogin } = useAuth()
 
     const handleStudentChange = ({ currentTarget: input }) => {
@@ -17,19 +17,15 @@ export default function StudentLogin() {
 
     const handleStudentSubmit = async (e) => {
         e.preventDefault()
-        try {
-            const { email, password } = data
-            const {
-                data: { accessToken },
-            } = await studentLogin(email, password)
-        } catch (error) {
-            if (
-                error.response &&
-                error.response.status >= 400 &&
-                error.response.status <= 500
-            ) {
-                setError(error.response.data.message)
-            }
+
+        const { email, password } = data
+        const error = await studentLogin(email, password)
+        if (
+            error?.response &&
+            error?.response.status >= 400 &&
+            error?.response.status <= 500
+        ) {
+            setError(error.response.data)
         }
     }
 
@@ -37,10 +33,11 @@ export default function StudentLogin() {
         <Login
             handleChange={handleStudentChange}
             handleSubmit={handleStudentSubmit}
-            redir={'/faculty/login'}
-            emailPlaceHolder={'Enter your SSU email'}
-            identity="Student"
-            inputName="email"
+            redir={"/faculty/login"}
+            emailPlaceHolder={"Enter your SSU email"}
+            identity='Student'
+            inputName='email'
+            error={error}
         />
     )
 }

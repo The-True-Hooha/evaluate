@@ -87,16 +87,16 @@ model CodingActivity {
   actitvity        Activity            @relation(fields: [activityId], references: [activityId], onDelete: Cascade)
   activityId       String              @unique
   testCases        String
-  skeletonCode     String @db.VarChar(1000)
+  skeletonCode     String              @db.VarChar(1000)
 }
 
 model Submission {
   submissionId             String         @id @default(uuid())
   sumbittedAt              DateTime       @default(now())
-  score                    Int
+  score                    String         @db.VarChar(5000)
   student                  Student        @relation(fields: [studentid], references: [sid], onDelete: Cascade)
   studentid                String
-  sourceCode               String
+  sourceCode               String         @db.VarChar(5000)
   codingActitvySubmissions CodingActivity @relation(fields: [codingActivityId], references: [codingactivityId])
   codingActivityId         String
 
