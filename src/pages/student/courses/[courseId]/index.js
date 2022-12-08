@@ -17,7 +17,7 @@ export default function Index({ info }) {
         <div>
             {activities.map((e, index) => {
                 return (
-                    <div className='flex flex-col items-center gap-10 md:flex-row'>
+                    <div className='flex flex-col items-center gap-10 md:flex-row' key={index}>
                         <StudentActivities
                             topic={e.topic}
                             point={e.points}
@@ -25,7 +25,7 @@ export default function Index({ info }) {
                             available={true}
                             availableto={e.availableto}
                             activityId={e.activityId}
-                            Key={index}
+                            
                         />
                     </div>
                 )
