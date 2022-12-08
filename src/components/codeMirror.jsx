@@ -33,7 +33,7 @@ export default function CodeUi({
         try {
             await axios
                 .post(
-                    "https://1vxp804848.execute-api.us-east-1.amazonaws.com/prod/run-code",
+                    "https://nf06lj6pzi.execute-api.us-east-1.amazonaws.com/prod/run-code",
                     data
                 )
                 .then(async ({ data: { result } }) => {
@@ -53,7 +53,7 @@ export default function CodeUi({
         try {
             await axios
                 .post(
-                    "https://1vxp804848.execute-api.us-east-1.amazonaws.com/prod/submit-code",
+                    "https://nf06lj6pzi.execute-api.us-east-1.amazonaws.com/prod/submit-code",
                     data
                 )
                 .then(async ({ data: { result } }) => {

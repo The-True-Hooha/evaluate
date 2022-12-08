@@ -42,4 +42,3 @@ infra-as-code/.cdk.staging
 infra-as-code/cdk.out
 infra-as-code/package-lock-json
 infra-as-code/lambda/src/node_modules
-src/prisma/migrations

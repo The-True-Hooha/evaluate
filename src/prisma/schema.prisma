@@ -97,7 +97,7 @@ model Submission {
   student                  Student        @relation(fields: [studentid], references: [sid], onDelete: Cascade)
   studentid                String
   sourceCode               String         @db.VarChar(5000)
-  codingActitvySubmissions CodingActivity @relation(fields: [codingActivityId], references: [codingactivityId])
+  codingActitvySubmissions CodingActivity @relation(fields: [codingActivityId], references: [codingactivityId], onDelete: Cascade)
   codingActivityId         String
 
   @@index([submissionId])
