@@ -17,7 +17,7 @@ export default function Index({ info }) {
        
             <div
                 className='flex flex-col items-center gap-10 md:flex-row'
-                key={index}>
+                >
                 {activities.map((e, index) => {
                     return (
                         <StudentActivities
@@ -27,6 +27,7 @@ export default function Index({ info }) {
                             available={true}
                             availableto={e.availableto}
                             activityId={e.activityId}
+                            key={index}
                         />
                     )
                 })}
