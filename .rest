@@ -132,6 +132,7 @@ GET  {{hostname}}/api/ops/student/read
 ###
 GET {{hostname}}/api/ops/student/read/771852fc-1d78-4b1f-89df-7331c95298bd
 ###
+GET {{hostname}}/api/ops/student/delete/6819aaa5-7878-4f20-a8f4-acbb3cc056b9
 
 # --- Student ---
 
