@@ -137,6 +137,8 @@ GET {{hostname}}/api/ops/student/read/771852fc-1d78-4b1f-89df-7331c95298bd
 
 #--- Operations ---
 ###
+GET {{hostname}}/api/ops/activity/read/submissions/af94529a-3b1b-4441-a020-1584c00f657b
+###
 
 POST https://bcxpmoqj0b.execute-api.us-east-1.amazonaws.com/prod/run-code
 
