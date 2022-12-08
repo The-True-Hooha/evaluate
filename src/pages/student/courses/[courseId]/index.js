@@ -25,7 +25,7 @@ export default function Index({ info }) {
                             available={true}
                             availableto={e.availableto}
                             activityId={e.activityId}
-                            key={index}
+                            Key={index}
                         />
                     </div>
                 )
