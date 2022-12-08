@@ -14,10 +14,12 @@ export default function Index({ info }) {
     }
 
     return (
-        <div>
-            {activities.map((e, index) => {
-                return (
-                    <div className='flex flex-col items-center gap-10 md:flex-row' key={index}>
+       
+            <div
+                className='flex flex-col items-center gap-10 md:flex-row'
+                key={index}>
+                {activities.map((e, index) => {
+                    return (
                         <StudentActivities
                             topic={e.topic}
                             point={e.points}
@@ -25,12 +27,10 @@ export default function Index({ info }) {
                             available={true}
                             availableto={e.availableto}
                             activityId={e.activityId}
-                            
                         />
-                    </div>
-                )
-            })}
-        </div>
+                    )
+                })}
+            </div>
     )
 }
 
