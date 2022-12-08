@@ -98,12 +98,12 @@ export default function CodeUi({
                 <div className='mt-3'>
                     <button
                         onClick={() => runCodeActivity()}
-                        className='mx-2 rounded-md border border-white p-2 text-secondary  hover:font-bold'>
+                        className='mx-2 rounded-md border border-white p-2 text-secondary  hover:font-bold hover:text-xl active:text-red-600'>
                         Run Code
                     </button>
                     <button
                         onClick={() => submitCodeActivity()}
-                        className='mx-2 rounded-md border border-white p-2 text-secondary  hover:font-bold'>
+                        className='mx-2 rounded-md border border-white p-2 text-secondary  hover:font-bold hover:text-xl active:text-red-600'>
                         Sumbit
                     </button>
                 </div>

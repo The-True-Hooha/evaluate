@@ -5,20 +5,23 @@ public class SolutionTest {
 
     @Test
     public void testAdd1() {
+        int[] array = new int[]{ 3, 4, 5 };
         Solution solution = new Solution();
-        int result = solution.cube(2);
-        assertEquals(8, result);
+        int result = solution.arrayLen(array);
+        assertEquals(array.length, result);
     }
     @Test
     public void testAdd2() {
+        int[] array = new int[]{ 3, 4, 5, 10, 4};
         Solution solution = new Solution();
-        int result = solution.cube(7);
-        assertEquals(343, result);
+        int result = solution.arrayLen(array);
+        assertEquals(array.length, result);
     }
     @Test
     public void testAdd3() {
+        int[] array = new int[]{ 3, 4, 5, 9, 3, 2, 1 };
         Solution solution = new Solution();
-        int result = solution.cube(10);
-        assertEquals(1000, result);
+        int result = solution.arrayLen(array);
+        assertEquals(array.length, result);
     }
 }
