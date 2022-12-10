@@ -11,15 +11,17 @@ export default async function (req, res) {
             where: {
                 codingactivityId: codingActivityId,
             },
-            select : {
-                submissions : {
-                    include : {
-                        student : {select : {
-                            email : true
-                        }}
-                    }
-                }
-            }
+            select: {
+                submissions: {
+                    include: {
+                        student: {
+                            select: {
+                                email: true,
+                            },
+                        },
+                    },
+                },
+            },
         })
     })
 }

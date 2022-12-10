@@ -12,8 +12,7 @@ export const getUser = async (ctx) => {
         .get("api/auth/me", {
             withCredentials: true,
         })
-        .then(({data}) => {
-            
+        .then(({ data }) => {
             if (data) {
                 return { status: "SIGNED_IN", user: data }
             } else {

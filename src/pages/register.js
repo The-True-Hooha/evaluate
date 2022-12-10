@@ -16,22 +16,25 @@ export default function StudentRegister() {
 
     const studentRegisterSubmit = async (e) => {
         e.preventDefault()
-       
-            const { email, username, password } = data
-           
-              const error = await studentRegister(email, username, password)
-     
-              if (
-                  error?.response &&
-                  error?.response.status >= 400 &&
-                  error?.response.status <= 500
-              ) {
-                  setError(error.response.data)
-              }
+
+        const { email, username, password } = data
+
+        const error = await studentRegister(email, username, password)
+
+        if (
+            error?.response &&
+            error?.response.status >= 400 &&
+            error?.response.status <= 500
+        ) {
+            setError(error.response.data)
         }
-   
+    }
 
     return (
-       <Register handleChange={handleChange} handleSubmit={studentRegisterSubmit} error={error} />
+        <Register
+            handleChange={handleChange}
+            handleSubmit={studentRegisterSubmit}
+            error={error}
+        />
     )
 }

@@ -3,28 +3,29 @@ import CodeUi from "../../../../../components/codeMirror"
 import api from "../../../../../lib/api"
 import { getUser } from "../../../../../lib/AuthContext"
 
-export default function StudentActivity({ info, sid, submissions}) {
+export default function StudentActivity({ info, sid, submissions }) {
     const [hasTaken, setHasTaken] = useState(false)
     const {
-       
         numofattempts,
         codingActivity: { codingactivityId, question, language, skeletonCode },
     } = info
 
     useEffect(() => {
-        submissions.map(e => {
-            if(e.codingActivityId === codingactivityId){
-               setHasTaken(true)
+        submissions.map((e) => {
+            if (e.codingActivityId === codingactivityId) {
+                setHasTaken(true)
             }
         })
     }, [])
 
-    if(hasTaken){
-      return (
-        <div className="text-secondary text-2xl uppercase font-bold">You have taken this activity already....</div>
-      )
+    if (hasTaken) {
+        return (
+            <div className='text-2xl font-bold uppercase text-secondary'>
+                You have taken this activity already....
+            </div>
+        )
     }
-    
+
     return (
         <div className='flex justify-center'>
             <div className='App'>

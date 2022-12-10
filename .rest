@@ -130,7 +130,7 @@ DELETE {{hostname}}/api/ops/activity/delete
 GET  {{hostname}}/api/ops/student/read  
 
 ###
-GET {{hostname}}/api/ops/student/read/771852fc-1d78-4b1f-89df-7331c95298bd
+GET {{hostname}}/api/ops/student/read/c8cfc2ec-57a5-436b-b74e-9c4e925cebf4
 ###
 GET {{hostname}}/api/ops/student/delete/6819aaa5-7878-4f20-a8f4-acbb3cc056b9
 
@@ -138,7 +138,7 @@ GET {{hostname}}/api/ops/student/delete/6819aaa5-7878-4f20-a8f4-acbb3cc056b9
 
 #--- Operations ---
 ###
-GET {{hostname}}/api/ops/activity/read/submissions/5f1dcede-d4b8-447d-8930-d022b47287f0
+GET {{hostname}}/api/ops/activity/read/submissions/b486d0cb-2cf4-45e9-89cb-6481b24f1e46
 ###
 
 POST https://bcxpmoqj0b.execute-api.us-east-1.amazonaws.com/prod/run-code

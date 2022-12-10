@@ -14,14 +14,14 @@ export default async function (req, res) {
             include: {
                 learningObjectives: true,
                 codingActivity: {
-                    select : {
-                        codingactivityId : true,
-                        question : true,
-                        language : true,
-                        skeletonCode : true,
-                        submissions : true
-                    }
-                }
+                    select: {
+                        codingactivityId: true,
+                        question: true,
+                        language: true,
+                        skeletonCode: true,
+                        submissions: true,
+                    },
+                },
             },
         })
     })

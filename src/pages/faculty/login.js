@@ -35,10 +35,10 @@ export default function FacltyLogin() {
         <Login
             handleChange={handleChange}
             handleSubmit={handleSubmit}
-            redir={'/login'}
-            emailPlaceHolder={'Enter your Faculty Identification Number'}
-            identity="Faculty"
-            inputName="facultyId"
+            redir={"/login"}
+            emailPlaceHolder={"Enter your Faculty Identification Number"}
+            identity='Faculty'
+            inputName='facultyId'
         />
     )
 }

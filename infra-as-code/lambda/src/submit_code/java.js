@@ -13,7 +13,7 @@ const submitJaveCode = async (code, skeletonCode, language) => {
     let result = null
     let testRunnerFileName = "TestRunner.java"
     let testRunnerCode =
-       "import org.junit.runner.JUnitCore;\nimport org.junit.runner.Result;\n\npublic class TestRunner {\n    public static void main(String[] args) {\n        Result result = JUnitCore.runClasses(SolutionTest.class);\n        int runCount = result.getRunCount();\n        int failureCount = result.getFailureCount();\n\n        int passedCount = runCount - failureCount;\n        double percentagePassed = (double) passedCount / runCount * 100;\n        \n        System.out.println(percentagePassed + \"%\");\n    }\n}"
+        'import org.junit.runner.JUnitCore;\nimport org.junit.runner.Result;\n\npublic class TestRunner {\n    public static void main(String[] args) {\n        Result result = JUnitCore.runClasses(SolutionTest.class);\n        int runCount = result.getRunCount();\n        int failureCount = result.getFailureCount();\n\n        int passedCount = runCount - failureCount;\n        double percentagePassed = (double) passedCount / runCount * 100;\n        \n        System.out.println(percentagePassed + "%");\n    }\n}'
 
     try {
         fs.mkdirSync(folder, 0777)
@@ -41,7 +41,7 @@ const submitJaveCode = async (code, skeletonCode, language) => {
         result = stdout
     } catch (e) {
         console.log("err", e)
-        const { stderr }  = e
+        const { stderr } = e
         result = stderr
     }
 

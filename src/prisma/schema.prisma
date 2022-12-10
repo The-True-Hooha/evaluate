@@ -4,7 +4,8 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://admin:Chiemekasalem123@db-evaluate.cea7yks8a3o0.us-east-1.rds.amazonaws.com:3306/evaluate"
+  url      = env("DATABASE_URL")
+  // "mysql://admin:Chiemekasalem123@db-evaluate.cea7yks8a3o0.us-east-1.rds.amazonaws.com:3306/evaluate"
 }
 
 model Student {
