@@ -20,3 +20,6 @@ Tochi:
 Backlog
 add allowed domains for cookie 
 making custom code mirror theme : https://uiwjs.github.io/react-codemirror/#/theme/editor/single
+
+NOTE: 
+removed script "prepare": "husky install" from package.json, it was failing the amplify build.
