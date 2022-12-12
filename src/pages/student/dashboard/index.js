@@ -28,14 +28,13 @@ export default function Home({ courses }) {
                 }
             )
             setAccessCode("")
-            window.location.reload();
+            window.location.reload()
         } catch (error) {
             if (
                 error.response &&
                 error.response.status >= 400 &&
                 error.response.status <= 500
             ) {
-               
                 setError(error.response.data)
             }
         }
@@ -49,10 +48,12 @@ export default function Home({ courses }) {
         <section>
             {courses.length !== 0 ? (
                 <>
-                    <h1 className='text-center text-xl md:text-start text-white font-bold'>
+                    <h1 className='text-center text-xl font-bold text-white md:text-start'>
                         Welcome{" "}
-                        <span className='font-bold uppercase text-secondary'>{username}</span>,
-                        Here are your courses:{" "}
+                        <span className='font-bold uppercase text-secondary'>
+                            {username}
+                        </span>
+                        , Here are your courses:{" "}
                     </h1>
                     <div className=''>
                         <div className='flex flex-col items-center gap-10 md:flex-row'>
@@ -75,8 +76,9 @@ export default function Home({ courses }) {
                 </>
             ) : (
                 <div>
-                    <h1 className=" font-bold">
-                    Please Contact your instructor for an Access Code to enroll in a course
+                    <h1 className=' font-bold'>
+                        Please Contact your instructor for an Access Code to
+                        enroll in a course
                     </h1>
                 </div>
             )}
@@ -84,7 +86,7 @@ export default function Home({ courses }) {
                 <input
                     type='text'
                     placeholder='Course Access Code'
-                    className='rounded-sm border border-white bg-black py-2 px-3 outline-none text-white'
+                    className='rounded-sm border border-white bg-black py-2 px-3 text-white outline-none'
                     onChange={handleChange}
                     value={accessCode}
                 />
@@ -93,7 +95,9 @@ export default function Home({ courses }) {
                     onClick={(e) => handleEnroll(e)}>
                     Enroll
                 </button>
-                {error && <div className="text-secondary font-bold py-3">{error}</div>}
+                {error && (
+                    <div className='py-3 font-bold text-secondary'>{error}</div>
+                )}
             </div>
         </section>
     )
@@ -101,7 +105,7 @@ export default function Home({ courses }) {
 
 export async function getServerSideProps(ctx) {
     const { user, status } = await getUser(ctx)
-    
+
     if (status == "SIGNED_OUT") {
         return {
             redirect: {

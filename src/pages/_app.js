@@ -20,5 +20,6 @@ MyApp.getInitialProps = async (appContext) => {
     const auth = await getUser(appContext.ctx)
     return { ...appProps, auth: auth }
 }
+//
 
 export default MyApp

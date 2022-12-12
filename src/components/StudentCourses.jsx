@@ -12,9 +12,12 @@ export default function StudentCourses({
                     {coursename}
                 </div>
                 <div class='p-6'>
-                    <h5 class='mb-2 text-xl  text-white font-bold'>
-                    Instructor:
-                    <span className="text-secondary uppercase"> {instructor.firstName} {instructor.lastName}</span>
+                    <h5 class='mb-2 text-xl  font-bold text-white'>
+                        Instructor:
+                        <span className='uppercase text-secondary'>
+                            {" "}
+                            {instructor.firstName} {instructor.lastName}
+                        </span>
                     </h5>
                     <p className='text-md font-bold text-white'>
                         Core Learning Objective:

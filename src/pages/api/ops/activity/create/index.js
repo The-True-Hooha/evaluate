@@ -39,7 +39,7 @@ export default async function create(req, res) {
                         question: question,
                         testCases: testCases,
                         language: language,
-                        skeletonCode : skeleton
+                        skeletonCode: skeleton,
                     },
                 },
             },

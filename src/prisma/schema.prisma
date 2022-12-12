@@ -4,7 +4,8 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  url      =  "mysql://admin:Chiemekasalem123@db-evaluate.cea7yks8a3o0.us-east-1.rds.amazonaws.com:3306/evaluate"
+ 
 }
 
 model Student {
@@ -87,17 +88,17 @@ model CodingActivity {
   actitvity        Activity            @relation(fields: [activityId], references: [activityId], onDelete: Cascade)
   activityId       String              @unique
   testCases        String
-  skeletonCode     String @db.VarChar(1000)
+  skeletonCode     String              @db.VarChar(1000)
 }
 
 model Submission {
   submissionId             String         @id @default(uuid())
   sumbittedAt              DateTime       @default(now())
-  score                    Int
+  score                    String         @db.VarChar(5000)
   student                  Student        @relation(fields: [studentid], references: [sid], onDelete: Cascade)
   studentid                String
-  sourceCode               String
-  codingActitvySubmissions CodingActivity @relation(fields: [codingActivityId], references: [codingactivityId])
+  sourceCode               String         @db.VarChar(5000)
+  codingActitvySubmissions CodingActivity @relation(fields: [codingActivityId], references: [codingactivityId], onDelete: Cascade)
   codingActivityId         String
 
   @@index([submissionId])

@@ -2,24 +2,31 @@ import StudentActivities from "../../../../components/StudentActivities"
 import api from "../../../../lib/api"
 
 export default function Index({ info }) {
-
     const {
         instructor: { firstname, lastname },
         activities,
     } = info
+
     if (activities.length === 0) {
         return (
-            <h1 className='text-neon_carrot-100'>
-                You have no activities available
-            </h1>
+            <h1 className='text-secondary'>You have no activities available</h1>
         )
     }
 
     return (
-        <div>
+        <div className='flex flex-col items-center gap-10 md:flex-row'>
             {activities.map((e, index) => {
-            
-               return  <StudentActivities topic={e.topic} point={e.points} numberOfAttempts={e.numofattempts} available={true} availableto={e.availableto} activityId={e.activityId} key={index} />
+                return (
+                    <StudentActivities
+                        topic={e.topic}
+                        point={e.points}
+                        numberOfAttempts={e.numofattempts}
+                        available={true}
+                        availableto={e.availableto}
+                        activityId={e.activityId}
+                        key={index}
+                    />
+                )
             })}
         </div>
     )

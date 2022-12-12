@@ -1,7 +1,6 @@
 import salemstate from "../public/salemstate.jpeg"
 import Link from "next/link"
 import Image from "next/image"
-import {GrLogin} from 'react-icons/gr'
 
 export default function Login({
     handleChange,
@@ -10,6 +9,7 @@ export default function Login({
     emailPlaceHolder,
     identity,
     inputName,
+    error,
 }) {
     return (
         <section className='gradient-form h-full text-white md:h-screen '>
@@ -18,10 +18,9 @@ export default function Login({
                     <div className='xl:w-10/12'>
                         <div className='block rounded-lg shadow-lg'>
                             <div className='g-0 lg:flex lg:flex-wrap'>
-                                <div className='border-l border-t border-b px-4 md:px-0 lg:w-6/12 border-secondary'>
+                                <div className='border-l border-t border-b border-secondary px-4 md:px-0 lg:w-6/12'>
                                     <div className='md:mx-6 md:p-12'>
                                         <div className='text-center'>
-                                            <GrLogin className="cursor-pointer text-4xl mx-auto"/>
                                             <h4 className='mt-1 mb-12 pb-1 text-xl font-semibold text-secondary'>
                                                 Welcome to Evaluate
                                             </h4>
@@ -30,6 +29,7 @@ export default function Login({
                                             <p className='mb-4 text-secondary '>
                                                 Please login to your account
                                             </p>
+
                                             <div className='mb-4'>
                                                 <input
                                                     type='text'
@@ -56,15 +56,24 @@ export default function Login({
                                                     }
                                                 />
                                             </div>
+                                            {error && (
+                                                <p className=' text-red-500'>
+                                                    {error}
+                                                </p>
+                                            )}
                                             <div className='mb-12 pt-1 pb-1 text-center'>
                                                 <button
-                                                    className='mb-3 inline-block w-full rounded px-6 py-2.5 text-xs text-secondary font-medium uppercase leading-tight shadow-md  hover:shadow-lg  active:shadow-lg'
+                                                    className='mb-3 inline-block w-full rounded px-6 py-2.5 text-xs font-medium uppercase leading-tight text-secondary shadow-md  hover:shadow-lg  active:shadow-lg'
                                                     type='button'
                                                     onClick={handleSubmit}>
                                                     Log in
                                                 </button>
-                                                <p className='text-secondary '>
-                                                    {identity == "Student" ? "Faculty" : "Student"}?{" "}
+
+                                                <p className='text-secondary'>
+                                                    {identity == "Student"
+                                                        ? "Faculty"
+                                                        : "Student"}
+                                                    ?{" "}
                                                     <span>
                                                         <Link
                                                             href={redir}
@@ -78,7 +87,10 @@ export default function Login({
                                     </div>
                                 </div>
                                 <div class=' lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none'>
-                                <Image src={salemstate} className="h-full" />
+                                    <Image
+                                        src={salemstate}
+                                        className='h-full'
+                                    />
                                 </div>
                             </div>
                         </div>

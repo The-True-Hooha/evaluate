@@ -5,32 +5,23 @@ public class SolutionTest {
 
     @Test
     public void testAdd1() {
+        int[] array = new int[]{ 3, 4, 5 };
         Solution solution = new Solution();
-        int result = solution.add(2, 3);
-        assertEquals(5, result);
+        int result = solution.arrayLen(array);
+        assertEquals(array.length, result);
     }
     @Test
     public void testAdd2() {
+        int[] array = new int[]{ 3, 4, 5, 10, 4};
         Solution solution = new Solution();
-        int result = solution.add(90, 90);
-        assertEquals(180, result);
+        int result = solution.arrayLen(array);
+        assertEquals(array.length, result);
     }
     @Test
     public void testAdd3() {
+        int[] array = new int[]{ 3, 4, 5, 9, 3, 2, 1 };
         Solution solution = new Solution();
-        int result = solution.add(10, 19);
-        assertEquals(29, result);
-    }
-    @Test
-    public void testAdd4() {
-        Solution solution = new Solution();
-        int result = solution.add(45, 3);
-        assertEquals(48, result);
-    }
-    @Test
-    public void testAdd5() {
-        Solution solution = new Solution();
-        int result = solution.add(100, 100);
-        assertEquals(200, result);
+        int result = solution.arrayLen(array);
+        assertEquals(array.length, result);
     }
 }

@@ -1,4 +1,6 @@
 import { prisma } from "../../../../../config/prisma.connect"
+// import { prisma, PrismaClient } from "@prisma/client"
+// const prisma = new PrismaClient()
 import prismaErrorWrapper from "../../../../../lib/prismaErrorWrapper"
 
 export default async function (req, res) {
@@ -11,7 +13,15 @@ export default async function (req, res) {
             },
             include: {
                 learningObjectives: true,
-                codingActivity: true,
+                codingActivity: {
+                    select: {
+                        codingactivityId: true,
+                        question: true,
+                        language: true,
+                        skeletonCode: true,
+                        submissions: true,
+                    },
+                },
             },
         })
     })

@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 
 import Head from 'next/head'
 
+=======
+import Head from "next/head"
+import Link from "next/link"
+import { TfiCommentAlt } from "react-icons/tfi"
+>>>>>>> 2721dad1fcd48af81d880f42f46939f878e3b2b2
 export default function Home() {
     return (
         <div className='App'>
@@ -10,15 +16,21 @@ export default function Home() {
             </Head>
 
             <div className='flex justify-center pt-8'>
-                <div className='text-center'>
-                    <img
-                        className='mx-auto w-48'
-                        src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp'
-                        alt='logo'
-                    />
-                    <h4 className='mt-1 mb-12 pb-1 text-[30px] font-semibold text-white'>
+                <div className='mt-4 text-center'>
+                    <TfiCommentAlt className=' my-2 text-5xl text-secondary' />
+                    <h4 className='my-2 pb-1 text-[30px] font-semibold text-secondary'>
                         Welcome to Evaluate
                     </h4>
+                    <Link
+                        href={"/login"}
+                        className='hover:text-neon_carrot-100 px-3 text-xl font-bold uppercase text-secondary hover:underline'>
+                        login
+                    </Link>
+                    <Link
+                        href={"/register"}
+                        className='hover:text-neon_carrot-100 px-3 text-xl font-bold uppercase text-secondary hover:underline'>
+                        signup
+                    </Link>
                 </div>
             </div>
         </div>

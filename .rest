@@ -1,20 +1,23 @@
+@hostname =https://main.d18umu7gcrf9e5.amplifyapp.com/
+# https://main.d18umu7gcrf9e5.amplifyapp.com
+
 # --- Authentication ---
-GET http://localhost:3000/api/auth/me
+GET {{hostname}}/api/auth/me
 Cookie: evaluate=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY2ZGE3NmNjLWRkZTMtNGEzNS04MzhlLWNiYTY2NzgzOWM5NCIsInJvbGUiOiJTVFVERU5UIiwiaWF0IjoxNjY5NDUxODkyLCJleHAiOjE2Njk3OTc0OTJ9.ToTofFQNnwz1EUbUCAqEFBwhgiAbqgS0r0Fvhnd1x-w
 
 ###
-POST  http://localhost:3000/api/ops/superuser/createFacultyCredentials
+POST  {{hostname}}/api/ops/superuser/createFacultyCredentials
 Content-Type: application/json
 
 {
-    "facultyId" : "2345",
-    "firstName" : "tochi",
-    "lastName" : "don",
-    "password" : "dev"
+    "facultyId" : "1234",
+    "firstName" : "Fatema",
+    "lastName" : "Nafa",
+    "password" : "fnafa123"
 }
 
 ###
-POST  http://localhost:3000/api/auth/faculty/login
+POST  {{hostname}}/api/auth/faculty/login
 Content-Type: application/json
 
 {
@@ -24,7 +27,7 @@ Content-Type: application/json
 
 ###
 
-POST  https://main.dn1yub99dp50a.amplifyapp.com/api/auth/student/signup
+POST  {{hostname}}/api/auth/student/signup
 Content-Type: application/json
 
 {
@@ -34,7 +37,7 @@ Content-Type: application/json
 }
 
 ###
-POST  https://main.dn1yub99dp50a.amplifyapp.com/api/auth/student/login
+POST  {{hostname}}/api/auth/student/login
 Content-Type: application/json
 
 {
@@ -48,38 +51,38 @@ Content-Type: application/json
 # --- Operations --- 
 
 # --- Course ---
-GET  http://localhost:3000/api/ops/course/read
+GET  {{hostname}}/api/ops/course/read
 
 ###
-GET  http://localhost:3000/api/ops/course/read/2463eff2-93d1-4b77-98a0-aa6a273f9aa9
+GET  {{hostname}}/api/ops/course/read/2463eff2-93d1-4b77-98a0-aa6a273f9aa9
 ###
-DELETE   http://localhost:3000/api/ops/course/delete
+DELETE   {{hostname}}/api/ops/course/delete
 
 ###
-DELETE   http://localhost:3000/api/ops/course/delete/b74db85d-7e6d-4de6-b90c-a9eab16d4240
+DELETE   {{hostname}}/api/ops/course/delete/b74db85d-7e6d-4de6-b90c-a9eab16d4240
 
 ###
-POST  http://localhost:3000/api/ops/course/create
+POST  {{hostname}}/api/ops/course/create
 Content-Type: application/json
 
 {
-    "coursename" : "Operating Systems1 31",
+    "coursename" : "Intro to Java",
     "academicyear" : "Spring 22",
     "academicterm" : "Fall 22/Spring 23",
-    "learningObjectives" : "Understand the core principles of different Operating Systems",
+    "learningObjectives" : "Understand the core principles of Object Oriented Programming",
     "facultyId" : "1234"
 }
 
 ###
 
-POST  http://localhost:3000/api/ops/course/update/enroll/1e987b94-0f61-448b-9ffe-11f711bbc65d
+POST  {{hostname}}/api/ops/course/update/enroll/1e987b94-0f61-448b-9ffe-11f711bbc65d
 Content-Type: application/json
 
 {
     "accessCode" : "199ac7ca-eb1d-4e6f-9998-3bce5425a28e"
 }
 ### 
-POST  http://localhost:3000/api/ops/course/read/getEnrolledStudents/2463eff2-93d1-4b77-98a0-aa6a273f9aa9
+POST  {{hostname}}/api/ops/course/read/getEnrolledStudents/2463eff2-93d1-4b77-98a0-aa6a273f9aa9
 Content-Type: application/json 
 
 # --- Course ---
@@ -87,53 +90,55 @@ Content-Type: application/json
 # --- Activity ---
 
 ###
-POST  http://localhost:3000/api/ops/activity/create
+POST  {{hostname}}/api/ops/activity/create
 Content-Type: application/json
 
 {
-    "topic" : "Strings",
-    "points" : 4,
+    "topic" : "How long am I",
+    "points" : 40,
     "numofattempts" : 1,
     "availablefrom" : "",
     "availableto" : "",
     "language" : "JAVA",
     "codingActivity" : {
-        "question": "Write a function that takes in two parameters and returns the sum of them"
+        "question": "Write a function called (arrayLen) that takes in one parameters (an array ) and returns the length of it"
     },
     "learningObjectives": {
-        "description" : "You should have better syntax and be able to tell"
+        "description" : "To learn how to input parameters and find their the length of the array"
     },
-    "courseId" : "38975005-867e-4f6e-b44f-e2488929ba88",
+    "courseId" : "c8cfc2ec-57a5-436b-b74e-9c4e925cebf4",
     "testCases" : "1 2 3\n4 5 9\n10 50 60\n100 100 200\n20 30 50\n4 4 8\n21 21 42\n 10 1 11\n20 20 40",
-    "skeleton" : "import org.junit.Test;\nimport static org.junit.Assert.*;\n\npublic class SolutionTest {\n\n    @Test\n    public void testAdd1() {\n        Solution solution = new Solution();\n        int result = solution.add(2, 3);\n        assertEquals(5, result);\n    }\n    @Test\n    public void testAdd2() {\n        Solution solution = new Solution();\n        int result = solution.add(90, 90);\n        assertEquals(180, result);\n    }\n    @Test\n    public void testAdd3() {\n        Solution solution = new Solution();\n        int result = solution.add(10, 19);\n        assertEquals(29, result);\n    }\n    @Test\n    public void testAdd4() {\n        Solution solution = new Solution();\n        int result = solution.add(45, 3);\n        assertEquals(48, result);\n    }\n    @Test\n    public void testAdd5() {\n        Solution solution = new Solution();\n        int result = solution.add(100, 100);\n        assertEquals(200, result);\n    }\n}"
+    "skeleton" : "import org.junit.Test;\nimport static org.junit.Assert.*;\n\npublic class SolutionTest {\n\n    @Test\n    public void testAdd1() {\n        int[] array = new int[]{ 3, 4, 5 };\n        Solution solution = new Solution();\n        int result = solution.arrayLen(array);\n        assertEquals(array.length, result);\n    }\n    @Test\n    public void testAdd2() {\n        int[] array = new int[]{ 3, 4, 5, 10, 4};\n        Solution solution = new Solution();\n        int result = solution.arrayLen(array);\n        assertEquals(array.length, result);\n    }\n    @Test\n    public void testAdd3() {\n        int[] array = new int[]{ 3, 4, 5, 9, 3, 2, 1 };\n        Solution solution = new Solution();\n        int result = solution.arrayLen(array);\n        assertEquals(array.length, result);\n    }\n}"
 }
 
 ###
-GET  http://localhost:3000/api/ops/activity/read
+GET  {{hostname}}/api/ops/activity/read
 
 ###
-GET http://localhost:3000/api/ops/activity/read/668d6818-dea1-472f-b421-d637c120059d
+GET {{hostname}}/api/ops/activity/read/668d6818-dea1-472f-b421-d637c120059d
 
 ###
-DELETE http://localhost:3000/api/ops/activity/delete/db8ee3dd-43e6-41b3-9b0e-036942674b97
+DELETE {{hostname}}/api/ops/activity/delete/6ee121e3-94eb-478a-94e5-39e2fab328df
 
 ###
-DELETE http://localhost:3000/api/ops/activity/delete
+DELETE {{hostname}}/api/ops/activity/delete
 
 # --- Activity ---
 
 # --- Student ---
 ###
-GET  http://localhost:3000/api/ops/student/read  
+GET  {{hostname}}/api/ops/student/read  
 
 ###
-GET http://localhost:3000/api/ops/student/read/771852fc-1d78-4b1f-89df-7331c95298bd
+GET {{hostname}}/api/ops/student/read/c8cfc2ec-57a5-436b-b74e-9c4e925cebf4
 ###
-
+GET {{hostname}}/api/ops/student/delete/6819aaa5-7878-4f20-a8f4-acbb3cc056b9
 
 # --- Student ---
 
 #--- Operations ---
+###
+GET {{hostname}}/api/ops/activity/read/submissions/b486d0cb-2cf4-45e9-89cb-6481b24f1e46
 ###
 
 POST https://bcxpmoqj0b.execute-api.us-east-1.amazonaws.com/prod/run-code

@@ -12,8 +12,7 @@ export const getUser = async (ctx) => {
         .get("api/auth/me", {
             withCredentials: true,
         })
-        .then(({data}) => {
-            
+        .then(({ data }) => {
             if (data) {
                 return { status: "SIGNED_IN", user: data }
             } else {
@@ -40,7 +39,7 @@ export const AuthProvider = (props) => {
                 router.push("/student/dashboard")
             })
             .catch((error) => {
-                console.error("Incorrect email or password entered.")
+                return error
             })
     }
     const facultyLogin = async (facultyId, password) => {
@@ -70,10 +69,10 @@ export const AuthProvider = (props) => {
                 withCredentials: true,
             })
             .then(() => {
-                router.push("/")
+                router.push("/login")
             })
             .catch(function (error) {
-                console.error(error.message)
+                return error
             })
     }
 

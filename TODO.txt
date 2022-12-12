@@ -8,11 +8,17 @@ Tochi:
 * clean up/validate auth flow --done
 * Write rce algorithm and routes --done
 * add test case feature to rce --done
-* calculate student score from test case
-* ui run_code / grade_code feature
-* login page v1
+* calculate student score from test case --done
+* ui run_code / grade_code feature --done
+* login page v1 --done
+* figure out env situation with aws amplify
+* integrate amplify in cdk or cmd line
+* Refractor/clean up code
+* refresh user access tokens - necessary for uninterupted workflows
 
 Backlog
 add allowed domains for cookie 
 making custom code mirror theme : https://uiwjs.github.io/react-codemirror/#/theme/editor/single
-refresh user access tokens --- necessary for uninterupted workflows
+
+NOTE: 
+removed script "prepare": "husky install" from package.json, it was failing the amplify build.
