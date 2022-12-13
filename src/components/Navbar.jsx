@@ -10,7 +10,7 @@ export default function Navbar() {
                 <h1 className='text-xl font-bold text-secondary '>
                     <Link href='/student/dashboard'>Evaluate</Link>
                 </h1>
-                <ul className='flex items-center'>
+                <ul className='flex items-center gap-10'>
                     <li>
                         <BsFillMoonStarsFill className=' cursor-pointer text-2xl text-secondary' />
                     </li>
@@ -21,7 +21,7 @@ export default function Navbar() {
                                 Cookies.remove("evaluate")
                                 router.push("/login")
                             }}
-                            className='to-black-500 font-burtons ml-8 rounded-md bg-gradient-to-r from-secondary to-orange-700 px-4 py-2 text-white '>
+                            className=' inline-block rounded border px-4 py-2 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-secondary hover:font-bold'>
                             Logout
                         </Link>
                     </li>

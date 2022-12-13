@@ -91,7 +91,7 @@ export default function Home({ courses }) {
                     value={accessCode}
                 />
                 <button
-                    className='ml-3 rounded-sm bg-gradient-to-r from-secondary to-orange-700 py-1 px-4 uppercase text-white'
+                    className='ml-3 inline-block rounded border px-4 py-2 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-secondary hover:font-bold'
                     onClick={(e) => handleEnroll(e)}>
                     Enroll
                 </button>

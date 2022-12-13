@@ -25,8 +25,12 @@ const runjavaCode = async (code, language) => {
         const { stdout } = await exec(command)
         result = stdout
     } catch (e) {
-        const { stderr } = e
-        result = stderr
+        if (e.toString().includes("ERR_CHILD_PROCESS_STDIO_MAXBUFFER")) {
+            result = "Stop writing infinite for loops please"
+        } else {
+            const { stderr } = e
+            result = stderr
+        }
     }
 
     if (fs.existsSync(path)) {

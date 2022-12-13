@@ -86,7 +86,7 @@ export default function Register({ handleChange, handleSubmit, error }) {
                                         </form>
                                     </div>
                                 </div>
-                                <div class=' lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none'>
+                                <div className=' lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none'>
                                     <Image
                                         src={salemstate}
                                         className='h-full'

@@ -1,4 +1,4 @@
-@hostname =https://main.d18umu7gcrf9e5.amplifyapp.com/
+@hostname =http://localhost:3000/
 # https://main.d18umu7gcrf9e5.amplifyapp.com
 
 # --- Authentication ---
@@ -94,21 +94,65 @@ POST  {{hostname}}/api/ops/activity/create
 Content-Type: application/json
 
 {
-    "topic" : "How long am I",
-    "points" : 40,
+    "topic" : "The Smallest",
+    "points" : 5,
     "numofattempts" : 1,
     "availablefrom" : "",
     "availableto" : "",
     "language" : "JAVA",
     "codingActivity" : {
-        "question": "Write a function called (arrayLen) that takes in one parameters (an array ) and returns the length of it"
+        "question": "Write a function called (smallest) that takes in 3 int parameters and returns the minimum of them"
     },
     "learningObjectives": {
-        "description" : "To learn how to input parameters and find their the length of the array"
+        "description" : "Properly learn how to write good code (filler)"
     },
-    "courseId" : "c8cfc2ec-57a5-436b-b74e-9c4e925cebf4",
+    "courseId" : "28b7593a-3569-4394-a137-221f5349cbe4",
     "testCases" : "1 2 3\n4 5 9\n10 50 60\n100 100 200\n20 30 50\n4 4 8\n21 21 42\n 10 1 11\n20 20 40",
-    "skeleton" : "import org.junit.Test;\nimport static org.junit.Assert.*;\n\npublic class SolutionTest {\n\n    @Test\n    public void testAdd1() {\n        int[] array = new int[]{ 3, 4, 5 };\n        Solution solution = new Solution();\n        int result = solution.arrayLen(array);\n        assertEquals(array.length, result);\n    }\n    @Test\n    public void testAdd2() {\n        int[] array = new int[]{ 3, 4, 5, 10, 4};\n        Solution solution = new Solution();\n        int result = solution.arrayLen(array);\n        assertEquals(array.length, result);\n    }\n    @Test\n    public void testAdd3() {\n        int[] array = new int[]{ 3, 4, 5, 9, 3, 2, 1 };\n        Solution solution = new Solution();\n        int result = solution.arrayLen(array);\n        assertEquals(array.length, result);\n    }\n}"
+    "skeleton" : "import org.junit.Test;\nimport static org.junit.Assert.*;\n\npublic class SolutionTest {\n    @Test\n    public void testAdd1() {\n        int a = 10;\n        int b = 11;\n        int c = 30;\n        int min = a;\n        Solution solution = new Solution();\n        int result = solution.smallest(a, b, c);\n        assertEquals(result, min);\n    }\n    @Test\n    public void testAdd2() {\n        int a = 100;\n        int b = 50;\n        int c = 300;\n        int min = b;\n        Solution solution = new Solution();\n        int result = solution.smallest(a, b, c);\n        assertEquals(result, min);\n    }\n    @Test\n    public void testAdd3() {\n        int a = 321;\n        int b = 123;\n        int c = 1;\n        int min = c;\n        Solution solution = new Solution();\n        int result = solution.smallest(a, b, c);\n        assertEquals(result, min);\n    }\n}"
+}
+
+###
+POST  {{hostname}}/api/ops/activity/create
+Content-Type: application/json
+
+{
+    "topic" : "Sum it up",
+    "points" : 20,
+    "numofattempts" : 1,
+    "availablefrom" : "",
+    "availableto" : "",
+    "language" : "JAVA",
+    "codingActivity" : {
+        "question": "Write a function called (sum) where given an array of integers it returns the sum of the elements in the array"
+    },
+    "learningObjectives": {
+        "description" : "Properly learn how to write good code"
+    },
+    "courseId" : "28b7593a-3569-4394-a137-221f5349cbe4",
+    "testCases" : "1 2 3\n4 5 9\n10 50 60\n100 100 200\n20 30 50\n4 4 8\n21 21 42\n 10 1 11\n20 20 40",
+    "skeleton" : "import org.junit.Test;\nimport static org.junit.Assert.*;\n\npublic class SolutionTest {\n    @Test\n    public void testAdd1() {\n        Solution solution = new Solution();\n        assertEquals(0, solution.sum(new int[]{}));\n    }\n    @Test\n    public void testAdd2() {\n        Solution solution = new Solution();\n        assertEquals(1, solution.sum(new int[]{1}));\n    }\n    @Test\n    public void testAdd3() {\n        Solution solution = new Solution();\n        assertEquals(15, solution.sum(new int[]{1, 2, 3, 4, 5}));\n    }\n    @Test\n    public void testAdd4() {\n        Solution solution = new Solution();\n        assertEquals(-5, solution.sum(new int[]{-5}));\n    }\n    @Test\n    public void testAdd5() {\n        Solution solution = new Solution();\n        assertEquals(0, solution.sum(new int[]{1, -2, -3, 4}));\n    }\n}"
+}
+
+###
+POST  {{hostname}}/api/ops/activity/create
+Content-Type: application/json
+
+{
+    "topic" : "We're even",
+    "points" : 50,
+    "numofattempts" : 1,
+    "availablefrom" : "",
+    "availableto" : "",
+    "language" : "JAVA",
+    "codingActivity" : {
+        "question": "Write a function called (isEven) that takes in two int parameters and returns TRUE if one of them is an even number else return FALSE"
+    },
+    "learningObjectives": {
+        "description" : "Properly learn how to write good code ()"
+    },
+    "courseId" : "28b7593a-3569-4394-a137-221f5349cbe4",
+    "testCases" : "1 2 3\n4 5 9\n10 50 60\n100 100 200\n20 30 50\n4 4 8\n21 21 42\n 10 1 11\n20 20 40",
+    "skeleton" : "import org.junit.Test;\nimport static org.junit.Assert.*;\n\npublic class SolutionTest {\n    @Test\n    public void testAdd1() {\n        Solution solution = new Solution();\n        assertTrue(solution.isEven(2, 4));\n    }\n    @Test\n    public void testAdd2() {\n        Solution solution = new Solution();\n        assertTrue(solution.isEven(1, 2));\n    }\n    @Test\n    public void testAdd3() {\n        Solution solution = new Solution();\n        assertTrue(solution.isEven(1, 3));\n    }\n    @Test\n    public void testAdd4() {\n        Solution solution = new Solution();\n        assertTrue(solution.isEven(-2, -4));\n    }\n    @Test\n    public void testAdd5() {\n        Solution solution = new Solution();\n        assertTrue(solution.isEven(-1, -3));\n    }\n}"
 }
 
 ###
@@ -118,7 +162,7 @@ GET  {{hostname}}/api/ops/activity/read
 GET {{hostname}}/api/ops/activity/read/668d6818-dea1-472f-b421-d637c120059d
 
 ###
-DELETE {{hostname}}/api/ops/activity/delete/6ee121e3-94eb-478a-94e5-39e2fab328df
+DELETE {{hostname}}/api/ops/activity/delete/f5c7fc7a-3188-4cbc-8098-bd81d562744d
 
 ###
 DELETE {{hostname}}/api/ops/activity/delete
@@ -138,12 +182,5 @@ GET {{hostname}}/api/ops/student/delete/6819aaa5-7878-4f20-a8f4-acbb3cc056b9
 
 #--- Operations ---
 ###
-GET {{hostname}}/api/ops/activity/read/submissions/b486d0cb-2cf4-45e9-89cb-6481b24f1e46
+GET {{hostname}}/api/ops/activity/read/submissions/dcf70bfc-b606-45cc-9428-a093bbac9f66
 ###
-
-POST https://bcxpmoqj0b.execute-api.us-east-1.amazonaws.com/prod/run-code
-
-{
-    "code" : "public class Solution {\n    public static void main(String[] args) {\n        System.out.println(\"This is the java function working\");\n    }\n}",
-    "language" : "java"
-}

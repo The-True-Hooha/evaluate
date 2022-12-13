@@ -29,7 +29,11 @@ export default async function (req, res) {
                         numofattempts: true,
                         availablefrom: true,
                         availableto: true,
+                        codingActivity: true,
                     },
+                    orderBy : {
+                        availablefrom : "asc"
+                    }
                 },
             },
         })
