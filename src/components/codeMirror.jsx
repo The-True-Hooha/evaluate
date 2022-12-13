@@ -2,7 +2,7 @@ import { useState } from "react"
 import api from "../lib/api"
 import CodeMirror from "@uiw/react-codemirror"
 import { langs } from "@uiw/codemirror-extensions-langs"
-import { githubDark, githubLight } from "@uiw/codemirror-themes-all"
+import { githubDark, dracula} from "@uiw/codemirror-themes-all"
 import { javaDefault } from "../lib/defaults"
 import { rceHttpClient } from "../lib/api"
 import axios from "axios"
@@ -108,7 +108,7 @@ export default function CodeUi({
                 <CodeMirror
                     value={codeActivity}
                     placeholder='enter your code here'
-                    theme={githubDark}
+                    theme={dracula}
                     height='545px'
                     extensions={[langs.java()]}
                     onChange={(value) => {
