@@ -31,9 +31,9 @@ export default async function (req, res) {
                         availableto: true,
                         codingActivity: true,
                     },
-                    orderBy : {
-                        availablefrom : "asc"
-                    }
+                    orderBy: {
+                        availablefrom: "asc",
+                    },
                 },
             },
         })

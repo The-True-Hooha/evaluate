@@ -15,7 +15,9 @@ export default function Index({ info, submissions }) {
 
     if (activities.length === 0) {
         return (
-            <h1 className='text-secondary font-bold text-xl'>You have no activities available</h1>
+            <h1 className='text-xl font-bold text-secondary'>
+                You have no activities available
+            </h1>
         )
     }
     return (
