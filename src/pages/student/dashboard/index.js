@@ -76,7 +76,7 @@ export default function Home({ courses }) {
                 </>
             ) : (
                 <div>
-                    <h1 className=' font-bold text-xl text-secondary'>
+                    <h1 className=' text-xl font-bold text-secondary'>
                         Please Contact your instructor for an Access Code to
                         enroll in a course
                     </h1>
