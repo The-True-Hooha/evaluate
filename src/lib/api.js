@@ -2,7 +2,7 @@ import Axios from "axios"
 
 let urls = {
     development: "http://localhost:3000/",
-    production: "https://main.d18umu7gcrf9e5.amplifyapp.com/",
+    production: process.env.PROD_URL,
 }
 
 const api = Axios.create({
