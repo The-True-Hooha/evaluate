@@ -4,7 +4,6 @@ let urls = {
     development: "http://localhost:3000/",
     production: "https://main.d36cdjokntdrty.amplifyapp.com/",
 }
-console.log(process.env.NODE_ENV)
 
 const api = Axios.create({
     baseURL: urls[process.env.NODE_ENV],

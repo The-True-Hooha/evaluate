@@ -1,5 +1,5 @@
 @hostname = http://localhost:3000/
-# https://main.d18umu7gcrf9e5.amplifyapp.com
+# https://main.d36cdjokntdrty.amplifyapp.com/
 # http://localhost:3000/
 
 # --- Authentication ---
@@ -102,12 +102,12 @@ Content-Type: application/json
     "availableto" : "",
     "language" : "JAVA",
     "codingActivity" : {
-        "question": "Write a function called (smallest) that takes in 3 int parameters and returns the minimum of them"
+        "question": "Write a method called (smallest) that takes in 3 int parameters and returns the minimum of them"
     },
     "learningObjectives": {
         "description" : "Properly learn how to write good code (filler)"
     },
-    "courseId" : "58363b07-42dd-4b87-8ae9-5f1eccee6f42",
+    "courseId" : "28b7593a-3569-4394-a137-221f5349cbe4",
     "testCases" : "1 2 3\n4 5 9\n10 50 60\n100 100 200\n20 30 50\n4 4 8\n21 21 42\n 10 1 11\n20 20 40",
     "skeleton" : "import org.junit.Test;\nimport static org.junit.Assert.*;\n\npublic class SolutionTest {\n    @Test\n    public void testAdd1() {\n        int a = 10;\n        int b = 11;\n        int c = 30;\n        int min = a;\n        Solution solution = new Solution();\n        int result = solution.smallest(a, b, c);\n        assertEquals(result, min);\n    }\n    @Test\n    public void testAdd2() {\n        int a = 100;\n        int b = 50;\n        int c = 300;\n        int min = b;\n        Solution solution = new Solution();\n        int result = solution.smallest(a, b, c);\n        assertEquals(result, min);\n    }\n    @Test\n    public void testAdd3() {\n        int a = 321;\n        int b = 123;\n        int c = 1;\n        int min = c;\n        Solution solution = new Solution();\n        int result = solution.smallest(a, b, c);\n        assertEquals(result, min);\n    }\n}"
 }
@@ -124,7 +124,7 @@ Content-Type: application/json
     "availableto" : "",
     "language" : "JAVA",
     "codingActivity" : {
-        "question": "Write a function called (sum) where given an array of integers it returns the sum of the elements in the array"
+        "question": "Write a method called (sum) where given an array of integers it returns the sum of the elements in the array"
     },
     "learningObjectives": {
         "description" : "Properly learn how to write good code"
@@ -146,7 +146,7 @@ Content-Type: application/json
     "availableto" : "",
     "language" : "JAVA",
     "codingActivity" : {
-        "question": "Write a function called (isEven) that takes in two int parameters and returns TRUE if one of them is an even number else return FALSE"
+        "question": "Write a method called (isEven) that takes in two int parameters and returns TRUE if one of them is an even number else return FALSE"
     },
     "learningObjectives": {
         "description" : "Properly learn how to write good code ()"
@@ -163,7 +163,7 @@ GET  {{hostname}}/api/ops/activity/read
 GET {{hostname}}/api/ops/activity/read/668d6818-dea1-472f-b421-d637c120059d
 
 ###
-DELETE {{hostname}}/api/ops/activity/delete/f5c7fc7a-3188-4cbc-8098-bd81d562744d
+DELETE {{hostname}}/api/ops/activity/delete/cd9a688c-268a-40ef-98f3-3c06be6e7c3e
 
 ###
 DELETE {{hostname}}/api/ops/activity/delete
