@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { useState } from "react"
-import { useAuth } from "../lib/AuthContext"
+import { getUser, useAuth } from "../lib/AuthContext"
 import Image from "next/image"
 import salemstate from "../public/salemstate.jpeg"
 import Register from "../components/Register"
@@ -37,4 +37,28 @@ export default function StudentRegister() {
             error={error}
         />
     )
+}
+
+export async function getServerSideProps(ctx) {
+    const res = await getUser(ctx)
+    if (res.status === "SIGNED_OUT") {
+        return {
+            props: {},
+        }
+    }
+    const {
+        status,
+        user: { role },
+    } = res
+    if (status === "SIGNED_IN" && role === "STUDENT") {
+        return {
+            redirect: {
+                permanent: false,
+                destination: "/student/dashboard",
+            },
+        }
+    }
+    return {
+        props: {},
+    }
 }

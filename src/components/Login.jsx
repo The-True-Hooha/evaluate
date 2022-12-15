@@ -90,6 +90,7 @@ export default function Login({
                                     <Image
                                         src={salemstate}
                                         className='h-full'
+                                        alt="picture of salem state"
                                     />
                                 </div>
                             </div>

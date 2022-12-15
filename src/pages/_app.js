@@ -1,7 +1,7 @@
 import "../styles/globals.css"
 import App from "next/app"
 import { getUser } from "../lib/AuthContext"
-import { AuthProvider, ProtectRoutes } from "../lib/AuthContext"
+import { AuthProvider } from "../lib/AuthContext"
 import Navbar from "../components/Navbar"
 
 function MyApp({ Component, pageProps, auth }) {
@@ -20,6 +20,5 @@ MyApp.getInitialProps = async (appContext) => {
     const auth = await getUser(appContext.ctx)
     return { ...appProps, auth: auth }
 }
-//
 
 export default MyApp

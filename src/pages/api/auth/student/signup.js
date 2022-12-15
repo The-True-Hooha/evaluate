@@ -1,7 +1,7 @@
-import { prisma } from "../../../../config/prisma.connect"
-import hashPassword from "../../../../lib/hashPassword"
-import { studentSignupValidation } from "../../../../lib/validate"
-import _isAvailable from "../../../../lib/_isAvailable"
+import { prisma } from "@config/prisma.connect"
+import hashPassword from "@lib/hashPassword"
+import { studentSignupValidation } from "@lib/validate"
+import _isAvailable from "@lib/_isAvailable"
 
 export default async function handler(req, res) {
     const error = studentSignupValidation(req.body)

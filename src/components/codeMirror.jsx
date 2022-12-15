@@ -1,27 +1,19 @@
 import { useState } from "react"
-import api from "../lib/api"
 import CodeMirror from "@uiw/react-codemirror"
 import { langs } from "@uiw/codemirror-extensions-langs"
-import { githubDark, dracula } from "@uiw/codemirror-themes-all"
+import { dracula } from "@uiw/codemirror-themes-all"
 import { javaDefault } from "../lib/defaults"
-import { rceHttpClient } from "../lib/api"
 import axios from "axios"
 import { useRouter } from "next/router"
-// for creating a custom theme
-// import { createTheme } from "@uiw/codemirror-themes"
-// import { tags as t } from '@lezer/highlight';
 
 export default function CodeUi({
     skeletonCode,
     sid,
     language,
     codingActivityId,
-    numofattempts,
 }) {
     const [codeActivity, setCodeActivity] = useState(javaDefault)
-    const [codeActivityResult, setCodeActivityResult] = useState([])
     const [output, setOutput] = useState(null)
-    const [error, setError] = useState(null)
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
 

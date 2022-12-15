@@ -1,4 +1,4 @@
-@hostname = https://main.d36cdjokntdrty.amplifyapp.com/
+@hostname = http://localhost:3000/
 # https://main.d18umu7gcrf9e5.amplifyapp.com
 # http://localhost:3000/
 
@@ -183,5 +183,5 @@ GET {{hostname}}/api/ops/student/delete/54c922ec-f46a-4fab-8f8f-dca012f7944d
 
 #--- Operations ---
 ###
-GET {{hostname}}/api/ops/activity/read/submissions/dcf70bfc-b606-45cc-9428-a093bbac9f66
+GET {{hostname}}/api/ops/activity/read/submissions/f7923c84-3c51-4f20-9c72-13dd7b25acfc
 ###
