@@ -8,10 +8,7 @@ export default async function me(req, res) {
     if (!authorization) return res.status(403).json("Not Authenticated")
 
     try {
-        const payload = verify(
-            authorization,
-            "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY2NzMwMjc4OCwiaWF0IjoxNjY3MzAyNzg4fQ.R1hbt4mebhB_t2a3xvDBdhAb6aO4qniRxIop4-vJkRA"
-        )
+        const payload = verify(authorization, process.env.ACCESS_TOKEN_SECRET)
 
         const { role, id } = payload
         if (role === "STUDENT") {

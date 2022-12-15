@@ -5,6 +5,7 @@ generator client {
 datasource db {
   provider = "mysql"
   url      =  env("DATABASE_URL")
+ 
 }
 
 model Student {
@@ -58,7 +59,7 @@ model LearningObjective {
   description   String
   course        Course?   @relation(fields: [courseId], references: [courseId], onDelete: Cascade)
   courseId      String?
-  activity      Activity? @relation(fields: [activityId], references: [activityId])
+  activity      Activity? @relation(fields: [activityId], references: [activityId], onDelete: Cascade)
   activityId    String?
 
   @@index([learningObjId])
@@ -80,7 +81,7 @@ model Activity {
 }
 
 model CodingActivity {
-  codingactivityId String              @id @default(uuid())
+  codingactivityId String         @id @default(uuid())
   question         String              @unique
   language         ProgrammingLanguage
   submissions      Submission[]

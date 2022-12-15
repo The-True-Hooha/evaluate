@@ -116,9 +116,5 @@ export class InfraAsCodeStack extends Stack {
         new cdk.CfnOutput(this, "run_code_path", {
             value: run_code.path,
         })
-
-        new cdk.CfnOutput(this, "database-url", {
-            value: instance.instanceIdentifier,
-        })
     }
 }

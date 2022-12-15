@@ -63,7 +63,7 @@ export default function Login({
                                             )}
                                             <div className='mb-12 pt-1 pb-1 text-center'>
                                                 <button
-                                                    className='mb-3 inline-block w-full rounded px-6 py-2.5 text-xs font-medium uppercase leading-tight text-secondary shadow-md  hover:shadow-lg  active:shadow-lg'
+                                                    className='my-3 inline-block rounded border px-4 py-2 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-secondary hover:font-bold'
                                                     type='button'
                                                     onClick={handleSubmit}>
                                                     Log in
@@ -86,7 +86,7 @@ export default function Login({
                                         </form>
                                     </div>
                                 </div>
-                                <div class=' lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none'>
+                                <div className=' lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none'>
                                     <Image
                                         src={salemstate}
                                         className='h-full'
