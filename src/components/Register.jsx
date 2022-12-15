@@ -90,7 +90,7 @@ export default function Register({ handleChange, handleSubmit, error }) {
                                     <Image
                                         src={salemstate}
                                         className='h-full'
-                                        alt="picture of salem state"
+                                        alt='picture of salem state'
                                     />
                                 </div>
                             </div>

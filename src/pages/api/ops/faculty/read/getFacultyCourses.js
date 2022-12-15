@@ -1,5 +1,5 @@
-import { prisma } from "../../../../../config/prisma.connect"
-import prismaErrorWrapper from "../../../../../lib/prismaErrorWrapper"
+import { prisma } from "@config/prisma.connect"
+import prismaErrorWrapper from "@lib/prismaErrorWrapper"
 
 export default function (req, res) {
     const { fid } = req.body

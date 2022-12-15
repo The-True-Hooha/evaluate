@@ -1,9 +1,6 @@
-import Link from "next/link"
 import { useState } from "react"
-import { getUser, useAuth } from "../lib/AuthContext"
-import Image from "next/image"
-import salemstate from "../public/salemstate.jpeg"
-import Register from "../components/Register"
+import { getUser, useAuth } from "@lib/AuthContext"
+import Register from "@components/Register"
 
 export default function StudentRegister() {
     const [data, setData] = useState({ email: "", username: "", password: "" })

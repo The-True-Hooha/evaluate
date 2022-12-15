@@ -1,7 +1,7 @@
 import Head from "next/head"
 import Link from "next/link"
 import { TfiCommentAlt } from "react-icons/tfi"
-import { getUser } from "../lib/AuthContext"
+
 export default function Home() {
     return (
         <div className='App'>
@@ -31,4 +31,3 @@ export default function Home() {
         </div>
     )
 }
-

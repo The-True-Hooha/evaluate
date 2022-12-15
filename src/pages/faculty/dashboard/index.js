@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
-import api from "../../../lib/api"
-import { getUser } from "../../../lib/AuthContext"
+import api from "@lib/api"
+import { getUser } from "@lib/AuthContext"
 
 export default function Dashboard({ courses }) {
     const router = useRouter()

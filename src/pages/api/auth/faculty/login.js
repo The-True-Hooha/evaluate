@@ -1,8 +1,8 @@
 import { prisma } from "../../../../config/prisma.connect"
 import bcrypt from "bcrypt"
-import { createAccessToken } from "../../../../lib/auth"
+import { createAccessToken } from "@lib/auth"
 import { serialize } from "cookie"
-import { facultyLoginValidation } from "../../../../lib/validate"
+import { facultyLoginValidation } from "@lib/validate"
 
 export default async function handler(req, res) {
     const error = facultyLoginValidation(req.body)

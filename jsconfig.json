@@ -3,8 +3,9 @@
         "target": "ES6",
         "baseUrl": ".",
         "paths": {
-            "@config/*" : ["src/config/*"],
-            "@lib/*" : ["src/lib/*"]
+            "@components/*": ["src/components/*"],
+            "@config/*": ["src/config/*"],
+            "@lib/*": ["src/lib/*"]
         }
     }
 }

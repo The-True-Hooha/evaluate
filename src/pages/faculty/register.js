@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useAuth } from "../../lib/AuthContext"
+import { useAuth } from "@lib/AuthContext"
 import Link from "next/link"
 import Image from "next/image"
 // import SalemState from "../../styles/assets/images/salem state.jpg"

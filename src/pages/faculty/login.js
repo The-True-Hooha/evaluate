@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/router"
-import { useAuth } from "../../lib/AuthContext"
-import Login from "../../components/Login"
+import { useAuth } from "@lib/AuthContext"
+import Login from "@components/Login"
 
 export default function FacltyLogin() {
     const router = useRouter()

@@ -1,8 +1,8 @@
 import "../styles/globals.css"
 import App from "next/app"
-import { getUser } from "../lib/AuthContext"
-import { AuthProvider } from "../lib/AuthContext"
-import Navbar from "../components/Navbar"
+import { getUser } from "@lib/AuthContext"
+import { AuthProvider } from "@lib/AuthContext"
+import Navbar from "@components/Navbar"
 
 function MyApp({ Component, pageProps, auth }) {
     return (
