@@ -180,7 +180,7 @@ GET  {{hostname}}/api/ops/student/read/getCount
 ###
 GET {{hostname}}/api/ops/student/read/54c922ec-f46a-4fab-8f8f-dca012f7944d
 ###
-GET {{hostname}}/api/ops/student/delete/54c922ec-f46a-4fab-8f8f-dca012f7944d
+GET {{hostname}}/api/ops/student/delete
 
 # --- Student ---
 
