@@ -38,7 +38,8 @@ next-env.d.ts
 
 package-lock.json
 infra-as-code/node_modules
-infra-as-code/lambda
 infra-as-code/.cdk.staging
 infra-as-code/cdk.out
 infra-as-code/package-lock-json
+infra-as-code/lambda/src/node_modules
+
