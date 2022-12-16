@@ -5,11 +5,12 @@ export default function StudentCourses({
     lOBJ,
     handleClick,
 }) {
+    console.log(coursename)
     return (
         <div className='mt-5'>
             <div className='block max-w-sm rounded-lg bg-primary px-5 text-center shadow-lg'>
                 <div className='border-b border-gray-300 py-3 px-6'>
-                    {coursename}
+                    <p className="text-white text-lg font-bold">{coursename}</p>
                 </div>
                 <div className='p-6'>
                     <h5 className='mb-2 text-xl  font-bold text-white'>

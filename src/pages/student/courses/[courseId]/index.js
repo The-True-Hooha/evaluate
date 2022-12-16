@@ -27,9 +27,7 @@ export default function Index({ info, submissions }) {
                     codingActivityIds.includes(
                         e.codingActivity.codingactivityId
                     )
-                    
                 ) {
-                   
                     return (
                         <StudentActivities
                             topic={e.topic}

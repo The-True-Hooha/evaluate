@@ -1,4 +1,4 @@
-import prisma from "@config/prisma.connect"
+import {prisma} from "@config/prisma.connect"
 
 export default async function getPendingStudents(req, res) {
     try {

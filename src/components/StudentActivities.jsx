@@ -6,7 +6,7 @@ export default function StudentActivities({
     numberOfAttempts,
     isAvailable,
     availableto,
-    activityId
+    activityId,
 }) {
     const router = useRouter()
     const handleClick = (e) => {
@@ -38,7 +38,7 @@ export default function StudentActivities({
                     }`}
                     onClick={() => handleClick(activityId)}
                     disabled={isAvailable ? false : true}>
-                    {isAvailable ? "Start" : 'Graded'}
+                    {isAvailable ? "Start" : "Graded"}
                 </button>
             </div>
         </div>

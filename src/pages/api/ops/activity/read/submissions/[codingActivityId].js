@@ -10,11 +10,13 @@ export default async function (req, res) {
                 codingactivityId: codingActivityId,
             },
             select: {
+                question : true,
                 submissions: {
                     include: {
                         student: {
                             select: {
                                 email: true,
+                                username : true
                             },
                         },
                     },
