@@ -1,12 +1,7 @@
-<<<<<<< HEAD
-
-import Head from 'next/head'
-
-=======
 import Head from "next/head"
 import Link from "next/link"
 import { TfiCommentAlt } from "react-icons/tfi"
->>>>>>> 2721dad1fcd48af81d880f42f46939f878e3b2b2
+
 export default function Home() {
     return (
         <div className='App'>

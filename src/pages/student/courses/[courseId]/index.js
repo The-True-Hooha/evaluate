@@ -1,6 +1,6 @@
-import StudentActivities from "../../../../components/StudentActivities"
-import api from "../../../../lib/api"
-import { getUser } from "../../../../lib/AuthContext"
+import StudentActivities from "@components/StudentActivities"
+import api from "@lib/api"
+import { getUser } from "@lib/AuthContext"
 
 export default function Index({ info, submissions }) {
     const {

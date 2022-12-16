@@ -1,8 +1,8 @@
 import { prisma } from "@config/prisma.connect"
 import prismaErrorWrapper from "@lib/prismaErrorWrapper"
 
-export default function (req, res) {
+export default async function (req, res) {
     return prismaErrorWrapper(res, async () => {
-        return await prisma.activity.deleteMany({})
+        return await prisma.student.deleteMany()
     })
 }

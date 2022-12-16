@@ -1,5 +1,5 @@
-import prismaErrorWrapper from "../../../../../lib/prismaErrorWrapper"
-import { prisma } from "../../../../../config/prisma.connect"
+import prismaErrorWrapper from "@lib/prismaErrorWrapper"
+import { prisma } from "@config/prisma.connect"
 
 export default async function getAll(req, res) {
     return prismaErrorWrapper(res, async () => {

@@ -1,27 +1,19 @@
-import { useState } from "react"
-import api from "../lib/api"
+import { useState, useEffect } from "react"
 import CodeMirror from "@uiw/react-codemirror"
 import { langs } from "@uiw/codemirror-extensions-langs"
-import { githubDark, dracula } from "@uiw/codemirror-themes-all"
-import { javaDefault } from "../lib/defaults"
-import { rceHttpClient } from "../lib/api"
+import { dracula } from "@uiw/codemirror-themes-all"
+import { javaDefault } from "@lib/defaults"
 import axios from "axios"
 import { useRouter } from "next/router"
-// for creating a custom theme
-// import { createTheme } from "@uiw/codemirror-themes"
-// import { tags as t } from '@lezer/highlight';
 
 export default function CodeUi({
     skeletonCode,
     sid,
     language,
     codingActivityId,
-    numofattempts,
 }) {
     const [codeActivity, setCodeActivity] = useState(javaDefault)
-    const [codeActivityResult, setCodeActivityResult] = useState([])
     const [output, setOutput] = useState(null)
-    const [error, setError] = useState(null)
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
 
@@ -77,17 +69,33 @@ export default function CodeUi({
             language: language,
             skeletonCode: skeletonCode,
         }
+
+        if (data.code.match(RegExp("private\\s+[\\w\\s<>,]+\\([^\\)]*\\)"))) {
+            setOutput(
+                "Private methods are not allowed, please change it to public"
+            )
+            setIsLoading(false)
+            return
+        }
         try {
             setIsLoading(true)
             setOutput("")
             await axios
                 .post(process.env.NEXT_PUBLIC_LAMBDA_GRADE_CODE_URL, data)
                 .then(async ({ data: { result } }) => {
+                    result = result.replace(/\n/g, "")
+                    result = Number(result)
+
+                    if (Number.isNaN(result)) {
+                        result = 0
+                    }
+
                     const post_data = {
                         codingActivityId: codingActivityId,
-                        score: result,
+                        score: result.toString(),
                         sourceCode: codeActivity,
                     }
+
                     await axios.post(
                         `/api/ops/student/update/assignGrade/${sid}`,
                         post_data
@@ -99,8 +107,18 @@ export default function CodeUi({
             setOutput(
                 "Something went wrong please contact tochey@outlook.com or try again"
             )
+            setIsLoading(false)
         }
     }
+    useEffect(() => {
+        const res = localStorage.getItem(codingActivityId)
+
+        if (!res) {
+            setCodeActivity(javaDefault)
+            return
+        }
+        setCodeActivity(res)
+    }, [])
 
     return (
         <div className='h-[] pt-[30px]'>
@@ -113,6 +131,7 @@ export default function CodeUi({
                     extensions={[langs.java()]}
                     onChange={(value) => {
                         setCodeActivity(value)
+                        localStorage.setItem(codingActivityId, value)
                     }}
                     className='border border-black p-1 '
                 />

@@ -1,9 +1,8 @@
-import api from "../../../lib/api"
-import { getUser, useAuth } from "../../../lib/AuthContext"
+import api from "@lib/api"
+import { getUser, useAuth } from "@lib/AuthContext"
 import { useRouter } from "next/router"
-import { render } from "react-dom"
 import { useState } from "react"
-import StudentCourses from "../../../components/StudentCourses"
+import StudentCourses from "@components/StudentCourses"
 
 export default function Home({ courses }) {
     const { auth } = useAuth()

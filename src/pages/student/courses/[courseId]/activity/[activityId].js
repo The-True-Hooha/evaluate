@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
-import CodeUi from "../../../../../components/codeMirror"
-import api from "../../../../../lib/api"
-import { getUser } from "../../../../../lib/AuthContext"
+import CodeUi from "@components/codeMirror"
+import api from "@lib/api"
+import { getUser } from "@lib/AuthContext"
 
 export default function StudentActivity({ info, sid, submissions }) {
     const {

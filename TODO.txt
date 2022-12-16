@@ -11,8 +11,7 @@ Tochi:
 * calculate student score from test case --done
 * ui run_code / grade_code feature --done
 * login page v1 --done
-* figure out env situation with aws amplify
-* integrate amplify in cdk or cmd line
+* figure out env situation with aws amplify --done 
 * Refractor/clean up code
 * refresh user access tokens - necessary for uninterupted workflows
 
@@ -22,4 +21,3 @@ making custom code mirror theme : https://uiwjs.github.io/react-codemirror/#/the
 
 NOTE: 
 removed script "prepare": "husky install" from package.json, it was failing the amplify build.
-//

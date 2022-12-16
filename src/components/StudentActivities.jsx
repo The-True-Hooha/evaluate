@@ -38,7 +38,7 @@ export default function StudentActivities({
                     }`}
                     onClick={() => handleClick(activityId)}
                     disabled={isAvailable ? false : true}>
-                    {isAvailable ? "Start" : "Taken"}
+                    {isAvailable ? "Start" : "Graded"}
                 </button>
             </div>
         </div>

@@ -1,7 +1,5 @@
-import { prisma } from "../../../../../../config/prisma.connect"
-// import { prisma, PrismaClient } from "@prisma/client"
-// const prisma = new PrismaClient()
-import prismaErrorWrapper from "../../../../../../lib/prismaErrorWrapper"
+import { prisma } from "@config/prisma.connect"
+import prismaErrorWrapper from "@lib/prismaErrorWrapper"
 
 export default async function (req, res) {
     const { codingActivityId } = req.query
@@ -12,11 +10,13 @@ export default async function (req, res) {
                 codingactivityId: codingActivityId,
             },
             select: {
+                question: true,
                 submissions: {
                     include: {
                         student: {
                             select: {
                                 email: true,
+                                username: true,
                             },
                         },
                     },

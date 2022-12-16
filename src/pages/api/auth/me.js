@@ -1,4 +1,4 @@
-import { prisma } from "../../../config/prisma.connect"
+import { prisma } from "@config/prisma.connect"
 import { verify } from "jsonwebtoken"
 
 export default async function me(req, res) {

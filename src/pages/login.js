@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react"
 import Router, { useRouter } from "next/router"
-import { getUser, useAuth } from "../lib/AuthContext"
-import Link from "next/link"
-import Image from "next/image"
-import Login from "../components/Login"
+import { getUser, useAuth } from "@lib/AuthContext"
+import Login from "@components/Login"
 
 export default function StudentLogin() {
     const router = useRouter()
