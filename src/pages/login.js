@@ -14,6 +14,7 @@ export default function StudentLogin() {
     }
 
     const handleStudentSubmit = async (e) => {
+        setError("")
         e.preventDefault()
 
         const { email, password } = data
