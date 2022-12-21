@@ -13,7 +13,13 @@ Tochi:
 * login page v1 --done
 * figure out env situation with aws amplify --done 
 * Refractor/clean up code
+* figure out render patterns for long term (ssr, get static props etc)
 * refresh user access tokens - necessary for uninterupted workflows
+* Explore gravatar for user profile pictures
+* refer to leetcode and hackerrank for better editor experience
+* build out faculty side
+* ssr cookie to persist info ( user's code )
+* write testRunner to /tmp dir in dockerfile then copy to dir on every subsequent use case
 
 Backlog
 add allowed domains for cookie 

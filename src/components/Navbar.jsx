@@ -12,7 +12,7 @@ export default function Navbar() {
                 </h1>
                 <ul className='flex items-center gap-10'>
                     <li>
-                        <BsFillMoonStarsFill className=' cursor-pointer text-2xl text-secondary' />
+                        <BsFillMoonStarsFill className='cursor-pointer text-2xl text-secondary' />
                     </li>
                     <li>
                         <Link

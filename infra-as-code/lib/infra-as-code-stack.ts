@@ -7,18 +7,15 @@ import {
 } from "aws-cdk-lib"
 import { Construct } from "constructs"
 import * as lambda from "aws-cdk-lib/aws-lambda"
-import { SqsEventSource } from "aws-cdk-lib/aws-lambda-event-sources"
 import * as rds from "aws-cdk-lib/aws-rds"
 import * as ec2 from "aws-cdk-lib/aws-ec2"
 import * as apigw from "aws-cdk-lib/aws-apigateway"
 import * as cdk from "aws-cdk-lib"
-import * as ssm from "aws-cdk-lib/aws-ssm"
 
 export class InfraAsCodeStack extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props)
-
-        const vpc = new ec2.Vpc(this, "evaluate-vpc", {
+        const vpc = new ec2.Vpc(this, "evaluate_vpc", {
             ipAddresses: ec2.IpAddresses.cidr("10.0.0.0/16"),
             vpcName: "evaluate-vpc",
             enableDnsHostnames: true,
@@ -34,7 +31,7 @@ export class InfraAsCodeStack extends Stack {
             maxAzs: 2,
         })
 
-        const subnetGroup = new rds.SubnetGroup(this, "evaluate-rds-sg", {
+        const subnetGroup = new rds.SubnetGroup(this, "evaluate_rds-subG", {
             description: "subnet group for evaluate-rds",
             vpc,
             removalPolicy: RemovalPolicy.DESTROY,
@@ -45,7 +42,7 @@ export class InfraAsCodeStack extends Stack {
             },
         })
 
-        const evaluateSG = new ec2.SecurityGroup(this, "evaluate-rds-secG", {
+        const evaluateSG = new ec2.SecurityGroup(this, "evaluate_rds-secG", {
             vpc,
             allowAllOutbound: true,
             description: "evaluate-vpc-secG",
@@ -53,7 +50,7 @@ export class InfraAsCodeStack extends Stack {
 
         evaluateSG.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.allTraffic())
 
-        const instance = new rds.DatabaseInstance(this, "database-store", {
+        const instance = new rds.DatabaseInstance(this, "evaluate_database", {
             vpc,
             engine: rds.DatabaseInstanceEngine.mysql({
                 version: rds.MysqlEngineVersion.VER_8_0_28,
@@ -76,7 +73,7 @@ export class InfraAsCodeStack extends Stack {
 
         const custom_docker_runtime = new lambda.DockerImageFunction(
             this,
-            "evaluate-docker",
+            "evaluate_docker",
             {
                 code: lambda.DockerImageCode.fromImageAsset("lambda"),
                 memorySize: 3000,
@@ -86,7 +83,7 @@ export class InfraAsCodeStack extends Stack {
 
         const evaluate_rce_api = new apigw.LambdaRestApi(
             this,
-            "evalaute_rce_api",
+            "evalaute_rce-api",
             {
                 handler: custom_docker_runtime,
                 proxy: false,
