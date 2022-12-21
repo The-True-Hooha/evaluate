@@ -115,4 +115,3 @@ export class InfraAsCodeStack extends Stack {
         })
     }
 }
-

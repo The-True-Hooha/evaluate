@@ -14,6 +14,7 @@ Tochi:
 * login page v1 --done
 * figure out env situation with aws amplify --done 
 * Refractor/clean up code
+* figure out render patterns for long term (ssr, get static props etc)
 * refresh user access tokens - necessary for uninterupted workflows
 * Explore gravatar for user profile pictures
 * refer to leetcode and hackerrank for better editor experience

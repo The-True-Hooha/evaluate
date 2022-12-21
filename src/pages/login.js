@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react"
-import Router, { useRouter } from "next/router"
+import { useState } from "react"
+import  { useRouter } from "next/router"
 import { getUser, useAuth } from "@lib/AuthContext"
 import Login from "@components/Login"
 

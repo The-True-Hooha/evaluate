@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useRouter } from "next/router"
 import { useAuth } from "@lib/AuthContext"
 import Login from "@components/Login"
 
 export default function FacltyLogin() {
-    const router = useRouter()
     const [data, setData] = useState({ facultyId: "", password: "" })
     const [error, setError] = useState("")
     const { facultyLogin } = useAuth()
