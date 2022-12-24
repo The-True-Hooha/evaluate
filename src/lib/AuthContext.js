@@ -124,5 +124,5 @@ export const AuthProvider = (props) => {
         />
     )
 }
-export const useAuth = () => useContext(AuthContext)
+export const registerAuth = () => useContext(AuthContext)
 export const AuthConsumer = AuthContext.Consumer
