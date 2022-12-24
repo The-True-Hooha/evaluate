@@ -1,12 +1,12 @@
 "use client"
 import { useState } from "react"
-import { getUser, registerAuth } from "@lib/AuthContext"
+import { getUser, useAuth } from "@lib/AuthContext"
 import Register from "@components/Register"
 
 export default function StudentRegister() {
     const [data, setData] = useState({ email: "", username: "", password: "" })
     const [error, setError] = useState("")
-    const studentRegister = registerAuth()
+    const studentRegister = useAuth()
 
     const handleChange = ({ currentTarget: input }) => {
         setData({ ...data, [input.name]: input.value })
