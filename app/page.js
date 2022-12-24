@@ -1,4 +1,4 @@
-import Link from "next/link"
+// import Link from "next/link"
 import { TfiCommentAlt } from "react-icons/tfi"
 
 
@@ -11,7 +11,7 @@ export default function Page() {
                     <h4 className='my-2 pb-1 text-[30px] font-semibold text-secondary'>
                         Welcome to Evaluate
                     </h4>
-                    <Link
+                    {/* <Link
                         href={"/login"}
                         className='hover:text-neon_carrot-100 px-3 text-xl font-bold uppercase text-secondary hover:underline'>
                         login
@@ -20,7 +20,7 @@ export default function Page() {
                         href={"/register"}
                         className='hover:text-neon_carrot-100 px-3 text-xl font-bold uppercase text-secondary hover:underline'>
                         signup
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
         </div>
