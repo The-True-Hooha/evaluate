@@ -2,9 +2,9 @@ import Link from "next/link"
 import { TfiCommentAlt } from "react-icons/tfi"
 
 
-export default function Home() {
+export default function Page() {
     return (
-        <div className='App'>
+        <div>
             <div className='flex justify-center pt-8'>
                 <div className='mt-4 text-center'>
                     <TfiCommentAlt className=' my-2 text-5xl text-secondary' />
