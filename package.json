@@ -22,7 +22,7 @@
         "eslint-config-next": "^13.0.7",
         "js-cookie": "^3.0.1",
         "jsonwebtoken": "^8.5.1",
-        "next": "^13.0.8-canary.2",
+        "next": "^13.1.0",
         "prisma": "^4.5.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
