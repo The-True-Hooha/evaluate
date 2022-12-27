@@ -11,6 +11,7 @@
         "prisma": "cd src && cd prisma && npx prisma migrate deploy && npx prisma generate"
     },
     "dependencies": {
+        "@lottiefiles/react-lottie-player": "^3.5.0",
         "@prisma/client": "^4.5.0",
         "@uiw/codemirror-extensions-langs": "^4.15.1",
         "@uiw/codemirror-themes-all": "^4.15.1",
