@@ -5,11 +5,13 @@
         "source.organizeImports": true
     },
     "cSpell.words": [
+        "availableto",
         "codenames",
         "codemirror",
         "colour",
         "commitlint",
         "coursename",
+        "codingactivityId",
         "datacentres",
         "devs",
         "Eagleson",
@@ -22,6 +24,7 @@
         "nextauth",
         "nextjs",
         "npmrc",
+        "numofattempts",
         "okaidia",
         "pravatar",
         "preload",

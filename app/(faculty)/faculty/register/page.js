@@ -3,7 +3,7 @@ import { useState } from "react"
 import { useAuth } from "@lib/AuthContext"
 // import Link from "next/link"
 // import Image from "next/image"
-// import SalemState from "../../styles/assets/images/salem state.jpg"
+//import SalemState from "../../styles/assets/images/salem state.jpg"
 
 export default function FacultyRegister() {
     const [data, setData] = useState({

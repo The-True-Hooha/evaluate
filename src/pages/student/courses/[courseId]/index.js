@@ -3,8 +3,9 @@ import api from "@lib/api"
 import { getUser } from "@lib/AuthContext"
 
 export default function Index({ info, submissions }) {
+
     const {
-        instructor: { firstname, lastname },
+        instructor: { firstName, lastName },
         activities,
     } = info
 
@@ -88,7 +89,6 @@ export async function getServerSideProps(ctx) {
             },
         }
     }
-
     return {
         props: {
             info,
