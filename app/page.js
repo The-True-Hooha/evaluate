@@ -6,7 +6,7 @@ import Lottie from "./lottie"
 
 export default function Page() {
     return (
-        <div className="w-full h-full">
+        <div className="w-full h-full bg-white">
             {/* <div className='flex justify-center pt-8 w-full h-full'>
                 <div className='mt-4 text-center'>
                     <TfiCommentAlt className=' my-2 text-5xl text-secondary' />
@@ -40,8 +40,8 @@ export default function Page() {
                     </Link>
                     <div className="absolute right-[80px]">
                         <ul className="flex font-semibold">
-                            <li className="ml-[60px] cursor-pointer my-4 ml-8">Log in</li>
-                            <li className="ml-[60px] cursor-pointer text-white  border px-5 border rounded bg-secondary items-center h-full my-4">signup</li>
+                            <li className="ml-[60px] cursor-pointer my-4">Log in</li>
+                            <li className="ml-[60px] cursor-pointer text-white  border px-5 rounded bg-secondary items-center h-full my-4">signup</li>
                         </ul>
                     </div>
                     </nav>
