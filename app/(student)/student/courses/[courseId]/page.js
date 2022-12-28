@@ -1,3 +1,4 @@
+"use client"
 import StudentActivities from "@components/StudentActivities"
 import api from "@lib/api"
 import { getUser } from "@lib/AuthContext"

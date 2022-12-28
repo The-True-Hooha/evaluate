@@ -1,3 +1,4 @@
+"use client"
 // import { useState, useEffect } from "react"
 import CodeUi from "@components/codeMirror"
 import api from "@lib/api"

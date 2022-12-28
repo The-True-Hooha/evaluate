@@ -1,3 +1,4 @@
+"use client"
 import api from "@lib/api"
 import { getUser, useAuth } from "@lib/AuthContext"
 import { useRouter } from "next/navigation"
