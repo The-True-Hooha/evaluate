@@ -40,8 +40,12 @@ export default function Page() {
                     </Link>
                     <div className="absolute right-[80px]">
                         <ul className="flex font-semibold">
+                            <Link href="/student/login">
                             <li className="ml-[60px] cursor-pointer my-4">Log in</li>
-                            <li className="ml-[60px] cursor-pointer text-white  border px-5 rounded bg-secondary items-center h-full my-4">signup</li>
+                            </Link>
+                            <Link href="/student/register">
+                            <li className="ml-[30px] cursor-pointer text-white  border px-5 py-3 rounded bg-secondary items-center ">signup</li>
+                            </Link>
                         </ul>
                     </div>
                     </nav>
