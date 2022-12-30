@@ -4,7 +4,7 @@
 
 @layer base {
     body {
-        @apply bg-primary tracking-wide;
+        @apply tracking-wide;
     }
     html {
         scroll-behavior: smooth;
